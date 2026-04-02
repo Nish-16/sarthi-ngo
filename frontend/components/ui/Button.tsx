@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Link from "next/link";
 
 type Variant = "primary" | "secondary" | "outline" | "ghost";
 type Size = "sm" | "md" | "lg";
@@ -43,6 +44,16 @@ export default function Button({
   const styles = `${base} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if (href) {
+    const isInternalRoute = href.startsWith("/");
+
+    if (isInternalRoute) {
+      return (
+        <Link href={href} className={styles}>
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <a href={href} className={styles}>
         {children}

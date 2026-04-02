@@ -6,23 +6,27 @@
   "navbar": {
     "logoText": "Sarthi",
     "ctaLabel": "Join the Movement",
-    "ctaHref": "#join",
+    "ctaHref": "/get-involved",
     "links": [
       {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "What We Do",
+        "href": "/what-we-do"
+      },
+      {
         "label": "About",
-        "href": "#about"
+        "href": "/about"
       },
       {
-        "label": "Projects",
-        "href": "#projects"
+        "label": "Team",
+        "href": "/team"
       },
       {
-        "label": "Impact",
-        "href": "#impact"
-      },
-      {
-        "label": "Stories",
-        "href": "#stories"
+        "label": "Get Involved",
+        "href": "/get-involved"
       }
     ]
   },

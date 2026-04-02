@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Container from "../ui/Container";
 import Button from "../ui/Button";
 import type { NavbarContent } from "@/types/content";
@@ -8,6 +10,7 @@ import type { NavbarContent } from "@/types/content";
 export default function Navbar({ content }: { content: NavbarContent }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -25,24 +28,28 @@ export default function Navbar({ content }: { content: NavbarContent }) {
     >
       <Container>
         <nav className="flex items-center justify-between h-18 py-4">
-          <a href="#" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <span className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
               {content.logoText.charAt(0)}
             </span>
             <span className="font-bold text-xl tracking-tight text-slate-900">
               {content.logoText}
             </span>
-          </a>
+          </Link>
 
           <ul className="hidden md:flex items-center gap-1">
             {content.links.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
-                  className="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200"
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    pathname === link.href
+                      ? "text-indigo-700 bg-indigo-100"
+                      : "text-slate-600 hover:text-indigo-600 hover:bg-indigo-50"
+                  }`}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -75,13 +82,17 @@ export default function Navbar({ content }: { content: NavbarContent }) {
             <ul className="flex flex-col gap-1 pt-3">
               {content.links.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
+                    className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      pathname === link.href
+                        ? "text-indigo-700 bg-indigo-100"
+                        : "text-slate-600 hover:text-indigo-600 hover:bg-indigo-50"
+                    }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li className="pt-2">

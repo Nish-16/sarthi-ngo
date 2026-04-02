@@ -22,21 +22,23 @@ export default function Recognitions({
           </p>
         </div>
 
-        {/* Logo belt */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-14">
-          {content.organizations.map((org) => (
-            <div
-              key={org.name}
-              className="group flex items-center gap-3 bg-white border border-slate-100 rounded-2xl px-6 py-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 cursor-default"
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-xs font-black shadow-sm shadow-indigo-300/30 group-hover:scale-105 transition-transform">
-                {org.abbr.slice(0, 2)}
+        {/* Logo belt — infinite marquee */}
+        <div className="relative mb-14 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex w-max animate-marquee gap-6 items-center">
+            {[...content.organizations, ...content.organizations].map((org, i) => (
+              <div
+                key={`${org.name}-${i}`}
+                className="group flex items-center gap-3 bg-white border border-slate-100 rounded-2xl px-6 py-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 cursor-default shrink-0"
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-xs font-black shadow-sm shadow-indigo-300/30 group-hover:scale-105 transition-transform">
+                  {org.abbr.slice(0, 2)}
+                </div>
+                <span className="text-slate-600 font-semibold text-sm group-hover:text-indigo-700 transition-colors">
+                  {org.name}
+                </span>
               </div>
-              <span className="text-slate-600 font-semibold text-sm group-hover:text-indigo-700 transition-colors">
-                {org.name}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Award cards */}
