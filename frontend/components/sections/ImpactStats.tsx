@@ -1,5 +1,8 @@
 import Container from "../ui/Container";
+import { GraduationCap, Users, MapPin, Heart } from "lucide-react";
 import type { ImpactStatsContent } from "@/types/content";
+
+const statIcons = [GraduationCap, Users, MapPin, Heart];
 
 export default function ImpactStats({
   content,
@@ -41,7 +44,9 @@ export default function ImpactStats({
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {content.stats.map((stat, i) => (
+          {content.stats.map((stat, i) => {
+            const Icon = statIcons[i % statIcons.length];
+            return (
             <div
               key={i}
               className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-7 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1"
@@ -49,7 +54,9 @@ export default function ImpactStats({
               <div
                 className={`absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full bg-gradient-to-r ${stat.gradient} opacity-0 group-hover:opacity-100 transition-opacity`}
               />
-              <div className="text-4xl mb-3">{stat.icon}</div>
+              <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${stat.gradient} bg-opacity-20 flex items-center justify-center mx-auto mb-3 text-white`}>
+                <Icon className="w-5 h-5" />
+              </div>
               <p
                 className={`text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br ${stat.gradient} leading-none mb-2`}
               >
@@ -58,7 +65,8 @@ export default function ImpactStats({
               <p className="text-white font-bold text-lg">{stat.label}</p>
               <p className="text-slate-400 text-sm mt-1">{stat.description}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <p className="text-center text-slate-500 text-sm mt-10">

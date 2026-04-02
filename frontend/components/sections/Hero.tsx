@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Container from "../ui/Container";
 import Button from "../ui/Button";
+import { Trophy } from "lucide-react";
 import type { HeroContent } from "@/types/content";
 
 export default function Hero({ content }: { content: HeroContent }) {
@@ -124,7 +125,7 @@ export default function Hero({ content }: { content: HeroContent }) {
 
             <div className="absolute bottom-16 right-0 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float-slow pointer-events-none">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🏆</span>
+                <Trophy className="w-5 h-5 text-amber-500" />
                 <div>
                   <p className="text-xs text-slate-400 font-medium leading-none">
                     Award

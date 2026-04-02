@@ -36,19 +36,25 @@ export default function WhyYouth() {
       <div
         className="absolute top-10 right-8 w-32 h-32 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
 
       <Container className="relative z-10">
         <div className="grid items-center gap-14 lg:grid-cols-2">
-
           {/* Image side */}
           <div className="relative order-2 lg:order-1">
             {/* dashed rings */}
-            <div className="absolute -left-5 -top-5 w-full h-full rounded-3xl border-2 border-dashed border-indigo-200/60" aria-hidden="true" />
-            <div className="absolute -right-3 -bottom-3 w-3/4 h-3/4 rounded-3xl border-2 border-dashed border-orange-200/50" aria-hidden="true" />
+            <div
+              className="absolute -left-5 -top-5 w-full h-full rounded-3xl border-2 border-dashed border-indigo-200/60"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute -right-3 -bottom-3 w-3/4 h-3/4 rounded-3xl border-2 border-dashed border-orange-200/50"
+              aria-hidden="true"
+            />
 
             <div className="relative rounded-3xl overflow-hidden min-h-[380px] md:min-h-[460px] shadow-2xl shadow-slate-300/40">
               <Image
@@ -63,8 +69,12 @@ export default function WhyYouth() {
 
             {/* floating stat */}
             <div className="absolute -bottom-6 -right-2 bg-white rounded-2xl shadow-xl px-5 py-4 border border-slate-100 animate-float pointer-events-none">
-              <p className="text-xs text-slate-400 font-medium">Youth trained</p>
-              <p className="text-3xl font-black text-indigo-600 mt-0.5">1,200+</p>
+              <p className="text-xs text-slate-400 font-medium">
+                Youth trained
+              </p>
+              <p className="text-3xl font-black text-indigo-600 mt-0.5">
+                1,200+
+              </p>
             </div>
           </div>
 
@@ -81,12 +91,12 @@ export default function WhyYouth() {
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-slate-600">
               Youth combine urgency with creativity. They understand emerging
-              challenges quickly, build peer trust naturally, and experiment with
-              solutions that established systems often overlook.
+              challenges quickly, build peer trust naturally, and experiment
+              with solutions that established systems often overlook.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              By backing young leaders early, we create a ripple effect where one
-              trained changemaker can influence schools, families, and whole
+              By backing young leaders early, we create a ripple effect where
+              one trained changemaker can influence schools, families, and whole
               communities.
             </p>
 
@@ -103,7 +113,6 @@ export default function WhyYouth() {
               ))}
             </div>
           </div>
-
         </div>
       </Container>
     </section>

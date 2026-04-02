@@ -1,5 +1,14 @@
 import Container from "../ui/Container";
+import { Trophy, Star, Award, Gem } from "lucide-react";
 import type { RecognitionsContent } from "@/types/content";
+
+const awardIcons = [Trophy, Star, Award, Gem];
+const awardColors = [
+  "bg-amber-50 text-amber-500",
+  "bg-indigo-50 text-indigo-500",
+  "bg-cyan-50 text-cyan-500",
+  "bg-purple-50 text-purple-500",
+];
 
 export default function Recognitions({
   content,
@@ -43,22 +52,26 @@ export default function Recognitions({
 
         {/* Award cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {content.awards.map((award) => (
-            <div
-              key={award.title}
-              className="bg-white rounded-2xl p-5 border border-slate-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 text-center group"
-            >
-              <span className="text-3xl block mb-3 group-hover:scale-110 transition-transform inline-block">
-                {award.icon}
-              </span>
-              <p className="text-sm font-bold text-slate-800 leading-tight">
-                {award.title}
-              </p>
-              <span className="mt-2 inline-block text-xs text-orange-500 font-semibold bg-orange-50 px-2 py-0.5 rounded-full">
-                {award.year}
-              </span>
-            </div>
-          ))}
+          {content.awards.map((award, i) => {
+            const Icon = awardIcons[i % awardIcons.length];
+            const color = awardColors[i % awardColors.length];
+            return (
+              <div
+                key={award.title}
+                className="bg-white rounded-2xl p-5 border border-slate-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 text-center group"
+              >
+                <div className={`w-11 h-11 rounded-xl ${color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+                <p className="text-sm font-bold text-slate-800 leading-tight">
+                  {award.title}
+                </p>
+                <span className="mt-2 inline-block text-xs text-orange-500 font-semibold bg-orange-50 px-2 py-0.5 rounded-full">
+                  {award.year}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </Container>
     </section>

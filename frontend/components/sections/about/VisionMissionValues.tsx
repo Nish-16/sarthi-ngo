@@ -45,7 +45,8 @@ export default function VisionMissionValues() {
       <div
         className="absolute bottom-10 left-6 w-32 h-32 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
@@ -82,7 +83,9 @@ export default function VisionMissionValues() {
                   0{i + 1}
                 </span>
 
-                <div className={`w-12 h-12 rounded-2xl ${pillar.iconBg} flex items-center justify-center text-white shadow-lg mb-6`}>
+                <div
+                  className={`w-12 h-12 rounded-2xl ${pillar.iconBg} flex items-center justify-center text-white shadow-lg mb-6`}
+                >
                   <Icon className="w-6 h-6" />
                 </div>
 

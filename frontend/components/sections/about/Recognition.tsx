@@ -67,7 +67,8 @@ export default function Recognition() {
       <div
         className="absolute top-10 right-10 w-36 h-36 opacity-10 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #67e8f9 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #67e8f9 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
@@ -89,7 +90,8 @@ export default function Recognition() {
             </h2>
           </div>
           <p className="max-w-xs text-slate-400 text-sm leading-relaxed">
-            Recognised by organisations and communities that share our commitment to impact.
+            Recognised by organisations and communities that share our
+            commitment to impact.
           </p>
         </div>
 
@@ -101,10 +103,14 @@ export default function Recognition() {
                 key={block.title}
                 className={`rounded-2xl border border-white/8 border-l-2 p-6 backdrop-blur-sm hover:bg-white/5 transition-colors duration-300 ${block.accent}`}
               >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${block.iconColor}`}>
+                <div
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${block.iconColor}`}
+                >
                   <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-base font-bold text-white mb-3">{block.title}</h3>
+                <h3 className="text-base font-bold text-white mb-3">
+                  {block.title}
+                </h3>
                 <ul className="space-y-2.5 text-sm leading-relaxed text-slate-400">
                   {block.details.map((detail) => (
                     <li key={detail} className="flex gap-2.5 items-start">

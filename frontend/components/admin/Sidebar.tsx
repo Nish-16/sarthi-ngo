@@ -2,17 +2,29 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import {
+  Sparkles,
+  Users,
+  Trophy,
+  FolderOpen,
+  BarChart2,
+  UserPlus,
+  Newspaper,
+  Link2,
+  PanelBottom,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const navItems = [
-  { href: "/admin/hero", label: "Hero", icon: "✦" },
-  { href: "/admin/who-we-are", label: "Who We Are", icon: "👥" },
-  { href: "/admin/recognitions", label: "Recognitions", icon: "🏆" },
-  { href: "/admin/projects", label: "Featured Projects", icon: "📂" },
-  { href: "/admin/impact", label: "Impact Stats", icon: "📊" },
-  { href: "/admin/join-us", label: "Join Us CTA", icon: "🙋" },
-  { href: "/admin/stories", label: "Stories & Updates", icon: "📰" },
-  { href: "/admin/navbar", label: "Navbar", icon: "🔗" },
-  { href: "/admin/footer", label: "Footer", icon: "⬇" },
+const navItems: { href: string; label: string; icon: LucideIcon }[] = [
+  { href: "/admin/hero", label: "Hero", icon: Sparkles },
+  { href: "/admin/who-we-are", label: "Who We Are", icon: Users },
+  { href: "/admin/recognitions", label: "Recognitions", icon: Trophy },
+  { href: "/admin/projects", label: "Featured Projects", icon: FolderOpen },
+  { href: "/admin/impact", label: "Impact Stats", icon: BarChart2 },
+  { href: "/admin/join-us", label: "Join Us CTA", icon: UserPlus },
+  { href: "/admin/stories", label: "Stories & Updates", icon: Newspaper },
+  { href: "/admin/navbar", label: "Navbar", icon: Link2 },
+  { href: "/admin/footer", label: "Footer", icon: PanelBottom },
 ];
 
 export default function Sidebar() {
@@ -41,6 +53,7 @@ export default function Sidebar() {
         <ul className="flex flex-col gap-0.5">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
+            const Icon = item.icon;
             return (
               <li key={item.href}>
                 <Link
@@ -51,7 +64,7 @@ export default function Sidebar() {
                       : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                   }`}
                 >
-                  <span className="text-base w-5 text-center">{item.icon}</span>
+                  <Icon className="w-4 h-4 shrink-0" />
                   {item.label}
                   {isActive && (
                     <span className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500" />

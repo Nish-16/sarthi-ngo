@@ -1,5 +1,6 @@
 import Container from "../ui/Container";
 import Button from "../ui/Button";
+import { Flame, Leaf, Lightbulb, CheckCircle } from "lucide-react";
 import type { JoinUsContent } from "@/types/content";
 
 export default function JoinUs({ content }: { content: JoinUsContent }) {
@@ -13,20 +14,19 @@ export default function JoinUs({ content }: { content: JoinUsContent }) {
           <div
             className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
-              backgroundImage:
-                "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+              backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
               backgroundSize: "24px 24px",
             }}
           />
 
-          <div className="absolute top-10 left-16 text-3xl animate-float opacity-60 pointer-events-none">
-            ✊
+          <div className="absolute top-10 left-16 animate-float opacity-50 pointer-events-none">
+            <Flame className="w-8 h-8 text-orange-300" />
           </div>
-          <div className="absolute bottom-10 right-20 text-3xl animate-float-slow opacity-60 pointer-events-none">
-            🌱
+          <div className="absolute bottom-10 right-20 animate-float-slow opacity-50 pointer-events-none">
+            <Leaf className="w-8 h-8 text-emerald-300" />
           </div>
-          <div className="absolute top-1/2 left-8 text-2xl animate-float opacity-40 pointer-events-none">
-            💡
+          <div className="absolute top-1/2 left-8 animate-float opacity-30 pointer-events-none">
+            <Lightbulb className="w-6 h-6 text-yellow-200" />
           </div>
 
           <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-6">
@@ -60,8 +60,9 @@ export default function JoinUs({ content }: { content: JoinUsContent }) {
               {content.badges.map((badge) => (
                 <span
                   key={badge}
-                  className="text-indigo-200 text-sm font-semibold"
+                  className="flex items-center gap-1.5 text-indigo-200 text-sm font-semibold"
                 >
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
                   {badge}
                 </span>
               ))}
