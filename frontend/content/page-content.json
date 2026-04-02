@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "title": "Sarthi NGO — Youth Driving Social Change",
+    "description": "A youth-led nonprofit committed to building communities, inspiring change, and creating lasting social impact across India."
+  },
+  "navbar": {
+    "logoText": "Sarthi",
+    "ctaLabel": "Join the Movement",
+    "ctaHref": "#join",
+    "links": [
+      {
+        "label": "About",
+        "href": "#about"
+      },
+      {
+        "label": "Projects",
+        "href": "#projects"
+      },
+      {
+        "label": "Impact",
+        "href": "#impact"
+      },
+      {
+        "label": "Stories",
+        "href": "#stories"
+      }
+    ]
+  },
+  "hero": {
+    "badge": "Youth-Led · Social Change · Indi",
+    "headline": "Answer to",
+    "headlineAccent": "responsible",
+    "headlineEnd": "youth driving social change",
+    "subtext": "Sarthi unites passionate young minds to build equitable communities, amplify underheard voices, and create sustainable impact — one initiative at a time.",
+    "ctaPrimary": "Get Involved",
+    "ctaSecondary": "Our Story",
+    "memberCount": "500+ Active Members",
+    "memberSubtext": "Across 12 cities",
+    "memberCities": "Across 12 cities",
+    "impactScore": "98%",
+    "awardLabel": "National Youth",
+    "memberAvatars": [
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80&fit=crop&crop=face",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&fit=crop&crop=face",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80&fit=crop&crop=face",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80&fit=crop&crop=face"
+    ],
+    "images": [
+      {
+        "src": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",
+        "alt": "Youth community gathering",
+        "clipPath": "polygon(0 0, 100% 0, 82% 100%, 0 100%)"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80",
+        "alt": "Team collaboration",
+        "clipPath": "polygon(18% 0, 100% 0, 82% 100%, 0 100%)"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+        "alt": "Community volunteering",
+        "clipPath": "polygon(18% 0, 100% 0, 82% 100%, 0 100%)"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
+        "alt": "Social impact work",
+        "clipPath": "polygon(18% 0, 100% 0, 100% 100%, 0 100%)"
+      }
+    ]
+  },
+  "whoWeAre": {
+    "eyebrow": "Who We Are",
+    "yearsValue": "6+",
+    "yearsLabel": "Years of Impact",
+    "headline": "A collective of",
+    "headlineAccent": "changemakers",
+    "description1": "Sarthi is a youth-driven nonprofit founded on the belief that young people are not the leaders of tomorrow — they are the leaders of today. We empower students and young professionals to take ownership of local challenges and build solutions that last.",
+    "description2": "Through skill-building programs, community outreach, and collaborative projects, we've reached thousands of lives across India. Every initiative we undertake is built from the ground up — by youth, for communities.",
+    "values": [
+      "🌱 Sustainability",
+      "🤝 Collaboration",
+      "✊ Equity",
+      "💡 Innovation",
+      "🌍 Community"
+    ],
+    "ctaLabel": "Our Full Story",
+    "mainImage": "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80",
+    "mainImageAlt": "Who we are",
+    "secondaryImage": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&q=80",
+    "secondaryImageAlt": "Team working together"
+  },
+  "recognitions": {
+    "eyebrow": "Recognitions & Awards",
+    "headline": "Trusted by",
+    "headlineAccent": "leading institutions",
+    "description": "Our work has been recognized by national bodies, global organizations, and leading youth platforms.",
+    "organizations": [
+      {
+        "name": "NITI Aayog",
+        "abbr": "NITI"
+      },
+      {
+        "name": "Youth Ki Awaaz",
+        "abbr": "YKA"
+      },
+      {
+        "name": "Ashoka Changemakers",
+        "abbr": "ACM"
+      },
+      {
+        "name": "UN Youth India",
+        "abbr": "UNYM"
+      },
+      {
+        "name": "India Social Forum",
+        "abbr": "ISF"
+      },
+      {
+        "name": "Forbes 30U30",
+        "abbr": "F30"
+      }
+    ],
+    "awards": [
+      {
+        "icon": "🏆",
+        "title": "National Youth Leadership Award",
+        "year": "2024"
+      },
+      {
+        "icon": "🌟",
+        "title": "Best Social Innovation, NITI",
+        "year": "2023"
+      },
+      {
+        "icon": "🎖️",
+        "title": "UN SDG Champion",
+        "year": "2023"
+      },
+      {
+        "icon": "💎",
+        "title": "Forbes Impact Nonprofit",
+        "year": "2022"
+      }
+    ]
+  },
+  "featuredProjects": {
+    "eyebrow": "Featured Projects",
+    "headline": "Initiatives making",
+    "headlineAccent": "real impact",
+    "ctaLabel": "View All Projects",
+    "projects": [
+      {
+        "image": "https://images.unsplash.com/photo-1509059852496-f3822ae057bf?w=800&q=80",
+        "tag": "Education",
+        "tagColor": "bg-indigo-100 text-indigo-700",
+        "title": "Pathshala Initiative",
+        "description": "Bringing quality education to rural communities through mobile classrooms and volunteer tutors across 8 districts.",
+        "stat": "12,000+ students reached",
+        "clipPath": "polygon(0 0, 100% 0, 100% 88%, 0 100%)"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80",
+        "tag": "Environment",
+        "tagColor": "bg-emerald-100 text-emerald-700",
+        "title": "GreenRoots Campaign",
+        "description": "Youth-led urban tree plantation and environmental awareness drives in partnership with municipal corporations.",
+        "stat": "50,000+ trees planted",
+        "clipPath": "polygon(0 8%, 100% 0, 100% 100%, 0 92%)"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80",
+        "tag": "Mental Health",
+        "tagColor": "bg-purple-100 text-purple-700",
+        "title": "Mindful Youth Program",
+        "description": "Free mental health workshops and peer-support circles for students navigating stress, anxiety, and identity.",
+        "stat": "3,500+ sessions conducted",
+        "clipPath": "polygon(0 0, 100% 8%, 100% 100%, 0 100%)"
+      }
+    ]
+  },
+  "impactStats": {
+    "eyebrow": "Our Impact",
+    "headline": "Numbers that",
+    "headlineAccent": "tell the story",
+    "description": "Every number represents a life touched, a community strengthened, and a step closer to systemic change.",
+    "footnote": "Data as of 2024 · Updated annually",
+    "stats": [
+      {
+        "value": "500+",
+        "label": "Active Interns",
+        "description": "Youth trained annually",
+        "icon": "🎓",
+        "gradient": "from-indigo-500 to-purple-600"
+      },
+      {
+        "value": "2,400+",
+        "label": "Members",
+        "description": "Across the country",
+        "icon": "🤝",
+        "gradient": "from-purple-500 to-pink-500"
+      },
+      {
+        "value": "12",
+        "label": "Cities",
+        "description": "And growing fast",
+        "icon": "🌆",
+        "gradient": "from-orange-400 to-red-500"
+      },
+      {
+        "value": "80K+",
+        "label": "People Reached",
+        "description": "Lives positively impacted",
+        "icon": "💫",
+        "gradient": "from-emerald-400 to-teal-600"
+      }
+    ]
+  },
+  "joinUs": {
+    "eyebrow": "Be Part of Something Bigger",
+    "headline": "Ready to create",
+    "headlineAccent": "real change",
+    "description": "Whether you're a student, professional, or passionate individual — Sarthi has a place for you. Join thousands of young changemakers working towards a more equitable India.",
+    "ctaPrimary": "Join as a Volunteer",
+    "ctaSecondary": "Explore Our Work",
+    "ctaSecondaryHref": "#projects",
+    "badges": [
+      "✓ Free to join",
+      "✓ Remote-friendly",
+      "✓ Certificate provided",
+      "✓ Real-world experience"
+    ]
+  },
+  "storiesUpdates": {
+    "eyebrow": "Stories & Updates",
+    "headline": "From the",
+    "headlineAccent": "field",
+    "ctaLabel": "Read All Stories",
+    "items": [
+      {
+        "image": "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&q=80",
+        "size": "tall",
+        "category": "Story",
+        "title": "How a 19-year-old built a reading program for 200 kids"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80",
+        "size": "normal",
+        "category": "Update",
+        "title": "Sarthi partners with NITI Aayog for rural outreach"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=600&q=80",
+        "size": "normal",
+        "category": "Story",
+        "title": "Meet the intern who planted 500 trees in her hometown"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80",
+        "size": "wide",
+        "category": "Event",
+        "title": "Sarthi Youth Summit 2024 — 800 changemakers, one roof"
+      }
+    ]
+  },
+  "footer": {
+    "logoText": "Sarthi",
+    "tagline": "Empowering youth to lead social change. Building communities, inspiring action, and creating lasting impact across India.",
+    "copyright": "© 2024 Sarthi NGO. All rights reserved.",
+    "linkGroups": [
+      {
+        "category": "Organisation",
+        "links": [
+          {
+            "label": "About Us",
+            "href": "#about"
+          },
+          {
+            "label": "Our Team",
+            "href": "#team"
+          },
+          {
+            "label": "Careers",
+            "href": "#careers"
+          },
+          {
+            "label": "Press",
+            "href": "#press"
+          },
+          {
+            "label": "Contact",
+            "href": "#contact"
+          }
+        ]
+      },
+      {
+        "category": "Programs",
+        "links": [
+          {
+            "label": "Internship Program",
+            "href": "#internship"
+          },
+          {
+            "label": "Pathshala Initiative",
+            "href": "#pathshala"
+          },
+          {
+            "label": "GreenRoots Campaign",
+            "href": "#greenroots"
+          },
+          {
+            "label": "Mindful Youth",
+            "href": "#mindful"
+          },
+          {
+            "label": "Youth Summit",
+            "href": "#summit"
+          }
+        ]
+      },
+      {
+        "category": "Resources",
+        "links": [
+          {
+            "label": "Blog",
+            "href": "#blog"
+          },
+          {
+            "label": "Annual Report",
+            "href": "#report"
+          },
+          {
+            "label": "Media Kit",
+            "href": "#media"
+          },
+          {
+            "label": "Donate",
+            "href": "#donate"
+          },
+          {
+            "label": "Newsletter",
+            "href": "#newsletter"
+          }
+        ]
+      }
+    ]
+  }
+}
