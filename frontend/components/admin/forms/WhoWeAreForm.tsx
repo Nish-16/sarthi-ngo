@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import SectionShell from "../SectionShell";
+import FormGroup from "../FormGroup";
 import ArrayField from "../ArrayField";
 import ImageUploader from "../ImageUploader";
 import { saveWhoWeAre } from "@/app/actions/content";
@@ -58,74 +59,71 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
       onSave={async () => setResult(await saveWhoWeAre(data))}
       saveResult={result}
     >
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="Eyebrow Label">
-          <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
+      <FormGroup title="Section Header">
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Eyebrow Label">
+            <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
+          </Field>
+          <Field label="CTA Label">
+            <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
+          </Field>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Headline (before accent)">
+            <Input value={data.headline} onChange={(v) => set("headline", v)} />
+          </Field>
+          <Field label="Headline Accent">
+            <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
+          </Field>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Years Value">
+            <Input value={data.yearsValue} onChange={(v) => set("yearsValue", v)} placeholder="6+" />
+          </Field>
+          <Field label="Years Label">
+            <Input value={data.yearsLabel} onChange={(v) => set("yearsLabel", v)} placeholder="Years of Impact" />
+          </Field>
+        </div>
+      </FormGroup>
+
+      <FormGroup title="Content">
+        <Field label="Description Paragraph 1">
+          <Textarea value={data.description1} onChange={(v) => set("description1", v)} rows={4} />
         </Field>
-        <Field label="CTA Label">
-          <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
+        <Field label="Description Paragraph 2">
+          <Textarea value={data.description2} onChange={(v) => set("description2", v)} rows={4} />
         </Field>
-      </div>
+        <ArrayField<string>
+          label="Values (pills displayed below description)"
+          items={data.values}
+          onChange={(v) => set("values", v)}
+          createItem={() => ""}
+          renderItem={(val, _i, onChange) => (
+            <Input value={val} onChange={onChange} placeholder="🌱 Sustainability" />
+          )}
+        />
+      </FormGroup>
 
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="Headline (before accent)">
-          <Input value={data.headline} onChange={(v) => set("headline", v)} />
+      <FormGroup title="Media">
+        <ImageUploader
+          label="Main Image"
+          value={data.mainImage}
+          onChange={(url) => set("mainImage", url)}
+          aspectRatio="4/3"
+        />
+        <Field label="Main Image Alt Text">
+          <Input value={data.mainImageAlt} onChange={(v) => set("mainImageAlt", v)} />
         </Field>
-        <Field label="Headline Accent">
-          <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
+        <ImageUploader
+          label="Secondary Image (floating card)"
+          value={data.secondaryImage}
+          onChange={(url) => set("secondaryImage", url)}
+          aspectRatio="1/1"
+        />
+        <Field label="Secondary Image Alt Text">
+          <Input value={data.secondaryImageAlt} onChange={(v) => set("secondaryImageAlt", v)} />
         </Field>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="Years Value">
-          <Input value={data.yearsValue} onChange={(v) => set("yearsValue", v)} placeholder="6+" />
-        </Field>
-        <Field label="Years Label">
-          <Input value={data.yearsLabel} onChange={(v) => set("yearsLabel", v)} placeholder="Years of Impact" />
-        </Field>
-      </div>
-
-      <Field label="Description Paragraph 1">
-        <Textarea value={data.description1} onChange={(v) => set("description1", v)} rows={4} />
-      </Field>
-
-      <Field label="Description Paragraph 2">
-        <Textarea value={data.description2} onChange={(v) => set("description2", v)} rows={4} />
-      </Field>
-
-      <hr className="border-slate-100" />
-
-      <ArrayField<string>
-        label="Values (pills displayed below description)"
-        items={data.values}
-        onChange={(v) => set("values", v)}
-        createItem={() => ""}
-        renderItem={(val, _i, onChange) => (
-          <Input value={val} onChange={onChange} placeholder="🌱 Sustainability" />
-        )}
-      />
-
-      <hr className="border-slate-100" />
-
-      <ImageUploader
-        label="Main Image"
-        value={data.mainImage}
-        onChange={(url) => set("mainImage", url)}
-        aspectRatio="4/3"
-      />
-      <Field label="Main Image Alt Text">
-        <Input value={data.mainImageAlt} onChange={(v) => set("mainImageAlt", v)} />
-      </Field>
-
-      <ImageUploader
-        label="Secondary Image (floating card)"
-        value={data.secondaryImage}
-        onChange={(url) => set("secondaryImage", url)}
-        aspectRatio="1/1"
-      />
-      <Field label="Secondary Image Alt Text">
-        <Input value={data.secondaryImageAlt} onChange={(v) => set("secondaryImageAlt", v)} />
-      </Field>
+      </FormGroup>
     </SectionShell>
   );
 }

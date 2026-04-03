@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 
 interface ArrayFieldProps<T> {
-  label: string;
+  label?: string;
   items: T[];
   onChange: (items: T[]) => void;
   createItem: () => T;
@@ -43,7 +43,7 @@ export default function ArrayField<T>({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <label className="text-sm font-semibold text-slate-700">{label}</label>
+        {label && <label className="text-sm font-semibold text-slate-700">{label}</label>}
         {(!maxItems || items.length < maxItems) && (
           <button
             type="button"

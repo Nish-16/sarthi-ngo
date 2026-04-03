@@ -1,17 +1,8 @@
 import Image from "next/image";
 import SocialIcons from "@/components/ui/SocialIcons";
+import type { TeamMemberContent } from "@/types/content";
 
-export interface TeamMember {
-  name: string;
-  role: string;
-  department: string;
-  image: string;
-  linkedin?: string;
-  email?: string;
-  accentColor: string;
-}
-
-export default function TeamCard({ member }: { member: TeamMember }) {
+export default function TeamCard({ member }: { member: TeamMemberContent }) {
   return (
     <article className="group relative bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-2 transition-all duration-500">
       {/* image */}
@@ -23,19 +14,14 @@ export default function TeamCard({ member }: { member: TeamMember }) {
           className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
-        {/* subtle dark vignette — keeps image readable, no white wash */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
-
-        {/* department tag */}
         <span className="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-white/85 backdrop-blur-sm text-slate-600 border border-white/60">
           {member.department}
         </span>
       </div>
 
-      {/* content — matches bg-slate-50 so there's no jarring white flash */}
       <div className="px-6 py-5">
         <div className={`w-7 h-1 rounded-full mb-3 ${member.accentColor}`} />
-
         <h3 className="text-base font-extrabold text-slate-900 tracking-tight leading-snug">
           {member.name}
         </h3>

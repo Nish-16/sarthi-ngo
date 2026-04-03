@@ -266,6 +266,226 @@
       }
     ]
   },
+  "whatWeDo": {
+    "hero": {
+      "badge": "Programs and Initiatives",
+      "headline": "What",
+      "headlineAccent": "We Do",
+      "description": "We co-create high-impact programs with communities, turning local challenges into scalable, youth-led solutions that last.",
+      "ctaPrimary": "Explore Programs",
+      "ctaPrimaryHref": "#projects",
+      "ctaSecondary": "Partner With Us",
+      "ctaSecondaryHref": "/get-involved"
+    },
+    "signatureProjects": {
+      "eyebrow": "Signature Projects",
+      "headline": "Initiatives built for",
+      "headlineAccent": "local realities",
+      "subheading": "Each program is designed with communities, not for them.",
+      "initiatives": [
+        {
+          "name": "Abhivyakti",
+          "tagline": "Youth Expression Lab",
+          "description": "A youth expression and leadership lab where students build confidence through storytelling, debate circles, and community journalism.",
+          "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1400&q=80",
+          "clipPath": "polygon(0 0, 100% 0, 92% 100%, 0 100%)",
+          "accent": "from-indigo-600/80 to-sky-500/60",
+          "iconName": "Users"
+        },
+        {
+          "name": "Sustainisha",
+          "tagline": "Green Action Program",
+          "description": "An action program helping neighborhoods reduce waste, adopt climate-smart habits, and co-create local green infrastructure.",
+          "image": "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=1400&q=80",
+          "clipPath": "polygon(10% 0, 100% 0, 100% 100%, 0 100%)",
+          "accent": "from-emerald-600/75 to-teal-500/60",
+          "iconName": "Leaf"
+        }
+      ]
+    },
+    "previousProjects": {
+      "eyebrow": "Our Previous Projects",
+      "headline": "Programs that",
+      "headlineAccent": "shaped our journey",
+      "description": "These initiatives taught us what sustainable impact requires: local trust, long-term engagement, and youth ownership.",
+      "projects": [
+        {
+          "title": "Save Daughters",
+          "description": "Awareness and mentorship circles to improve access to education for girls in semi-urban schools.",
+          "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80",
+          "iconName": "GraduationCap",
+          "accent": "from-pink-500 to-rose-400",
+          "tag": "Education"
+        },
+        {
+          "title": "Save Environment",
+          "description": "Street-level campaigns for waste segregation, neighborhood composting, and community clean-ups.",
+          "image": "https://images.unsplash.com/photo-1497493292307-31c376b6e479?w=1200&q=80",
+          "iconName": "Recycle",
+          "accent": "from-emerald-500 to-teal-400",
+          "tag": "Environment"
+        },
+        {
+          "title": "Health on Wheels",
+          "description": "Mobile health check-up camps in underserved pockets with youth volunteers and local clinics.",
+          "image": "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1200&q=80",
+          "iconName": "HeartPulse",
+          "accent": "from-red-500 to-orange-400",
+          "tag": "Healthcare"
+        },
+        {
+          "title": "Skills for Youth",
+          "description": "Career readiness bootcamps focused on communication, digital literacy, and interview readiness.",
+          "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
+          "iconName": "BookOpen",
+          "accent": "from-indigo-500 to-purple-400",
+          "tag": "Livelihoods"
+        }
+      ]
+    },
+    "problem": {
+      "eyebrow": "The Problem",
+      "headline": "High-potential communities blocked by",
+      "headlineAccent": "unequal access",
+      "description1": "Across many neighborhoods, young people face fragmented access to quality learning, health support, and livelihood opportunities. The issue is not lack of ambition, but the gap between existing systems and local realities.",
+      "description2": "We work where that gap is widest, building practical interventions with residents, schools, and local institutions so progress is shared, measurable, and lasting.",
+      "image": "https://images.unsplash.com/photo-1469571486292-b53601020d72?w=1400&q=80",
+      "imageAlt": "Community members discussing local challenges",
+      "statValue": "42+",
+      "statLabel": "Communities reached",
+      "gaps": [
+        { "iconName": "TrendingDown", "label": "Unequal Learning Access", "color": "text-orange-500 bg-orange-50" },
+        { "iconName": "Users", "label": "Fragmented Community Support", "color": "text-indigo-500 bg-indigo-50" },
+        { "iconName": "AlertTriangle", "label": "Broken Livelihood Pathways", "color": "text-rose-500 bg-rose-50" }
+      ]
+    },
+    "approach": {
+      "eyebrow": "Our Approach",
+      "headline": "A field-tested process that keeps",
+      "headlineAccent": "communities in the driver seat",
+      "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80",
+      "imageAlt": "Volunteers collaborating on a field program",
+      "quoteCard": "From planning to execution, each step is measurable and locally led.",
+      "steps": [
+        { "title": "Listen", "description": "Map local needs through community circles, youth interviews, and partner consultations.", "iconName": "Ear", "color": "bg-cyan-400/20 text-cyan-200 border-cyan-400/30" },
+        { "title": "Co-Design", "description": "Build programs with residents and local institutions so solutions fit real constraints.", "iconName": "PenLine", "color": "bg-indigo-400/20 text-indigo-200 border-indigo-400/30" },
+        { "title": "Activate", "description": "Run pilots with trained youth volunteers, tracking participation and outcomes in real time.", "iconName": "Zap", "color": "bg-orange-400/20 text-orange-200 border-orange-400/30" },
+        { "title": "Scale", "description": "Replicate validated models in new communities with local ownership and shared playbooks.", "iconName": "TrendingUp", "color": "bg-emerald-400/20 text-emerald-200 border-emerald-400/30" }
+      ]
+    },
+    "impact": {
+      "eyebrow": "Our Impact",
+      "headline": "Numbers that reflect",
+      "headlineAccent": "durable change",
+      "stats": [
+        { "value": "95K+", "label": "People Reached", "iconName": "Users" },
+        { "value": "42", "label": "Communities Impacted", "iconName": "MapPin" },
+        { "value": "280+", "label": "Programs Conducted", "iconName": "BarChart3" },
+        { "value": "1,200+", "label": "Youth Volunteers Trained", "iconName": "GraduationCap" }
+      ]
+    }
+  },
+  "team": {
+    "hero": {
+      "badge": "The People Behind Sarthi",
+      "headline": "Our",
+      "headlineAccent": "Team",
+      "description": "Meet the passionate leaders, field coordinators, and volunteers who turn ideas into action — every single day.",
+      "stats": [
+        { "value": "1,200+", "label": "Active volunteers", "iconName": "Users" },
+        { "value": "42", "label": "Communities served", "iconName": "MapPin" },
+        { "value": "8+", "label": "Years building together", "iconName": "Calendar" }
+      ]
+    },
+    "grid": {
+      "groups": [
+        {
+          "title": "Leadership Team",
+          "subtitle": "The founding members and senior leaders steering our mission.",
+          "members": [
+            {
+              "name": "Arjun Mehta",
+              "role": "Founder & Executive Director",
+              "department": "Leadership",
+              "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "arjun@sarthi.org",
+              "accentColor": "bg-indigo-500"
+            },
+            {
+              "name": "Priya Sharma",
+              "role": "Co-Founder & Programs Lead",
+              "department": "Leadership",
+              "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "priya@sarthi.org",
+              "accentColor": "bg-purple-500"
+            },
+            {
+              "name": "Rohan Verma",
+              "role": "Head of Community Outreach",
+              "department": "Leadership",
+              "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "rohan@sarthi.org",
+              "accentColor": "bg-cyan-500"
+            },
+            {
+              "name": "Sneha Patel",
+              "role": "Director of Partnerships",
+              "department": "Leadership",
+              "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "sneha@sarthi.org",
+              "accentColor": "bg-orange-500"
+            }
+          ]
+        },
+        {
+          "title": "Core Team",
+          "subtitle": "The dedicated coordinators and specialists who make programs happen on the ground.",
+          "members": [
+            {
+              "name": "Vikram Nair",
+              "role": "Field Programs Coordinator",
+              "department": "Operations",
+              "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "vikram@sarthi.org",
+              "accentColor": "bg-emerald-500"
+            },
+            {
+              "name": "Ananya Singh",
+              "role": "Education & Skilling Lead",
+              "department": "Programs",
+              "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "ananya@sarthi.org",
+              "accentColor": "bg-rose-500"
+            },
+            {
+              "name": "Kabir Joshi",
+              "role": "Digital & Communications",
+              "department": "Operations",
+              "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "kabir@sarthi.org",
+              "accentColor": "bg-amber-500"
+            },
+            {
+              "name": "Meera Iyer",
+              "role": "Climate Action Coordinator",
+              "department": "Programs",
+              "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+              "linkedin": "https://linkedin.com",
+              "email": "meera@sarthi.org",
+              "accentColor": "bg-teal-500"
+            }
+          ]
+        }
+      ]
+    }
+  },
   "footer": {
     "logoText": "Sarthi",
     "tagline": "Empowering youth to lead social change. Building communities, inspiring action, and creating lasting impact across India.",

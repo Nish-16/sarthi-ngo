@@ -174,6 +174,153 @@ export interface FooterContent {
   linkGroups: FooterLinkGroup[];
 }
 
+// ─── What We Do Page ──────────────────────────────────────────────────────────
+
+export interface WwdHeroContent {
+  badge: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  ctaPrimary: string;
+  ctaPrimaryHref: string;
+  ctaSecondary: string;
+  ctaSecondaryHref: string;
+}
+
+export interface WwdInitiativeItem {
+  name: string;
+  tagline: string;
+  description: string;
+  image: string;
+  clipPath: string;
+  accent: string;
+  iconName: string;
+}
+
+export interface WwdSignatureProjectsContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  subheading: string;
+  initiatives: WwdInitiativeItem[];
+}
+
+export interface WwdPreviousProjectItem {
+  title: string;
+  description: string;
+  image: string;
+  iconName: string;
+  accent: string;
+  tag: string;
+}
+
+export interface WwdPreviousProjectsContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  projects: WwdPreviousProjectItem[];
+}
+
+export interface WwdGapItem {
+  iconName: string;
+  label: string;
+  color: string;
+}
+
+export interface WwdProblemContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description1: string;
+  description2: string;
+  image: string;
+  imageAlt: string;
+  statValue: string;
+  statLabel: string;
+  gaps: WwdGapItem[];
+}
+
+export interface WwdApproachStep {
+  title: string;
+  description: string;
+  iconName: string;
+  color: string;
+}
+
+export interface WwdApproachContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  image: string;
+  imageAlt: string;
+  quoteCard: string;
+  steps: WwdApproachStep[];
+}
+
+export interface WwdImpactStatItem {
+  value: string;
+  label: string;
+  iconName: string;
+}
+
+export interface WwdImpactContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  stats: WwdImpactStatItem[];
+}
+
+export interface WhatWeDoContent {
+  hero: WwdHeroContent;
+  signatureProjects: WwdSignatureProjectsContent;
+  previousProjects: WwdPreviousProjectsContent;
+  problem: WwdProblemContent;
+  approach: WwdApproachContent;
+  impact: WwdImpactContent;
+}
+
+// ─── Team Page ────────────────────────────────────────────────────────────────
+
+export interface TeamStatItem {
+  value: string;
+  label: string;
+  iconName: string;
+}
+
+export interface TeamHeroContent {
+  badge: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  stats: TeamStatItem[];
+}
+
+export interface TeamMemberContent {
+  name: string;
+  role: string;
+  department: string;
+  image: string;
+  linkedin: string;
+  email: string;
+  accentColor: string;
+}
+
+export interface TeamGroupContent {
+  title: string;
+  subtitle: string;
+  members: TeamMemberContent[];
+}
+
+export interface TeamGridContent {
+  groups: TeamGroupContent[];
+}
+
+export interface TeamPageContent {
+  hero: TeamHeroContent;
+  grid: TeamGridContent;
+}
+
 // ─── Root ─────────────────────────────────────────────────────────────────────
 
 export interface PageContent {
@@ -187,4 +334,6 @@ export interface PageContent {
   joinUs: JoinUsContent;
   storiesUpdates: StoriesUpdatesContent;
   footer: FooterContent;
+  whatWeDo: WhatWeDoContent;
+  team: TeamPageContent;
 }

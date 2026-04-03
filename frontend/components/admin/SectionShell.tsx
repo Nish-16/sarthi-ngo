@@ -26,7 +26,7 @@ export default function SectionShell({
   }
 
   return (
-    <div className="flex flex-col gap-6 max-w-3xl">
+    <div className="flex flex-col gap-4 max-w-4xl">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -79,7 +79,7 @@ export default function SectionShell({
       )}
 
       {/* Form content */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         {children}
       </div>
     </div>

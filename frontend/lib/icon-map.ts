@@ -1,0 +1,62 @@
+import {
+  Users,
+  Leaf,
+  GraduationCap,
+  Recycle,
+  HeartPulse,
+  BookOpen,
+  TrendingDown,
+  TrendingUp,
+  AlertTriangle,
+  Ear,
+  PenLine,
+  Zap,
+  MapPin,
+  BarChart3,
+  Heart,
+  Star,
+  Globe,
+  Award,
+  Lightbulb,
+  Shield,
+  Handshake,
+  TreePine,
+  Stethoscope,
+  School,
+  Calendar,
+  type LucideIcon,
+} from "lucide-react";
+
+export const iconMap: Record<string, LucideIcon> = {
+  Users,
+  Leaf,
+  GraduationCap,
+  Recycle,
+  HeartPulse,
+  BookOpen,
+  TrendingDown,
+  TrendingUp,
+  AlertTriangle,
+  Ear,
+  PenLine,
+  Zap,
+  MapPin,
+  BarChart3,
+  Heart,
+  Star,
+  Globe,
+  Award,
+  Lightbulb,
+  Shield,
+  Handshake,
+  TreePine,
+  Stethoscope,
+  School,
+  Calendar,
+};
+
+export const iconNames = Object.keys(iconMap);
+
+export function getIcon(name: string): LucideIcon {
+  return iconMap[name] ?? Users;
+}

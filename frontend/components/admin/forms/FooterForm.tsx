@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import SectionShell from "../SectionShell";
+import FormGroup from "../FormGroup";
 import ArrayField from "../ArrayField";
 import { saveFooter } from "@/app/actions/content";
 import type { FooterContent, FooterLinkGroup, FooterLinkItem } from "@/types/content";
@@ -77,34 +78,36 @@ export default function FooterForm({ initial }: { initial: FooterContent }) {
       onSave={async () => setResult(await saveFooter(data))}
       saveResult={result}
     >
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="Logo Text">
-          <Input value={data.logoText} onChange={(v) => set("logoText", v)} />
+      <FormGroup title="Brand">
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Logo Text">
+            <Input value={data.logoText} onChange={(v) => set("logoText", v)} />
+          </Field>
+          <Field label="Copyright Text">
+            <Input value={data.copyright} onChange={(v) => set("copyright", v)} />
+          </Field>
+        </div>
+        <Field label="Brand Tagline">
+          <textarea
+            value={data.tagline}
+            rows={2}
+            onChange={(e) => set("tagline", e.target.value)}
+            className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+          />
         </Field>
-        <Field label="Copyright Text">
-          <Input value={data.copyright} onChange={(v) => set("copyright", v)} />
-        </Field>
-      </div>
-      <Field label="Brand Tagline">
-        <textarea
-          value={data.tagline}
-          rows={2}
-          onChange={(e) => set("tagline", e.target.value)}
-          className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+      </FormGroup>
+
+      <FormGroup title="Link Groups">
+        <ArrayField<FooterLinkGroup>
+          label=""
+          items={data.linkGroups}
+          onChange={(v) => set("linkGroups", v)}
+          createItem={() => ({ category: "New Group", links: [] })}
+          renderItem={(group, _i, onChange) => (
+            <LinkGroupEditor group={group} onChange={onChange} />
+          )}
         />
-      </Field>
-
-      <hr className="border-slate-100" />
-
-      <ArrayField<FooterLinkGroup>
-        label="Link Groups"
-        items={data.linkGroups}
-        onChange={(v) => set("linkGroups", v)}
-        createItem={() => ({ category: "New Group", links: [] })}
-        renderItem={(group, _i, onChange) => (
-          <LinkGroupEditor group={group} onChange={onChange} />
-        )}
-      />
+      </FormGroup>
     </SectionShell>
   );
 }

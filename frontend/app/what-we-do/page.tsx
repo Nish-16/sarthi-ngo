@@ -12,6 +12,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function WhatWeDoPage() {
   const content = readContent();
+  const wwd = content.whatWeDo;
 
   return (
     <>
@@ -28,8 +29,7 @@ export default function WhatWeDoPage() {
           <div
             className="absolute top-24 left-8 w-36 h-36 opacity-25 pointer-events-none"
             style={{
-              backgroundImage:
-                "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+              backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
               backgroundSize: "12px 12px",
             }}
           />
@@ -37,8 +37,7 @@ export default function WhatWeDoPage() {
           <div
             className="absolute bottom-16 right-10 w-28 h-28 opacity-20 pointer-events-none"
             style={{
-              backgroundImage:
-                "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
+              backgroundImage: "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
               backgroundSize: "12px 12px",
             }}
           />
@@ -51,12 +50,12 @@ export default function WhatWeDoPage() {
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
                 <Sparkles className="w-3.5 h-3.5" />
-                Programs and Initiatives
+                {wwd.hero.badge}
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.05]">
-                What{" "}
+                {wwd.hero.headline}{" "}
                 <span className="relative inline-block">
-                  <span className="text-indigo-600">We Do</span>
+                  <span className="text-indigo-600">{wwd.hero.headlineAccent}</span>
                   <span
                     className="absolute -bottom-1 left-0 right-0 h-1.5 bg-orange-400 rounded-full"
                     aria-hidden="true"
@@ -64,16 +63,15 @@ export default function WhatWeDoPage() {
                 </span>
               </h1>
               <p className="mt-7 text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl">
-                We co-create high-impact programs with communities, turning
-                local challenges into scalable, youth-led solutions that last.
+                {wwd.hero.description}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Button href="#projects" size="lg">
-                  <span>Explore Programs</span>
+                <Button href={wwd.hero.ctaPrimaryHref} size="lg">
+                  <span>{wwd.hero.ctaPrimary}</span>
                   <ArrowRight className="w-5 h-5" />
                 </Button>
-                <Button href="/get-involved" variant="ghost" size="lg">
-                  Partner With Us
+                <Button href={wwd.hero.ctaSecondaryHref} variant="ghost" size="lg">
+                  {wwd.hero.ctaSecondary}
                 </Button>
               </div>
             </div>
@@ -91,12 +89,12 @@ export default function WhatWeDoPage() {
         </section>
 
         <div id="projects">
-          <ProjectsSection />
+          <ProjectsSection content={wwd.signatureProjects} />
         </div>
-        <PreviousProjects />
-        <ProblemSection />
-        <ApproachSection />
-        <ImpactSection />
+        <PreviousProjects content={wwd.previousProjects} />
+        <ProblemSection content={wwd.problem} />
+        <ApproachSection content={wwd.approach} />
+        <ImpactSection content={wwd.impact} />
       </main>
       <Footer content={content.footer} />
     </>

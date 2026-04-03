@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import SectionShell from "../SectionShell";
+import FormGroup from "../FormGroup";
 import ArrayField from "../ArrayField";
 import { saveNavbar } from "@/app/actions/content";
 import type { NavbarContent, NavLink } from "@/types/content";
@@ -44,32 +45,34 @@ export default function NavbarForm({ initial }: { initial: NavbarContent }) {
       onSave={async () => setResult(await saveNavbar(data))}
       saveResult={result}
     >
-      <Field label="Logo Text">
-        <Input value={data.logoText} onChange={(v) => set("logoText", v)} placeholder="Sarthi" />
-      </Field>
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="CTA Button Label">
-          <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
+      <FormGroup title="Brand & CTA">
+        <Field label="Logo Text">
+          <Input value={data.logoText} onChange={(v) => set("logoText", v)} placeholder="Sarthi" />
         </Field>
-        <Field label="CTA Button Href">
-          <Input value={data.ctaHref} onChange={(v) => set("ctaHref", v)} placeholder="#join" />
-        </Field>
-      </div>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="CTA Button Label">
+            <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
+          </Field>
+          <Field label="CTA Button Href">
+            <Input value={data.ctaHref} onChange={(v) => set("ctaHref", v)} placeholder="#join" />
+          </Field>
+        </div>
+      </FormGroup>
 
-      <hr className="border-slate-100" />
-
-      <ArrayField<NavLink>
-        label="Navigation Links"
-        items={data.links}
-        onChange={(v) => set("links", v)}
-        createItem={() => ({ label: "", href: "#" })}
-        renderItem={(link, _i, onChange) => (
-          <div className="grid grid-cols-2 gap-2">
-            <Input value={link.label} onChange={(v) => onChange({ ...link, label: v })} placeholder="Link label" />
-            <Input value={link.href} onChange={(v) => onChange({ ...link, href: v })} placeholder="#section" />
-          </div>
-        )}
-      />
+      <FormGroup title="Navigation Links">
+        <ArrayField<NavLink>
+          label=""
+          items={data.links}
+          onChange={(v) => set("links", v)}
+          createItem={() => ({ label: "", href: "#" })}
+          renderItem={(link, _i, onChange) => (
+            <div className="grid grid-cols-2 gap-2">
+              <Input value={link.label} onChange={(v) => onChange({ ...link, label: v })} placeholder="Link label" />
+              <Input value={link.href} onChange={(v) => onChange({ ...link, href: v })} placeholder="#section" />
+            </div>
+          )}
+        />
+      </FormGroup>
     </SectionShell>
   );
 }

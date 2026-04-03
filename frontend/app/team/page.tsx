@@ -3,7 +3,8 @@ import Footer from "@/components/layout/Footer";
 import Container from "@/components/ui/Container";
 import TeamGrid from "@/components/sections/team/TeamGrid";
 import { readContent } from "@/lib/content";
-import { Users, Sparkles } from "lucide-react";
+import { getIcon } from "@/lib/icon-map";
+import { Sparkles } from "lucide-react";
 
 export const metadata = {
   title: "Our Team | Sarthi NGO",
@@ -13,6 +14,7 @@ export const metadata = {
 
 export default function TeamPage() {
   const content = readContent();
+  const { hero, grid } = content.team;
 
   return (
     <>
@@ -50,13 +52,13 @@ export default function TeamPage() {
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
                 <Sparkles className="w-3.5 h-3.5" />
-                The People Behind Sarthi
+                {hero.badge}
               </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.05]">
-                Our{" "}
+                {hero.headline}{" "}
                 <span className="relative inline-block">
-                  <span className="text-indigo-600">Team</span>
+                  <span className="text-indigo-600">{hero.headlineAccent}</span>
                   <span
                     className="absolute -bottom-1 left-0 right-0 h-1.5 bg-orange-400 rounded-full"
                     aria-hidden="true"
@@ -65,35 +67,26 @@ export default function TeamPage() {
               </h1>
 
               <p className="mt-7 text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl">
-                Meet the passionate leaders, field coordinators, and volunteers who
-                turn ideas into action — every single day.
+                {hero.description}
               </p>
 
               {/* stat pills */}
               <div className="mt-10 flex flex-wrap gap-4">
-                <div className="flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl px-5 py-3 shadow-sm">
-                  <Users className="w-5 h-5 text-indigo-500" />
-                  <div>
-                    <p className="text-xl font-black text-slate-900">1,200+</p>
-                    <p className="text-xs text-slate-400 font-medium">Active volunteers</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl px-5 py-3 shadow-sm">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center">
-                    <span className="text-white text-[9px] font-black">42</span>
-                  </div>
-                  <div>
-                    <p className="text-xl font-black text-slate-900">42</p>
-                    <p className="text-xs text-slate-400 font-medium">Communities served</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl px-5 py-3 shadow-sm">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 to-rose-400" />
-                  <div>
-                    <p className="text-xl font-black text-slate-900">8+</p>
-                    <p className="text-xs text-slate-400 font-medium">Years building together</p>
-                  </div>
-                </div>
+                {hero.stats.map((stat) => {
+                  const Icon = getIcon(stat.iconName);
+                  return (
+                    <div
+                      key={stat.label}
+                      className="flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl px-5 py-3 shadow-sm"
+                    >
+                      <Icon className="w-5 h-5 text-indigo-500" />
+                      <div>
+                        <p className="text-xl font-black text-slate-900">{stat.value}</p>
+                        <p className="text-xs text-slate-400 font-medium">{stat.label}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </Container>
@@ -109,7 +102,7 @@ export default function TeamPage() {
           </div>
         </section>
 
-        <TeamGrid />
+        <TeamGrid content={grid} />
 
       </main>
       <Footer content={content.footer} />

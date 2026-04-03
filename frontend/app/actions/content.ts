@@ -13,6 +13,16 @@ import type {
   NavbarContent,
   FooterContent,
   MetaContent,
+  WhatWeDoContent,
+  WwdHeroContent,
+  WwdSignatureProjectsContent,
+  WwdPreviousProjectsContent,
+  WwdProblemContent,
+  WwdApproachContent,
+  WwdImpactContent,
+  TeamPageContent,
+  TeamHeroContent,
+  TeamGridContent,
 } from "@/types/content";
 
 type ActionResult = { success: true } | { error: string };
@@ -29,6 +39,22 @@ function withSave<T>(
     return { success: true };
   } catch (err) {
     console.error(`Failed to save ${key}:`, err);
+    return { error: "Failed to save. Please try again." };
+  }
+}
+
+function withSaveWwd<K extends keyof WhatWeDoContent>(
+  key: K,
+  data: WhatWeDoContent[K]
+): ActionResult {
+  try {
+    const content = readContent();
+    content.whatWeDo[key] = data;
+    writeContent(content);
+    revalidatePath("/what-we-do", "page");
+    return { success: true };
+  } catch (err) {
+    console.error(`Failed to save whatWeDo.${key}:`, err);
     return { error: "Failed to save. Please try again." };
   }
 }
@@ -81,4 +107,56 @@ export async function saveStoriesUpdates(
 
 export async function saveFooter(data: FooterContent): Promise<ActionResult> {
   return withSave("footer", data);
+}
+
+// ─── What We Do ───────────────────────────────────────────────────────────────
+
+export async function saveWwdHero(data: WwdHeroContent): Promise<ActionResult> {
+  return withSaveWwd("hero", data);
+}
+
+export async function saveWwdSignatureProjects(data: WwdSignatureProjectsContent): Promise<ActionResult> {
+  return withSaveWwd("signatureProjects", data);
+}
+
+export async function saveWwdPreviousProjects(data: WwdPreviousProjectsContent): Promise<ActionResult> {
+  return withSaveWwd("previousProjects", data);
+}
+
+export async function saveWwdProblem(data: WwdProblemContent): Promise<ActionResult> {
+  return withSaveWwd("problem", data);
+}
+
+export async function saveWwdApproach(data: WwdApproachContent): Promise<ActionResult> {
+  return withSaveWwd("approach", data);
+}
+
+export async function saveWwdImpact(data: WwdImpactContent): Promise<ActionResult> {
+  return withSaveWwd("impact", data);
+}
+
+// ─── Team ─────────────────────────────────────────────────────────────────────
+
+function withSaveTeam<K extends keyof TeamPageContent>(
+  key: K,
+  data: TeamPageContent[K]
+): ActionResult {
+  try {
+    const content = readContent();
+    content.team[key] = data;
+    writeContent(content);
+    revalidatePath("/team", "page");
+    return { success: true };
+  } catch (err) {
+    console.error(`Failed to save team.${key}:`, err);
+    return { error: "Failed to save. Please try again." };
+  }
+}
+
+export async function saveTeamHero(data: TeamHeroContent): Promise<ActionResult> {
+  return withSaveTeam("hero", data);
+}
+
+export async function saveTeamGrid(data: TeamGridContent): Promise<ActionResult> {
+  return withSaveTeam("grid", data);
 }
