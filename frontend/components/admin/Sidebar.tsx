@@ -4,9 +4,26 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
-  Sparkles, Users, Trophy, FolderOpen, BarChart2, UserPlus, Newspaper,
-  Link2, PanelBottom, Layers, BookOpen, AlertCircle, GitBranch, TrendingUp,
-  Home, Wrench, Info, HandHeart, ChevronDown, Globe,
+  Sparkles,
+  Users,
+  Trophy,
+  FolderOpen,
+  BarChart2,
+  UserPlus,
+  Newspaper,
+  Link2,
+  PanelBottom,
+  Layers,
+  BookOpen,
+  AlertCircle,
+  GitBranch,
+  TrendingUp,
+  Home,
+  Wrench,
+  Info,
+  HandHeart,
+  ChevronDown,
+  Globe,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -44,8 +61,16 @@ const groups: PageGroup[] = [
     previewHref: "/what-we-do",
     items: [
       { href: "/admin/wwd/hero", label: "Hero", icon: Sparkles },
-      { href: "/admin/wwd/projects", label: "Signature Projects", icon: Layers },
-      { href: "/admin/wwd/previous-projects", label: "Previous Projects", icon: BookOpen },
+      {
+        href: "/admin/wwd/projects",
+        label: "Signature Projects",
+        icon: Layers,
+      },
+      {
+        href: "/admin/wwd/previous-projects",
+        label: "Previous Projects",
+        icon: BookOpen,
+      },
       { href: "/admin/wwd/problem", label: "The Problem", icon: AlertCircle },
       { href: "/admin/wwd/approach", label: "Our Approach", icon: GitBranch },
       { href: "/admin/wwd/impact", label: "Impact Numbers", icon: TrendingUp },
@@ -72,8 +97,36 @@ const groups: PageGroup[] = [
     label: "Get Involved",
     pageIcon: HandHeart,
     previewHref: "/get-involved",
-    items: [],
-    comingSoon: true,
+    items: [
+      { href: "/admin/get-involved/hero", label: "Hero", icon: Sparkles },
+      {
+        href: "/admin/get-involved/involvement-grid",
+        label: "Ways to Join",
+        icon: Layers,
+      },
+      { href: "/admin/get-involved/why-join", label: "Why Join", icon: Users },
+      {
+        href: "/admin/get-involved/testimonials",
+        label: "Testimonials",
+        icon: Newspaper,
+      },
+      {
+        href: "/admin/get-involved/stats",
+        label: "Impact Stats",
+        icon: BarChart2,
+      },
+      {
+        href: "/admin/get-involved/volunteer",
+        label: "Volunteer",
+        icon: UserPlus,
+      },
+      { href: "/admin/get-involved/intern", label: "Intern", icon: BookOpen },
+      {
+        href: "/admin/get-involved/collaborate",
+        label: "Collaborate",
+        icon: Link2,
+      },
+    ],
   },
   {
     id: "global",
@@ -101,7 +154,7 @@ export default function Sidebar() {
   const activeGroupId = pathToGroup.get(pathname) ?? "home";
 
   const [openGroups, setOpenGroups] = useState<Set<string>>(
-    () => new Set([activeGroupId])
+    () => new Set([activeGroupId]),
   );
 
   // When navigating, make sure the active group is open
@@ -158,8 +211,8 @@ export default function Sidebar() {
                   group.comingSoon
                     ? "opacity-40 cursor-default"
                     : hasActive
-                    ? "text-indigo-700"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                      ? "text-indigo-700"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                 }`}
               >
                 <span
@@ -203,7 +256,9 @@ export default function Sidebar() {
                               : "text-slate-500 hover:bg-slate-50 hover:text-slate-800 font-medium"
                           }`}
                         >
-                          <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-indigo-500" : "text-slate-400"}`} />
+                          <Icon
+                            className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-indigo-500" : "text-slate-400"}`}
+                          />
                           <span className="truncate">{item.label}</span>
                           {isActive && (
                             <span className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
@@ -230,10 +285,22 @@ export default function Sidebar() {
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-sm text-slate-500 hover:text-indigo-600 font-medium transition-colors px-2 py-1.5 rounded-lg hover:bg-indigo-50"
         >
-          <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          <svg
+            className="w-4 h-4 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
           </svg>
-          <span className="truncate">Preview {activeGroup?.label ?? "Website"}</span>
+          <span className="truncate">
+            Preview {activeGroup?.label ?? "Website"}
+          </span>
         </a>
       </div>
     </aside>

@@ -20,6 +20,15 @@ import type {
   WwdProblemContent,
   WwdApproachContent,
   WwdImpactContent,
+  GetInvolvedPageContent,
+  GetInvolvedHeroContent,
+  GetInvolvedGridContent,
+  GetInvolvedWhyJoinContent,
+  GetInvolvedTestimonialsContent,
+  GetInvolvedStatsContent,
+  GetInvolvedVolunteerContent,
+  GetInvolvedInternContent,
+  GetInvolvedCollaborateContent,
   TeamPageContent,
   TeamHeroContent,
   TeamGridContent,
@@ -29,7 +38,7 @@ type ActionResult = { success: true } | { error: string };
 
 function withSave<T>(
   key: keyof ReturnType<typeof readContent>,
-  data: T
+  data: T,
 ): ActionResult {
   try {
     const content = readContent();
@@ -45,7 +54,7 @@ function withSave<T>(
 
 function withSaveWwd<K extends keyof WhatWeDoContent>(
   key: K,
-  data: WhatWeDoContent[K]
+  data: WhatWeDoContent[K],
 ): ActionResult {
   try {
     const content = readContent();
@@ -72,25 +81,25 @@ export async function saveHero(data: HeroContent): Promise<ActionResult> {
 }
 
 export async function saveWhoWeAre(
-  data: WhoWeAreContent
+  data: WhoWeAreContent,
 ): Promise<ActionResult> {
   return withSave("whoWeAre", data);
 }
 
 export async function saveRecognitions(
-  data: RecognitionsContent
+  data: RecognitionsContent,
 ): Promise<ActionResult> {
   return withSave("recognitions", data);
 }
 
 export async function saveFeaturedProjects(
-  data: FeaturedProjectsContent
+  data: FeaturedProjectsContent,
 ): Promise<ActionResult> {
   return withSave("featuredProjects", data);
 }
 
 export async function saveImpactStats(
-  data: ImpactStatsContent
+  data: ImpactStatsContent,
 ): Promise<ActionResult> {
   return withSave("impactStats", data);
 }
@@ -100,7 +109,7 @@ export async function saveJoinUs(data: JoinUsContent): Promise<ActionResult> {
 }
 
 export async function saveStoriesUpdates(
-  data: StoriesUpdatesContent
+  data: StoriesUpdatesContent,
 ): Promise<ActionResult> {
   return withSave("storiesUpdates", data);
 }
@@ -115,31 +124,107 @@ export async function saveWwdHero(data: WwdHeroContent): Promise<ActionResult> {
   return withSaveWwd("hero", data);
 }
 
-export async function saveWwdSignatureProjects(data: WwdSignatureProjectsContent): Promise<ActionResult> {
+export async function saveWwdSignatureProjects(
+  data: WwdSignatureProjectsContent,
+): Promise<ActionResult> {
   return withSaveWwd("signatureProjects", data);
 }
 
-export async function saveWwdPreviousProjects(data: WwdPreviousProjectsContent): Promise<ActionResult> {
+export async function saveWwdPreviousProjects(
+  data: WwdPreviousProjectsContent,
+): Promise<ActionResult> {
   return withSaveWwd("previousProjects", data);
 }
 
-export async function saveWwdProblem(data: WwdProblemContent): Promise<ActionResult> {
+export async function saveWwdProblem(
+  data: WwdProblemContent,
+): Promise<ActionResult> {
   return withSaveWwd("problem", data);
 }
 
-export async function saveWwdApproach(data: WwdApproachContent): Promise<ActionResult> {
+export async function saveWwdApproach(
+  data: WwdApproachContent,
+): Promise<ActionResult> {
   return withSaveWwd("approach", data);
 }
 
-export async function saveWwdImpact(data: WwdImpactContent): Promise<ActionResult> {
+export async function saveWwdImpact(
+  data: WwdImpactContent,
+): Promise<ActionResult> {
   return withSaveWwd("impact", data);
+}
+
+// ─── Get Involved ────────────────────────────────────────────────────────────
+
+function withSaveGetInvolved<K extends keyof GetInvolvedPageContent>(
+  key: K,
+  data: GetInvolvedPageContent[K],
+): ActionResult {
+  try {
+    const content = readContent();
+    content.getInvolved[key] = data;
+    writeContent(content);
+    revalidatePath("/get-involved", "page");
+    return { success: true };
+  } catch (err) {
+    console.error(`Failed to save getInvolved.${key}:`, err);
+    return { error: "Failed to save. Please try again." };
+  }
+}
+
+export async function saveGetInvolvedHero(
+  data: GetInvolvedHeroContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("hero", data);
+}
+
+export async function saveGetInvolvedInvolvementGrid(
+  data: GetInvolvedGridContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("involvementGrid", data);
+}
+
+export async function saveGetInvolvedWhyJoin(
+  data: GetInvolvedWhyJoinContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("whyJoin", data);
+}
+
+export async function saveGetInvolvedTestimonials(
+  data: GetInvolvedTestimonialsContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("testimonials", data);
+}
+
+export async function saveGetInvolvedStats(
+  data: GetInvolvedStatsContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("stats", data);
+}
+
+export async function saveGetInvolvedVolunteer(
+  data: GetInvolvedVolunteerContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("volunteer", data);
+}
+
+export async function saveGetInvolvedIntern(
+  data: GetInvolvedInternContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("intern", data);
+}
+
+export async function saveGetInvolvedCollaborate(
+  data: GetInvolvedCollaborateContent,
+): Promise<ActionResult> {
+  return withSaveGetInvolved("collaborate", data);
 }
 
 // ─── Team ─────────────────────────────────────────────────────────────────────
 
 function withSaveTeam<K extends keyof TeamPageContent>(
   key: K,
-  data: TeamPageContent[K]
+  data: TeamPageContent[K],
 ): ActionResult {
   try {
     const content = readContent();
@@ -153,10 +238,14 @@ function withSaveTeam<K extends keyof TeamPageContent>(
   }
 }
 
-export async function saveTeamHero(data: TeamHeroContent): Promise<ActionResult> {
+export async function saveTeamHero(
+  data: TeamHeroContent,
+): Promise<ActionResult> {
   return withSaveTeam("hero", data);
 }
 
-export async function saveTeamGrid(data: TeamGridContent): Promise<ActionResult> {
+export async function saveTeamGrid(
+  data: TeamGridContent,
+): Promise<ActionResult> {
   return withSaveTeam("grid", data);
 }

@@ -24,6 +24,14 @@ import {
   Stethoscope,
   School,
   Calendar,
+  Building2,
+  Clock,
+  Gift,
+  Network,
+  Mic,
+  ShieldCheck,
+  Briefcase,
+  UserPlus,
   type LucideIcon,
 } from "lucide-react";
 
@@ -53,6 +61,14 @@ export const iconMap: Record<string, LucideIcon> = {
   Stethoscope,
   School,
   Calendar,
+  Building2,
+  Clock,
+  Gift,
+  Network,
+  Mic,
+  ShieldCheck,
+  Briefcase,
+  UserPlus,
 };
 
 export const iconNames = Object.keys(iconMap);

@@ -354,9 +354,21 @@
       "statValue": "42+",
       "statLabel": "Communities reached",
       "gaps": [
-        { "iconName": "TrendingDown", "label": "Unequal Learning Access", "color": "text-orange-500 bg-orange-50" },
-        { "iconName": "Users", "label": "Fragmented Community Support", "color": "text-indigo-500 bg-indigo-50" },
-        { "iconName": "AlertTriangle", "label": "Broken Livelihood Pathways", "color": "text-rose-500 bg-rose-50" }
+        {
+          "iconName": "TrendingDown",
+          "label": "Unequal Learning Access",
+          "color": "text-orange-500 bg-orange-50"
+        },
+        {
+          "iconName": "Users",
+          "label": "Fragmented Community Support",
+          "color": "text-indigo-500 bg-indigo-50"
+        },
+        {
+          "iconName": "AlertTriangle",
+          "label": "Broken Livelihood Pathways",
+          "color": "text-rose-500 bg-rose-50"
+        }
       ]
     },
     "approach": {
@@ -367,10 +379,30 @@
       "imageAlt": "Volunteers collaborating on a field program",
       "quoteCard": "From planning to execution, each step is measurable and locally led.",
       "steps": [
-        { "title": "Listen", "description": "Map local needs through community circles, youth interviews, and partner consultations.", "iconName": "Ear", "color": "bg-cyan-400/20 text-cyan-200 border-cyan-400/30" },
-        { "title": "Co-Design", "description": "Build programs with residents and local institutions so solutions fit real constraints.", "iconName": "PenLine", "color": "bg-indigo-400/20 text-indigo-200 border-indigo-400/30" },
-        { "title": "Activate", "description": "Run pilots with trained youth volunteers, tracking participation and outcomes in real time.", "iconName": "Zap", "color": "bg-orange-400/20 text-orange-200 border-orange-400/30" },
-        { "title": "Scale", "description": "Replicate validated models in new communities with local ownership and shared playbooks.", "iconName": "TrendingUp", "color": "bg-emerald-400/20 text-emerald-200 border-emerald-400/30" }
+        {
+          "title": "Listen",
+          "description": "Map local needs through community circles, youth interviews, and partner consultations.",
+          "iconName": "Ear",
+          "color": "bg-cyan-400/20 text-cyan-200 border-cyan-400/30"
+        },
+        {
+          "title": "Co-Design",
+          "description": "Build programs with residents and local institutions so solutions fit real constraints.",
+          "iconName": "PenLine",
+          "color": "bg-indigo-400/20 text-indigo-200 border-indigo-400/30"
+        },
+        {
+          "title": "Activate",
+          "description": "Run pilots with trained youth volunteers, tracking participation and outcomes in real time.",
+          "iconName": "Zap",
+          "color": "bg-orange-400/20 text-orange-200 border-orange-400/30"
+        },
+        {
+          "title": "Scale",
+          "description": "Replicate validated models in new communities with local ownership and shared playbooks.",
+          "iconName": "TrendingUp",
+          "color": "bg-emerald-400/20 text-emerald-200 border-emerald-400/30"
+        }
       ]
     },
     "impact": {
@@ -379,9 +411,338 @@
       "headlineAccent": "durable change",
       "stats": [
         { "value": "95K+", "label": "People Reached", "iconName": "Users" },
-        { "value": "42", "label": "Communities Impacted", "iconName": "MapPin" },
-        { "value": "280+", "label": "Programs Conducted", "iconName": "BarChart3" },
-        { "value": "1,200+", "label": "Youth Volunteers Trained", "iconName": "GraduationCap" }
+        {
+          "value": "42",
+          "label": "Communities Impacted",
+          "iconName": "MapPin"
+        },
+        {
+          "value": "280+",
+          "label": "Programs Conducted",
+          "iconName": "BarChart3"
+        },
+        {
+          "value": "1,200+",
+          "label": "Youth Volunteers Trained",
+          "iconName": "GraduationCap"
+        }
+      ]
+    }
+  },
+  "getInvolved": {
+    "hero": {
+      "badge": "Join the Movement",
+      "headline": "Be a part of",
+      "headlineAccent": "the change",
+      "description": "Whether you have two hours or two years to give, there's a meaningful role for you at Sarthi. Volunteer, intern, donate, or collaborate — every contribution shapes the future of communities.",
+      "ctaPrimary": "Get Involved",
+      "ctaPrimaryHref": "#get-involved-options",
+      "ctaSecondary": "Volunteer Now",
+      "ctaSecondaryHref": "#volunteer",
+      "openRolesLabel": "Open roles",
+      "openRolesValue": "6 ways",
+      "communitiesLabel": "Communities",
+      "communitiesValue": "42",
+      "stats": [
+        {
+          "value": "1,200+",
+          "label": "Volunteers"
+        },
+        {
+          "value": "320+",
+          "label": "Interns"
+        },
+        {
+          "value": "50K+",
+          "label": "Hours given"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1400&q=80",
+          "alt": "Team working together",
+          "clipPath": "polygon(0 0, 100% 0, 85% 100%, 0 100%)"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1469571486292-b53601020d72?w=1400&q=80",
+          "alt": "Community engagement",
+          "clipPath": "polygon(20% 0, 100% 0, 100% 100%, 5% 100%)"
+        }
+      ]
+    },
+    "involvementGrid": {
+      "eyebrow": "Ways to Join",
+      "headline": "Choose your",
+      "headlineAccent": "role in change",
+      "description": "Every contribution matters — pick the path that fits your time, skills, and goals.",
+      "featured": {
+        "iconName": "Users",
+        "title": "Volunteer",
+        "description": "Join our network of 1,200+ active volunteers and contribute your time to programs across 42 communities. No prior experience needed — just passion.",
+        "cta": "Apply Now",
+        "href": "#volunteer",
+        "image": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1400&q=80",
+        "badge": "Most Popular"
+      },
+      "cards": [
+        {
+          "iconName": "GraduationCap",
+          "title": "Intern With Us",
+          "description": "Gain real-world experience in social impact. Work alongside field teams on live programs for 3–6 months.",
+          "cta": "Learn More",
+          "href": "#intern",
+          "accent": "bg-indigo-50 border-indigo-100",
+          "iconBg": "bg-gradient-to-br from-indigo-500 to-purple-500",
+          "ctaVariant": "outline"
+        },
+        {
+          "iconName": "UserPlus",
+          "title": "Become a Member",
+          "description": "Get exclusive access to events, training workshops, and our growing alumni network of changemakers.",
+          "cta": "Join Now",
+          "href": "/contact",
+          "accent": "bg-purple-50 border-purple-100",
+          "iconBg": "bg-gradient-to-br from-purple-500 to-pink-500",
+          "ctaVariant": "outline"
+        },
+        {
+          "iconName": "Gift",
+          "title": "Donate",
+          "description": "Every rupee funds a youth-led program. Your contribution directly expands our reach into underserved communities.",
+          "cta": "Contribute",
+          "href": "/contact",
+          "accent": "bg-orange-50 border-orange-100",
+          "iconBg": "bg-gradient-to-br from-orange-500 to-rose-500",
+          "ctaVariant": "secondary"
+        },
+        {
+          "iconName": "Network",
+          "title": "Collaborate",
+          "description": "Partner with us as an organisation, school, or CSR initiative. Co-design programs that create mutual community impact.",
+          "cta": "Partner With Us",
+          "href": "/contact",
+          "accent": "bg-emerald-50 border-emerald-100",
+          "iconBg": "bg-gradient-to-br from-emerald-500 to-teal-500",
+          "ctaVariant": "outline"
+        }
+      ],
+      "invite": {
+        "title": "Invite Our Founders",
+        "description": "Invite our founders to speak at your college, corporate event, or community forum. We share stories, learnings, and insights from years of youth-led social impact work.",
+        "cta": "Send an Invite",
+        "href": "/get-involved"
+      }
+    },
+    "whyJoin": {
+      "eyebrow": "Why Join Us?",
+      "headline": "More than just",
+      "headlineAccent": "volunteering",
+      "description": "Being part of Sarthi means growing alongside the communities you serve — personally, professionally, and collectively.",
+      "image": "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
+      "imageAlt": "Youth volunteers at work",
+      "satisfactionLabel": "Avg. satisfaction rate",
+      "satisfactionValue": "97%",
+      "benefits": [
+        {
+          "iconName": "Zap",
+          "title": "Real-world impact from day one",
+          "description": "Work on live programs that reach thousands of people, not hypothetical projects.",
+          "color": "bg-amber-50 text-amber-600 border-amber-100"
+        },
+        {
+          "iconName": "BookOpen",
+          "title": "Structured skill development",
+          "description": "Access workshops, mentorship sessions, and field training across social sectors.",
+          "color": "bg-indigo-50 text-indigo-600 border-indigo-100"
+        },
+        {
+          "iconName": "Users",
+          "title": "A network of 1,200+ changemakers",
+          "description": "Connect with volunteers, alumni, and partners across 42 communities.",
+          "color": "bg-purple-50 text-purple-600 border-purple-100"
+        },
+        {
+          "iconName": "ShieldCheck",
+          "title": "Certified and recognised work",
+          "description": "Earn certificates and endorsements that reflect verified, measurable contribution.",
+          "color": "bg-emerald-50 text-emerald-600 border-emerald-100"
+        },
+        {
+          "iconName": "TrendingUp",
+          "title": "Career-defining experience",
+          "description": "Past volunteers have gone on to lead social enterprises, NGOs, and policy roles.",
+          "color": "bg-cyan-50 text-cyan-600 border-cyan-100"
+        },
+        {
+          "iconName": "Star",
+          "title": "Be part of a shared story",
+          "description": "Your efforts are documented, credited, and celebrated within our community.",
+          "color": "bg-rose-50 text-rose-600 border-rose-100"
+        }
+      ]
+    },
+    "testimonials": {
+      "eyebrow": "Voices From Our Community",
+      "headline": "Hear it from those",
+      "headlineAccent": "who showed up",
+      "items": [
+        {
+          "quote": "Volunteering with Sarthi was the most formative six months of my life. I ran workshops for 80 students and came back with more skills than I gave.",
+          "name": "Riya Kapoor",
+          "role": "Volunteer, 2023 · Delhi",
+          "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
+          "accent": "border-t-indigo-500",
+          "tag": "Volunteer"
+        },
+        {
+          "quote": "My internship here was nothing like a corporate placement. I co-designed a real program, tracked outcomes, and saw direct community response — all in 3 months.",
+          "name": "Aryan Dubey",
+          "role": "Intern, 2024 · Pune",
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+          "accent": "border-t-orange-500",
+          "tag": "Intern"
+        },
+        {
+          "quote": "As a CSR partner, Sarthi gave us full visibility into how our funds were used. The impact reports were detailed, honest, and genuinely compelling.",
+          "name": "Smita Nair",
+          "role": "Corporate Partner · Mumbai",
+          "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80",
+          "accent": "border-t-emerald-500",
+          "tag": "Partner"
+        }
+      ]
+    },
+    "stats": {
+      "eyebrow": "Our Reach",
+      "headline": "Numbers that prove",
+      "headlineAccent": "collective action works",
+      "items": [
+        {
+          "value": "150+",
+          "label": "Colleges & Institutions",
+          "description": "Partnerships with schools and universities",
+          "iconName": "Building2",
+          "gradient": "from-indigo-400 to-purple-400",
+          "iconColor": "bg-indigo-400/15 text-indigo-300 border-indigo-400/20"
+        },
+        {
+          "value": "1,200+",
+          "label": "Active Volunteers",
+          "description": "Across 42 communities and counting",
+          "iconName": "Users",
+          "gradient": "from-cyan-400 to-sky-400",
+          "iconColor": "bg-cyan-400/15 text-cyan-300 border-cyan-400/20"
+        },
+        {
+          "value": "320+",
+          "label": "Interns Trained",
+          "description": "With certified field experience",
+          "iconName": "GraduationCap",
+          "gradient": "from-orange-400 to-rose-400",
+          "iconColor": "bg-orange-400/15 text-orange-300 border-orange-400/20"
+        },
+        {
+          "value": "50K+",
+          "label": "Hours Contributed",
+          "description": "Of community-led service time",
+          "iconName": "Clock",
+          "gradient": "from-emerald-400 to-teal-400",
+          "iconColor": "bg-emerald-400/15 text-emerald-300 border-emerald-400/20"
+        }
+      ]
+    },
+    "volunteer": {
+      "eyebrow": "Become a Volunteer",
+      "headline": "Give your time.",
+      "headlineAccent": "Multiply the impact.",
+      "description": "Our volunteers are the engine of every program. Whether you can give two hours a week or commit to a full season, there's a role built for you.",
+      "benefits": [
+        "Flexible time commitment — from weekends to full immersion",
+        "Hands-on training before your first program deployment",
+        "Field experience across education, health, and climate sectors",
+        "Certificate of contribution from Sarthi on completion",
+        "Access to our alumni network and career support sessions",
+        "Travel and logistics support for outstation programs"
+      ],
+      "ctaLabel": "Apply as Volunteer",
+      "ctaHref": "/get-involved",
+      "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&q=80",
+      "imageAlt": "Volunteers working in the field",
+      "openSpotsLabel": "Open spots",
+      "openSpotsValue": "200+",
+      "intakeLabel": "Next intake",
+      "intakeValue": "Rolling admissions"
+    },
+    "intern": {
+      "eyebrow": "Intern With Us",
+      "headline": "Build skills that",
+      "headlineAccent": "classrooms can't teach",
+      "description": "Our internships are project-based, field-facing, and built around real responsibility. You'll leave with a portfolio, a network, and a story worth telling.",
+      "opportunities": [
+        {
+          "iconName": "Briefcase",
+          "title": "Program Management",
+          "description": "Plan and coordinate field programs end-to-end with senior team support.",
+          "color": "bg-indigo-50 text-indigo-600 border-indigo-100"
+        },
+        {
+          "iconName": "BarChart3",
+          "title": "Research & Impact",
+          "description": "Design surveys, analyse outcomes, and document stories from the ground.",
+          "color": "bg-cyan-50 text-cyan-600 border-cyan-100"
+        },
+        {
+          "iconName": "Users",
+          "title": "Community Outreach",
+          "description": "Build trust with local partners and mobilise community participation.",
+          "color": "bg-emerald-50 text-emerald-600 border-emerald-100"
+        },
+        {
+          "iconName": "Award",
+          "title": "Communications & Design",
+          "description": "Tell our story through content, social media, and visual design.",
+          "color": "bg-orange-50 text-orange-600 border-orange-100"
+        }
+      ],
+      "ctaLabel": "Apply for Internship",
+      "ctaHref": "/get-involved",
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80",
+      "imageAlt": "Intern working on research",
+      "durationLabel": "Duration",
+      "durationValue": "3–6 months",
+      "trainedLabel": "Interns trained",
+      "trainedValue": "320+"
+    },
+    "collaborate": {
+      "eyebrow": "Collaborate & Partner",
+      "headline": "Build something",
+      "headlineAccent": "bigger together",
+      "description": "We partner with institutions, corporates, and changemakers who share our commitment to community-led progress. Let's co-create something that lasts.",
+      "options": [
+        {
+          "iconName": "Handshake",
+          "title": "CSR & Institutional Partnership",
+          "description": "Co-fund or co-design programs with full impact reporting, community access, and co-branding opportunities.",
+          "cta": "Explore Partnership",
+          "href": "/contact",
+          "color": "bg-white/15 border-white/20 hover:bg-white/20"
+        },
+        {
+          "iconName": "Building2",
+          "title": "School & College Collaboration",
+          "description": "Bring Sarthi programs to your institution — volunteer drives, leadership workshops, and field exposure for students.",
+          "cta": "Collaborate Now",
+          "href": "/contact",
+          "color": "bg-white/15 border-white/20 hover:bg-white/20"
+        },
+        {
+          "iconName": "Mic",
+          "title": "Invite Our Founders",
+          "description": "Book a speaker session for your event, campus, or corporate forum. We bring stories, data, and inspiration.",
+          "cta": "Send an Invite",
+          "href": "/contact",
+          "color": "bg-white/15 border-white/20 hover:bg-white/20"
+        }
       ]
     }
   },
@@ -392,9 +753,17 @@
       "headlineAccent": "Team",
       "description": "Meet the passionate leaders, field coordinators, and volunteers who turn ideas into action — every single day.",
       "stats": [
-        { "value": "1,200+", "label": "Active volunteers", "iconName": "Users" },
+        {
+          "value": "1,200+",
+          "label": "Active volunteers",
+          "iconName": "Users"
+        },
         { "value": "42", "label": "Communities served", "iconName": "MapPin" },
-        { "value": "8+", "label": "Years building together", "iconName": "Calendar" }
+        {
+          "value": "8+",
+          "label": "Years building together",
+          "iconName": "Calendar"
+        }
       ]
     },
     "grid": {

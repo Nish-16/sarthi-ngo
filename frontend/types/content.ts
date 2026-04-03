@@ -280,6 +280,198 @@ export interface WhatWeDoContent {
   impact: WwdImpactContent;
 }
 
+// ─── Get Involved Page ───────────────────────────────────────────────────────
+
+export interface GetInvolvedHeroImage {
+  src: string;
+  alt: string;
+  clipPath: string;
+}
+
+export interface GetInvolvedHeroStat {
+  value: string;
+  label: string;
+}
+
+export interface GetInvolvedHeroContent {
+  badge: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  ctaPrimary: string;
+  ctaPrimaryHref: string;
+  ctaSecondary: string;
+  ctaSecondaryHref: string;
+  openRolesLabel: string;
+  openRolesValue: string;
+  communitiesLabel: string;
+  communitiesValue: string;
+  stats: GetInvolvedHeroStat[];
+  images: GetInvolvedHeroImage[];
+}
+
+export type GetInvolvedButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "ghost";
+
+export interface GetInvolvedGridFeatured {
+  iconName: string;
+  title: string;
+  description: string;
+  cta: string;
+  href: string;
+  image: string;
+  badge: string;
+}
+
+export interface GetInvolvedGridCard {
+  iconName: string;
+  title: string;
+  description: string;
+  cta: string;
+  href: string;
+  accent: string;
+  iconBg: string;
+  ctaVariant: GetInvolvedButtonVariant;
+}
+
+export interface GetInvolvedGridInvite {
+  title: string;
+  description: string;
+  cta: string;
+  href: string;
+}
+
+export interface GetInvolvedGridContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  featured: GetInvolvedGridFeatured;
+  cards: GetInvolvedGridCard[];
+  invite: GetInvolvedGridInvite;
+}
+
+export interface GetInvolvedWhyJoinBenefit {
+  iconName: string;
+  title: string;
+  description: string;
+  color: string;
+}
+
+export interface GetInvolvedWhyJoinContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  satisfactionLabel: string;
+  satisfactionValue: string;
+  benefits: GetInvolvedWhyJoinBenefit[];
+}
+
+export interface GetInvolvedTestimonialItem {
+  quote: string;
+  name: string;
+  role: string;
+  image: string;
+  accent: string;
+  tag: string;
+}
+
+export interface GetInvolvedTestimonialsContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  items: GetInvolvedTestimonialItem[];
+}
+
+export interface GetInvolvedStatItem {
+  value: string;
+  label: string;
+  description: string;
+  iconName: string;
+  gradient: string;
+  iconColor: string;
+}
+
+export interface GetInvolvedStatsContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  items: GetInvolvedStatItem[];
+}
+
+export interface GetInvolvedVolunteerContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  benefits: string[];
+  ctaLabel: string;
+  ctaHref: string;
+  image: string;
+  imageAlt: string;
+  openSpotsLabel: string;
+  openSpotsValue: string;
+  intakeLabel: string;
+  intakeValue: string;
+}
+
+export interface GetInvolvedOpportunityItem {
+  iconName: string;
+  title: string;
+  description: string;
+  color: string;
+}
+
+export interface GetInvolvedInternContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  opportunities: GetInvolvedOpportunityItem[];
+  ctaLabel: string;
+  ctaHref: string;
+  image: string;
+  imageAlt: string;
+  durationLabel: string;
+  durationValue: string;
+  trainedLabel: string;
+  trainedValue: string;
+}
+
+export interface GetInvolvedCollaborateOption {
+  iconName: string;
+  title: string;
+  description: string;
+  cta: string;
+  href: string;
+  color: string;
+}
+
+export interface GetInvolvedCollaborateContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  options: GetInvolvedCollaborateOption[];
+}
+
+export interface GetInvolvedPageContent {
+  hero: GetInvolvedHeroContent;
+  involvementGrid: GetInvolvedGridContent;
+  whyJoin: GetInvolvedWhyJoinContent;
+  testimonials: GetInvolvedTestimonialsContent;
+  stats: GetInvolvedStatsContent;
+  volunteer: GetInvolvedVolunteerContent;
+  intern: GetInvolvedInternContent;
+  collaborate: GetInvolvedCollaborateContent;
+}
+
 // ─── Team Page ────────────────────────────────────────────────────────────────
 
 export interface TeamStatItem {
@@ -335,5 +527,6 @@ export interface PageContent {
   storiesUpdates: StoriesUpdatesContent;
   footer: FooterContent;
   whatWeDo: WhatWeDoContent;
+  getInvolved: GetInvolvedPageContent;
   team: TeamPageContent;
 }
