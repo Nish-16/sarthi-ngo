@@ -1,40 +1,12 @@
 import Container from "@/components/ui/Container";
-import { Telescope, Target, Heart } from "lucide-react";
+import { getIcon } from "@/lib/icon-map";
+import type { AboutVisionMissionValuesContent } from "@/types/content";
 
-const pillars = [
-  {
-    title: "Vision",
-    icon: Telescope,
-    description:
-      "A future where every young person has the confidence, skills, and platform to shape inclusive communities.",
-    accent: "from-indigo-500 to-purple-500",
-    bg: "bg-indigo-50 border-indigo-100",
-    iconBg: "bg-gradient-to-br from-indigo-500 to-purple-500",
-    tag: "Where we're going",
-  },
-  {
-    title: "Mission",
-    icon: Target,
-    description:
-      "Mobilize youth through action-led programs in education, climate awareness, mental wellbeing, and civic participation.",
-    accent: "from-orange-500 to-rose-500",
-    bg: "bg-orange-50 border-orange-100",
-    iconBg: "bg-gradient-to-br from-orange-500 to-rose-500",
-    tag: "What we do daily",
-  },
-  {
-    title: "Values",
-    icon: Heart,
-    description:
-      "Shared leadership, empathy, accountability, and local co-creation guide everything we design and deliver.",
-    accent: "from-cyan-500 to-teal-500",
-    bg: "bg-cyan-50 border-cyan-100",
-    iconBg: "bg-gradient-to-br from-cyan-500 to-teal-500",
-    tag: "How we show up",
-  },
-] as const;
-
-export default function VisionMissionValues() {
+export default function VisionMissionValues({
+  content,
+}: {
+  content: AboutVisionMissionValuesContent;
+}) {
   return (
     <section className="relative overflow-hidden py-24 bg-white">
       {/* blobs */}
@@ -55,24 +27,24 @@ export default function VisionMissionValues() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-indigo-600">
-              Vision · Mission · Values
+              {content.eyebrow}
             </p>
             <h2 className="mt-3 text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-              The principles behind{" "}
+              {content.headline}{" "}
               <span className="relative inline-block">
-                <span className="text-indigo-600">every initiative</span>
+                <span className="text-indigo-600">{content.headlineAccent}</span>
                 <span className="absolute -bottom-1 left-0 right-0 h-1 bg-orange-400 rounded-full" />
               </span>
             </h2>
           </div>
           <p className="max-w-xs text-slate-500 text-sm leading-relaxed">
-            Three pillars that guide our decisions, programs, and partnerships.
+            {content.description}
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          {pillars.map((pillar, i) => {
-            const Icon = pillar.icon;
+          {content.pillars.map((pillar, i) => {
+            const Icon = getIcon(pillar.iconName);
             return (
               <article
                 key={pillar.title}

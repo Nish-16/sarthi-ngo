@@ -472,6 +472,115 @@ export interface GetInvolvedPageContent {
   collaborate: GetInvolvedCollaborateContent;
 }
 
+// ─── About Page ───────────────────────────────────────────────────────────────
+
+export interface AboutHeroImage {
+  src: string;
+  alt: string;
+  clipPath: string;
+}
+
+export interface AboutHeroStat {
+  value: string;
+  label: string;
+}
+
+export interface AboutHeroContent {
+  badge: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  ctaPrimary: string;
+  ctaPrimaryHref: string;
+  ctaSecondary: string;
+  ctaSecondaryHref: string;
+  topCardLabel: string;
+  topCardValue: string;
+  bottomCardLabel: string;
+  bottomCardValue: string;
+  stats: AboutHeroStat[];
+  images: AboutHeroImage[];
+}
+
+export interface AboutPillarItem {
+  title: string;
+  iconName: string;
+  description: string;
+  accent: string;
+  bg: string;
+  iconBg: string;
+  tag: string;
+}
+
+export interface AboutVisionMissionValuesContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  pillars: AboutPillarItem[];
+}
+
+export interface AboutWhyYouthReason {
+  iconName: string;
+  label: string;
+  color: string;
+}
+
+export interface AboutWhyYouthContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description1: string;
+  description2: string;
+  image: string;
+  imageAlt: string;
+  statLabel: string;
+  statValue: string;
+  reasons: AboutWhyYouthReason[];
+}
+
+export interface AboutRecognitionBlock {
+  title: string;
+  iconName: string;
+  accent: string;
+  iconColor: string;
+  details: string[];
+}
+
+export interface AboutRecognitionContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  blocks: AboutRecognitionBlock[];
+  partnerEyebrow: string;
+  partnerLogos: string[];
+}
+
+export interface AboutSharedLeadershipPrinciple {
+  iconName: string;
+  label: string;
+  color: string;
+}
+
+export interface AboutSharedLeadershipContent {
+  eyebrow: string;
+  headline: string;
+  headlineAccent: string;
+  description: string;
+  cta: string;
+  ctaHref: string;
+  principles: AboutSharedLeadershipPrinciple[];
+}
+
+export interface AboutPageContent {
+  hero: AboutHeroContent;
+  visionMissionValues: AboutVisionMissionValuesContent;
+  whyYouth: AboutWhyYouthContent;
+  recognition: AboutRecognitionContent;
+  sharedLeadership: AboutSharedLeadershipContent;
+}
+
 // ─── Team Page ────────────────────────────────────────────────────────────────
 
 export interface TeamStatItem {
@@ -527,6 +636,7 @@ export interface PageContent {
   storiesUpdates: StoriesUpdatesContent;
   footer: FooterContent;
   whatWeDo: WhatWeDoContent;
+  about: AboutPageContent;
   getInvolved: GetInvolvedPageContent;
   team: TeamPageContent;
 }

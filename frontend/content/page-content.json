@@ -410,7 +410,11 @@
       "headline": "Numbers that reflect",
       "headlineAccent": "durable change",
       "stats": [
-        { "value": "95K+", "label": "People Reached", "iconName": "Users" },
+        {
+          "value": "95K+",
+          "label": "People Reached",
+          "iconName": "Users"
+        },
         {
           "value": "42",
           "label": "Communities Impacted",
@@ -425,6 +429,209 @@
           "value": "1,200+",
           "label": "Youth Volunteers Trained",
           "iconName": "GraduationCap"
+        }
+      ]
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Youth-Led Social ",
+      "headline": "Who",
+      "headlineAccent": "We Are",
+      "description": "We are a network of student leaders, volunteers, and community partners building practical solutions that create dignity, opportunity, and shared progress across neighborhoods.",
+      "ctaPrimary": "Our Programs",
+      "ctaPrimaryHref": "/what-we-do",
+      "ctaSecondary": "Get Involved",
+      "ctaSecondaryHref": "/get-involved",
+      "topCardLabel": "Volunteers trained",
+      "topCardValue": "1,200+",
+      "bottomCardLabel": "Communities",
+      "bottomCardValue": "42",
+      "stats": [
+        {
+          "value": "8+",
+          "label": "Years of impact"
+        },
+        {
+          "value": "95K+",
+          "label": "Lives touched"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1400&q=80",
+          "alt": "Young volunteers discussing community plans",
+          "clipPath": "polygon(0 0, 100% 0, 85% 100%, 0 100%)"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
+          "alt": "Youth workshop session",
+          "clipPath": "polygon(20% 0, 100% 0, 100% 100%, 5% 100%)"
+        }
+      ]
+    },
+    "visionMissionValues": {
+      "eyebrow": "Vision · Mission · Values",
+      "headline": "The principles behind",
+      "headlineAccent": "every initiative",
+      "description": "Three pillars that guide our decisions, programs, and partnerships.",
+      "pillars": [
+        {
+          "title": "Vision",
+          "iconName": "Telescope",
+          "description": "A future where every young person has the confidence, skills, and platform to shape inclusive communities.",
+          "accent": "from-indigo-500 to-purple-500",
+          "bg": "bg-indigo-50 border-indigo-100",
+          "iconBg": "bg-gradient-to-br from-indigo-500 to-purple-500",
+          "tag": "Where we're going"
+        },
+        {
+          "title": "Mission",
+          "iconName": "Target",
+          "description": "Mobilize youth through action-led programs in education, climate awareness, mental wellbeing, and civic participation.",
+          "accent": "from-orange-500 to-rose-500",
+          "bg": "bg-orange-50 border-orange-100",
+          "iconBg": "bg-gradient-to-br from-orange-500 to-rose-500",
+          "tag": "What we do daily"
+        },
+        {
+          "title": "Values",
+          "iconName": "Heart",
+          "description": "Shared leadership, empathy, accountability, and local co-creation guide everything we design and deliver.",
+          "accent": "from-cyan-500 to-teal-500",
+          "bg": "bg-cyan-50 border-cyan-100",
+          "iconBg": "bg-gradient-to-br from-cyan-500 to-teal-500",
+          "tag": "How we show up"
+        }
+      ]
+    },
+    "whyYouth": {
+      "eyebrow": "Why Youth?",
+      "headline": "Young people move first when change",
+      "headlineAccent": "feels impossible",
+      "description1": "Youth combine urgency with creativity. They understand emerging challenges quickly, build peer trust naturally, and experiment with solutions that established systems often overlook.",
+      "description2": "By backing young leaders early, we create a ripple effect where one trained changemaker can influence schools, families, and whole communities.",
+      "image": "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
+      "imageAlt": "Youth group collaborating in a workshop",
+      "statLabel": "Youth trained",
+      "statValue": "1,200+",
+      "reasons": [
+        {
+          "iconName": "Lightbulb",
+          "label": "Urgency meets creativity",
+          "color": "bg-amber-50 text-amber-600 border-amber-100"
+        },
+        {
+          "iconName": "Users",
+          "label": "Natural peer trust builders",
+          "color": "bg-indigo-50 text-indigo-600 border-indigo-100"
+        },
+        {
+          "iconName": "Zap",
+          "label": "Fast to experiment & adapt",
+          "color": "bg-emerald-50 text-emerald-600 border-emerald-100"
+        },
+        {
+          "iconName": "TrendingUp",
+          "label": "Ripple-effect on communities",
+          "color": "bg-rose-50 text-rose-600 border-rose-100"
+        }
+      ]
+    },
+    "recognition": {
+      "eyebrow": "Recognition",
+      "headline": "Credibility built through",
+      "headlineAccent": "outcomes and trust",
+      "description": "Recognised by organisations and communities that share our commitment to impact.",
+      "blocks": [
+        {
+          "title": "Awards",
+          "iconName": "Trophy",
+          "accent": "border-l-amber-400 bg-amber-400/5",
+          "iconColor": "text-amber-400 bg-amber-400/10",
+          "details": [
+            "National Youth Leadership Honour (2024)",
+            "Grassroots Innovation Citation (2023)"
+          ]
+        },
+        {
+          "title": "Media Coverage",
+          "iconName": "Newspaper",
+          "accent": "border-l-sky-400 bg-sky-400/5",
+          "iconColor": "text-sky-400 bg-sky-400/10",
+          "details": [
+            "Featured by regional and national digital platforms",
+            "Documented in youth-led climate action stories"
+          ]
+        },
+        {
+          "title": "Partnerships & Endorsements",
+          "iconName": "Handshake",
+          "accent": "border-l-indigo-400 bg-indigo-400/5",
+          "iconColor": "text-indigo-400 bg-indigo-400/10",
+          "details": [
+            "Collaborations with schools, NGOs, and local governments",
+            "Advisory support from civic and social-sector mentors"
+          ]
+        },
+        {
+          "title": "Certifications",
+          "iconName": "ShieldCheck",
+          "accent": "border-l-emerald-400 bg-emerald-400/5",
+          "iconColor": "text-emerald-400 bg-emerald-400/10",
+          "details": [
+            "Program quality and volunteer safety standards",
+            "Transparent reporting and outcome tracking practices"
+          ]
+        },
+        {
+          "title": "Others",
+          "iconName": "Mic",
+          "accent": "border-l-purple-400 bg-purple-400/5",
+          "iconColor": "text-purple-400 bg-purple-400/10",
+          "details": [
+            "Invited talks at youth summits and campus forums",
+            "Community references from long-term field partners"
+          ]
+        }
+      ],
+      "partnerEyebrow": "Partner Signals",
+      "partnerLogos": [
+        "NITI",
+        "UNY",
+        "ISF",
+        "YKA",
+        "ACM",
+        "CSR"
+      ]
+    },
+    "sharedLeadership": {
+      "eyebrow": "Shared Leadership",
+      "headline": "Many voices",
+      "headlineAccent": "one direction",
+      "description": "We do not centralize change in one leader. We distribute ownership, co-design with communities, and create systems where responsibility is shared, visible, and sustained.",
+      "cta": "Join the movement",
+      "ctaHref": "/get-involved",
+      "principles": [
+        {
+          "iconName": "Network",
+          "label": "Distributed ownership",
+          "color": "bg-indigo-400/20 text-indigo-300 border-indigo-400/30"
+        },
+        {
+          "iconName": "Vote",
+          "label": "Community co-design",
+          "color": "bg-cyan-400/20 text-cyan-300 border-cyan-400/30"
+        },
+        {
+          "iconName": "GitMerge",
+          "label": "Shared accountability",
+          "color": "bg-purple-400/20 text-purple-300 border-purple-400/30"
+        },
+        {
+          "iconName": "Megaphone",
+          "label": "Visible and sustained",
+          "color": "bg-emerald-400/20 text-emerald-300 border-emerald-400/30"
         }
       ]
     }
@@ -758,7 +965,11 @@
           "label": "Active volunteers",
           "iconName": "Users"
         },
-        { "value": "42", "label": "Communities served", "iconName": "MapPin" },
+        {
+          "value": "42",
+          "label": "Communities served",
+          "iconName": "MapPin"
+        },
         {
           "value": "8+",
           "label": "Years building together",

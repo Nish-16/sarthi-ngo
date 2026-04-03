@@ -20,6 +20,12 @@ import type {
   WwdProblemContent,
   WwdApproachContent,
   WwdImpactContent,
+  AboutPageContent,
+  AboutHeroContent,
+  AboutVisionMissionValuesContent,
+  AboutWhyYouthContent,
+  AboutRecognitionContent,
+  AboutSharedLeadershipContent,
   GetInvolvedPageContent,
   GetInvolvedHeroContent,
   GetInvolvedGridContent,
@@ -152,6 +158,54 @@ export async function saveWwdImpact(
   data: WwdImpactContent,
 ): Promise<ActionResult> {
   return withSaveWwd("impact", data);
+}
+
+// ─── About ───────────────────────────────────────────────────────────────────
+
+function withSaveAbout<K extends keyof AboutPageContent>(
+  key: K,
+  data: AboutPageContent[K],
+): ActionResult {
+  try {
+    const content = readContent();
+    content.about[key] = data;
+    writeContent(content);
+    revalidatePath("/about", "page");
+    return { success: true };
+  } catch (err) {
+    console.error(`Failed to save about.${key}:`, err);
+    return { error: "Failed to save. Please try again." };
+  }
+}
+
+export async function saveAboutHero(
+  data: AboutHeroContent,
+): Promise<ActionResult> {
+  return withSaveAbout("hero", data);
+}
+
+export async function saveAboutVisionMissionValues(
+  data: AboutVisionMissionValuesContent,
+): Promise<ActionResult> {
+  return withSaveAbout("visionMissionValues", data);
+}
+
+export async function saveAboutWhyYouth(
+  data: AboutWhyYouthContent,
+): Promise<ActionResult> {
+  return withSaveAbout("whyYouth", data);
+}
+
+export async function saveAboutRecognition(
+  data: AboutRecognitionContent,
+): Promise<ActionResult> {
+  return withSaveAbout("recognition", data);
+}
+
+export async function saveAboutSharedLeadership(
+  data: AboutSharedLeadershipContent,
+): Promise<ActionResult> {
+  return withSaveAbout("sharedLeadership", data);
 }
 
 // ─── Get Involved ────────────────────────────────────────────────────────────

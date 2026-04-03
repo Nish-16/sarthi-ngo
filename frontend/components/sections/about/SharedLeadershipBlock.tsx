@@ -1,31 +1,14 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import { ArrowRight, Network, Vote, GitMerge, Megaphone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { getIcon } from "@/lib/icon-map";
+import type { AboutSharedLeadershipContent } from "@/types/content";
 
-const principles = [
-  {
-    icon: Network,
-    label: "Distributed ownership",
-    color: "bg-indigo-400/20 text-indigo-300 border-indigo-400/30",
-  },
-  {
-    icon: Vote,
-    label: "Community co-design",
-    color: "bg-cyan-400/20 text-cyan-300 border-cyan-400/30",
-  },
-  {
-    icon: GitMerge,
-    label: "Shared accountability",
-    color: "bg-purple-400/20 text-purple-300 border-purple-400/30",
-  },
-  {
-    icon: Megaphone,
-    label: "Visible and sustained",
-    color: "bg-emerald-400/20 text-emerald-300 border-emerald-400/30",
-  },
-];
-
-export default function SharedLeadershipBlock() {
+export default function SharedLeadershipBlock({
+  content,
+}: {
+  content: AboutSharedLeadershipContent;
+}) {
   return (
     <section className="relative overflow-hidden bg-white py-24">
       {/* outer blobs */}
@@ -52,22 +35,20 @@ export default function SharedLeadershipBlock() {
             {/* Text */}
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-indigo-100">
-                Shared Leadership
+                {content.eyebrow}
               </p>
               <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight leading-tight">
-                Many voices,{" "}
+                {content.headline},{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-white">
-                  one direction
+                  {content.headlineAccent}
                 </span>
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-indigo-100 max-w-lg">
-                We do not centralize change in one leader. We distribute ownership,
-                co-design with communities, and create systems where responsibility
-                is shared, visible, and sustained.
+                {content.description}
               </p>
               <div className="mt-8">
-                <Button href="/get-involved" variant="secondary" size="lg">
-                  Join the movement
+                <Button href={content.ctaHref} variant="secondary" size="lg">
+                  {content.cta}
                   <ArrowRight className="w-5 h-5" />
                 </Button>
               </div>
@@ -75,17 +56,20 @@ export default function SharedLeadershipBlock() {
 
             {/* Principles grid */}
             <div className="grid grid-cols-2 gap-4">
-              {principles.map(({ icon: Icon, label, color }) => (
-                <div
-                  key={label}
-                  className={`rounded-2xl border backdrop-blur-sm p-5 flex flex-col gap-3 hover:bg-white/10 transition-colors duration-300 ${color}`}
-                >
-                  <div className={`w-10 h-10 rounded-xl border flex items-center justify-center ${color}`}>
-                    <Icon className="w-5 h-5" />
+              {content.principles.map((principle) => {
+                const Icon = getIcon(principle.iconName);
+                return (
+                  <div
+                    key={principle.label}
+                    className={`rounded-2xl border backdrop-blur-sm p-5 flex flex-col gap-3 hover:bg-white/10 transition-colors duration-300 ${principle.color}`}
+                  >
+                    <div className={`w-10 h-10 rounded-xl border flex items-center justify-center ${principle.color}`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <p className="text-sm font-semibold text-white leading-snug">{principle.label}</p>
                   </div>
-                  <p className="text-sm font-semibold text-white leading-snug">{label}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
           </div>

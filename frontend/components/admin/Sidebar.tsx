@@ -81,8 +81,25 @@ const groups: PageGroup[] = [
     label: "About",
     pageIcon: Info,
     previewHref: "/about",
-    items: [],
-    comingSoon: true,
+    items: [
+      { href: "/admin/about/hero", label: "Hero", icon: Sparkles },
+      {
+        href: "/admin/about/vision-mission-values",
+        label: "Vision Mission Values",
+        icon: Layers,
+      },
+      { href: "/admin/about/why-youth", label: "Why Youth", icon: Users },
+      {
+        href: "/admin/about/recognition",
+        label: "Recognition",
+        icon: Trophy,
+      },
+      {
+        href: "/admin/about/shared-leadership",
+        label: "Shared Leadership",
+        icon: GitBranch,
+      },
+    ],
   },
   {
     id: "team",

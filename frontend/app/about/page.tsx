@@ -15,16 +15,17 @@ export const metadata = {
 
 export default function AboutPage() {
   const content = readContent();
+  const { about } = content;
 
   return (
     <>
       <Navbar content={content.navbar} />
       <main className="flex flex-1 flex-col">
-        <AboutHero />
-        <VisionMissionValues />
-        <WhyYouth />
-        <Recognition />
-        <SharedLeadershipBlock />
+        <AboutHero content={about.hero} />
+        <VisionMissionValues content={about.visionMissionValues} />
+        <WhyYouth content={about.whyYouth} />
+        <Recognition content={about.recognition} />
+        <SharedLeadershipBlock content={about.sharedLeadership} />
       </main>
       <Footer content={content.footer} />
     </>

@@ -32,6 +32,13 @@ import {
   ShieldCheck,
   Briefcase,
   UserPlus,
+  Telescope,
+  Target,
+  Vote,
+  GitMerge,
+  Megaphone,
+  Trophy,
+  Newspaper,
   type LucideIcon,
 } from "lucide-react";
 
@@ -69,6 +76,13 @@ export const iconMap: Record<string, LucideIcon> = {
   ShieldCheck,
   Briefcase,
   UserPlus,
+  Telescope,
+  Target,
+  Vote,
+  GitMerge,
+  Megaphone,
+  Trophy,
+  Newspaper,
 };
 
 export const iconNames = Object.keys(iconMap);
