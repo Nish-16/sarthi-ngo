@@ -2,7 +2,11 @@ import Container from "@/components/ui/Container";
 import { getIcon } from "@/lib/icon-map";
 import type { AboutRecognitionContent } from "@/types/content";
 
-export default function Recognition({ content }: { content: AboutRecognitionContent }) {
+export default function Recognition({
+  content,
+}: {
+  content: AboutRecognitionContent;
+}) {
   return (
     <section className="relative overflow-hidden bg-slate-950 py-24 text-slate-100">
       {/* blobs */}

@@ -32,7 +32,9 @@ export default function VisionMissionValues({
             <h2 className="mt-3 text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
               {content.headline}{" "}
               <span className="relative inline-block">
-                <span className="text-indigo-600">{content.headlineAccent}</span>
+                <span className="text-indigo-600">
+                  {content.headlineAccent}
+                </span>
                 <span className="absolute -bottom-1 left-0 right-0 h-1 bg-orange-400 rounded-full" />
               </span>
             </h2>

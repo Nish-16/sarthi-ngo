@@ -16,14 +16,16 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
       <div
         className="absolute top-24 left-8 w-36 h-36 opacity-25 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
       <div
         className="absolute bottom-20 right-12 w-28 h-28 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
@@ -34,7 +36,6 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
 
       <Container className="relative z-10 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
-
           {/* Left: text */}
           <div className="flex flex-col gap-7 animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-2 rounded-full w-fit">
@@ -45,8 +46,13 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black text-slate-900 leading-[1.05] tracking-tight">
               {content.headline}{" "}
               <span className="relative inline-block">
-                <span className="text-indigo-600">{content.headlineAccent}</span>
-                <span className="absolute -bottom-1 left-0 right-0 h-1.5 bg-orange-400 rounded-full" aria-hidden="true" />
+                <span className="text-indigo-600">
+                  {content.headlineAccent}
+                </span>
+                <span
+                  className="absolute -bottom-1 left-0 right-0 h-1.5 bg-orange-400 rounded-full"
+                  aria-hidden="true"
+                />
               </span>
             </h1>
 
@@ -67,9 +73,16 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
             {/* trust signal */}
             <div className="flex items-center gap-6 pt-2">
               {content.stats.map((stat) => (
-                <div key={stat.label} className="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl px-5 py-3 shadow-sm">
-                  <p className="text-2xl font-black text-indigo-600">{stat.value}</p>
-                  <p className="text-xs text-slate-400 font-medium mt-0.5">{stat.label}</p>
+                <div
+                  key={stat.label}
+                  className="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl px-5 py-3 shadow-sm"
+                >
+                  <p className="text-2xl font-black text-indigo-600">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs text-slate-400 font-medium mt-0.5">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -79,14 +92,22 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
           <div className="relative flex items-center justify-center lg:justify-end h-[500px]">
             {/* floating card top */}
             <div className="absolute top-10 left-4 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float pointer-events-none border border-slate-100">
-              <p className="text-xs text-slate-400 font-medium">{content.topCardLabel}</p>
-              <p className="text-2xl font-black text-indigo-600">{content.topCardValue}</p>
+              <p className="text-xs text-slate-400 font-medium">
+                {content.topCardLabel}
+              </p>
+              <p className="text-2xl font-black text-indigo-600">
+                {content.topCardValue}
+              </p>
             </div>
 
             {/* floating card bottom */}
             <div className="absolute bottom-16 right-0 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float-slow pointer-events-none border border-slate-100">
-              <p className="text-xs text-slate-400 font-medium">{content.bottomCardLabel}</p>
-              <p className="text-2xl font-black text-indigo-600">{content.bottomCardValue}</p>
+              <p className="text-xs text-slate-400 font-medium">
+                {content.bottomCardLabel}
+              </p>
+              <p className="text-2xl font-black text-indigo-600">
+                {content.bottomCardValue}
+              </p>
             </div>
 
             {/* image slices */}
@@ -119,8 +140,16 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
 
       {/* bottom wave */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path d="M0 60L1440 60L1440 20C1200 60 960 0 720 20C480 40 240 10 0 40L0 60Z" fill="white" />
+        <svg
+          viewBox="0 0 1440 60"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full"
+        >
+          <path
+            d="M0 60L1440 60L1440 20C1200 60 960 0 720 20C480 40 240 10 0 40L0 60Z"
+            fill="white"
+          />
         </svg>
       </div>
     </section>

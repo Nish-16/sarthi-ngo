@@ -3,7 +3,11 @@ import Container from "@/components/ui/Container";
 import { getIcon } from "@/lib/icon-map";
 import type { AboutWhyYouthContent } from "@/types/content";
 
-export default function WhyYouth({ content }: { content: AboutWhyYouthContent }) {
+export default function WhyYouth({
+  content,
+}: {
+  content: AboutWhyYouthContent;
+}) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 py-24">
       {/* blobs */}
