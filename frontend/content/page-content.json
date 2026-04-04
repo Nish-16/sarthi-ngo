@@ -78,8 +78,8 @@
     "yearsLabel": "Years of Impact",
     "headline": "A collective of",
     "headlineAccent": "changemakers",
-    "description1": "Sarthi is a youth-driven nonprofit founded on the belief that young people are not the leaders of tomorrow — they are the leaders of today. We empower students and young professionals to take ownership of local challenges and build solutions that last.",
-    "description2": "Through skill-building programs, community outreach, and collaborative projects, we've reached thousands of lives across India. Every initiative we undertake is built from the ground up — by youth, for communities.",
+    "description1": "We are a youth-led nonprofit championing grassroots change. Our programs are created and led by young people to address the social issues that matter most to them. We place youth at the centre of social change — not as participants, but as leaders.",
+    "description2": "",
     "values": [
       "Sustainability",
       "Collaboration",
@@ -154,20 +154,11 @@
     "ctaLabel": "View All Projects",
     "projects": [
       {
-        "image": "https://images.unsplash.com/photo-1509059852496-f3822ae057bf?w=800&q=80",
-        "tag": "Education",
-        "tagColor": "bg-indigo-100 text-indigo-700",
-        "title": "Pathshala Initiative",
-        "description": "Bringing quality education to rural communities through mobile classrooms and volunteer tutors across 8 districts.",
-        "stat": "12,000+ students reached",
-        "clipPath": "polygon(0 0, 100% 0, 100% 88%, 0 100%)"
-      },
-      {
         "image": "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80",
         "tag": "Environment",
         "tagColor": "bg-emerald-100 text-emerald-700",
         "title": "GreenRoots Campaign",
-        "description": "Youth-led urban tree plantation and environmental awareness drives in partnership with municipal corporations.",
+        "description": "Demystifying and destigmatising mental health one conversation at a time.",
         "stat": "50,000+ trees planted",
         "clipPath": "polygon(0 8%, 100% 0, 100% 100%, 0 92%)"
       },
