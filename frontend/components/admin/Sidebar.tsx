@@ -106,8 +106,10 @@ const groups: PageGroup[] = [
     label: "Team",
     pageIcon: Users,
     previewHref: "/team",
-    items: [],
-    comingSoon: true,
+    items: [
+      { href: "/admin/team/hero", label: "Hero", icon: Sparkles },
+      { href: "/admin/team/grid", label: "Team Grid", icon: Layers },
+    ],
   },
   {
     id: "get-involved",
