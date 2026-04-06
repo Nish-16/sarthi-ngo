@@ -2,9 +2,11 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/ui/Container";
 import TeamGrid from "@/components/sections/team/TeamGrid";
-import { readContent } from "@/lib/content";
+import { readShared, readTeam } from "@/lib/content";
 import { getIcon } from "@/lib/icon-map";
 import { Sparkles } from "lucide-react";
+
+export const revalidate = 3600; // ISR: revalidate every 1 hour
 
 export const metadata = {
   title: "Our Team | Sarthi NGO",
@@ -13,12 +15,12 @@ export const metadata = {
 };
 
 export default async function TeamPage() {
-  const content = await readContent();
-  const { hero, grid } = content.team;
+  const [shared, team] = await Promise.all([readShared(), readTeam()]);
+  const { hero, grid } = team;
 
   return (
     <>
-      <Navbar content={content.navbar} />
+      <Navbar content={shared.navbar} />
       <main className="flex flex-1 flex-col">
 
         {/* ── Hero ──────────────────────────────────────────────────── */}
@@ -105,7 +107,7 @@ export default async function TeamPage() {
         <TeamGrid content={grid} />
 
       </main>
-      <Footer content={content.footer} />
+      <Footer content={shared.footer} />
     </>
   );
 }

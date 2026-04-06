@@ -2,7 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import { readContent } from "@/lib/content";
+import { readShared, readGetInvolved } from "@/lib/content";
 import InvolvementGrid from "@/components/sections/get-involved/InvolvementGrid";
 import WhyJoin from "@/components/sections/get-involved/WhyJoin";
 import InvolvementStats from "@/components/sections/get-involved/InvolvementStats";
@@ -13,6 +13,8 @@ import CollaborateSection from "@/components/sections/get-involved/CollaborateSe
 import { Sparkles, ArrowRight, ArrowDown } from "lucide-react";
 import Image from "next/image";
 
+export const revalidate = 3600; // ISR: revalidate every 1 hour
+
 export const metadata = {
   title: "Get Involved | Sarthi NGO",
   description:
@@ -20,7 +22,7 @@ export const metadata = {
 };
 
 export default async function GetInvolvedPage() {
-  const content = await readContent();
+  const [shared, getInvolved] = await Promise.all([readShared(), readGetInvolved()]);
   const {
     hero,
     involvementGrid,
@@ -30,11 +32,11 @@ export default async function GetInvolvedPage() {
     volunteer,
     intern,
     collaborate,
-  } = content.getInvolved;
+  } = getInvolved;
 
   return (
     <>
-      <Navbar content={content.navbar} />
+      <Navbar content={shared.navbar} />
       <main className="flex flex-1 flex-col">
         {/* ── Hero ──────────────────────────────────────────────────── */}
         <section className="relative min-h-[82vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/30 pt-28 pb-0">
@@ -208,7 +210,7 @@ export default async function GetInvolvedPage() {
         <InternSection content={intern} />
         <CollaborateSection content={collaborate} />
       </main>
-      <Footer content={content.footer} />
+      <Footer content={shared.footer} />
     </>
   );
 }

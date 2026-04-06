@@ -1,4 +1,6 @@
-import { readContent } from "@/lib/content";
+import { readShared, readHome } from "@/lib/content";
+
+export const revalidate = 3600; // ISR: revalidate every 1 hour
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -10,21 +12,21 @@ import JoinUs from "@/components/sections/JoinUs";
 import StoriesUpdates from "@/components/sections/StoriesUpdates";
 
 export default async function Home() {
-  const content = await readContent();
+  const [shared, home] = await Promise.all([readShared(), readHome()]);
 
   return (
     <>
-      <Navbar content={content.navbar} />
+      <Navbar content={shared.navbar} />
       <main className="flex flex-col flex-1">
-        <Hero content={content.hero} />
-        <WhoWeAre content={content.whoWeAre} />
-        <Recognitions content={content.recognitions} />
-        <FeaturedProjects content={content.featuredProjects} />
-        <ImpactStats content={content.impactStats} />
-        <JoinUs content={content.joinUs} />
-        <StoriesUpdates content={content.storiesUpdates} />
+        <Hero content={home.hero} />
+        <WhoWeAre content={home.whoWeAre} />
+        <Recognitions content={home.recognitions} />
+        <FeaturedProjects content={home.featuredProjects} />
+        <ImpactStats content={home.impactStats} />
+        <JoinUs content={home.joinUs} />
+        <StoriesUpdates content={home.storiesUpdates} />
       </main>
-      <Footer content={content.footer} />
+      <Footer content={shared.footer} />
     </>
   );
 }

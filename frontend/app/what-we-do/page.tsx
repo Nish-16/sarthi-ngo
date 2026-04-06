@@ -2,7 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import { readContent } from "@/lib/content";
+import { readShared, readWhatWeDo } from "@/lib/content";
 import ProjectsSection from "@/components/sections/what-we-do/ProjectsSection";
 import PreviousProjects from "@/components/sections/what-we-do/PreviousProjects";
 import ProblemSection from "@/components/sections/what-we-do/ProblemSection";
@@ -10,13 +10,14 @@ import ApproachSection from "@/components/sections/what-we-do/ApproachSection";
 import ImpactSection from "@/components/sections/what-we-do/ImpactSection";
 import { ArrowRight, Sparkles } from "lucide-react";
 
+export const revalidate = 3600; // ISR: revalidate every 1 hour
+
 export default async function WhatWeDoPage() {
-  const content = await readContent();
-  const wwd = content.whatWeDo;
+  const [shared, wwd] = await Promise.all([readShared(), readWhatWeDo()]);
 
   return (
     <>
-      <Navbar content={content.navbar} />
+      <Navbar content={shared.navbar} />
       <main className="flex flex-col flex-1">
         {/* ── Hero ───────────────────────────────────────────────── */}
         <section className="relative pt-32 pb-0 overflow-hidden bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/30 min-h-[72vh] flex items-center">
@@ -96,7 +97,7 @@ export default async function WhatWeDoPage() {
         <ApproachSection content={wwd.approach} />
         <ImpactSection content={wwd.impact} />
       </main>
-      <Footer content={content.footer} />
+      <Footer content={shared.footer} />
     </>
   );
 }

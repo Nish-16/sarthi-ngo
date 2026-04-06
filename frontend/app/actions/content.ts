@@ -1,7 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { readContent, writeContent } from "@/lib/content";
+import {
+  readShared, writeShared, SharedContent,
+  readHome, writeHome, HomeContent,
+  readAbout, writeAbout,
+  readTeam, writeTeam,
+  readGetInvolved, writeGetInvolved,
+  readWhatWeDo, writeWhatWeDo,
+} from "@/lib/content";
 import type {
   HeroContent,
   WhoWeAreContent,
@@ -13,7 +20,6 @@ import type {
   NavbarContent,
   FooterContent,
   MetaContent,
-  WhatWeDoContent,
   WwdHeroContent,
   WwdSignatureProjectsContent,
   WwdPreviousProjectsContent,
@@ -42,31 +48,47 @@ import type {
 
 type ActionResult = { success: true } | { error: string };
 
-async function withSave<T>(
-  key: string,
-  data: T,
-  revalidate: string = "/",
+async function withSaveShared<K extends keyof SharedContent>(
+  key: K,
+  data: SharedContent[K],
 ): Promise<ActionResult> {
   try {
-    const content = await readContent();
-    (content as unknown as Record<string, unknown>)[key as string] = data;
-    await writeContent(content);
-    revalidatePath(revalidate, "page");
+    const content = await readShared();
+    content[key] = data;
+    await writeShared(content);
+    // Shared content (navbar/footer) appears on all pages
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err) {
-    console.error(`Failed to save ${String(key)}:`, err);
+    console.error(`Failed to save shared.${String(key)}:`, err);
     return { error: "Failed to save. Please try again." };
   }
 }
 
-async function withSaveWwd<K extends keyof WhatWeDoContent>(
+async function withSaveHome<K extends keyof HomeContent>(
   key: K,
-  data: WhatWeDoContent[K],
+  data: HomeContent[K],
 ): Promise<ActionResult> {
   try {
-    const content = await readContent();
-    content.whatWeDo[key] = data;
-    await writeContent(content);
+    const content = await readHome();
+    content[key] = data;
+    await writeHome(content);
+    revalidatePath("/", "page");
+    return { success: true };
+  } catch (err) {
+    console.error(`Failed to save home.${String(key)}:`, err);
+    return { error: "Failed to save. Please try again." };
+  }
+}
+
+async function withSaveWwd<K extends keyof WwdContent>(
+  key: K,
+  data: WwdContent[K],
+): Promise<ActionResult> {
+  try {
+    const content = await readWhatWeDo();
+    (content as unknown as Record<string, unknown>)[key as string] = data;
+    await writeWhatWeDo(content);
     revalidatePath("/what-we-do", "page");
     return { success: true };
   } catch (err) {
@@ -75,14 +97,24 @@ async function withSaveWwd<K extends keyof WhatWeDoContent>(
   }
 }
 
+// local helper type
+type WwdContent = {
+  hero: WwdHeroContent;
+  signatureProjects: WwdSignatureProjectsContent;
+  previousProjects: WwdPreviousProjectsContent;
+  problem: WwdProblemContent;
+  approach: WwdApproachContent;
+  impact: WwdImpactContent;
+};
+
 async function withSaveAbout<K extends keyof AboutPageContent>(
   key: K,
   data: AboutPageContent[K],
 ): Promise<ActionResult> {
   try {
-    const content = await readContent();
-    content.about[key] = data;
-    await writeContent(content);
+    const content = await readAbout();
+    content[key] = data;
+    await writeAbout(content);
     revalidatePath("/about", "page");
     return { success: true };
   } catch (err) {
@@ -96,9 +128,9 @@ async function withSaveGetInvolved<K extends keyof GetInvolvedPageContent>(
   data: GetInvolvedPageContent[K],
 ): Promise<ActionResult> {
   try {
-    const content = await readContent();
-    content.getInvolved[key] = data;
-    await writeContent(content);
+    const content = await readGetInvolved();
+    content[key] = data;
+    await writeGetInvolved(content);
     revalidatePath("/get-involved", "page");
     return { success: true };
   } catch (err) {
@@ -112,9 +144,9 @@ async function withSaveTeam<K extends keyof TeamPageContent>(
   data: TeamPageContent[K],
 ): Promise<ActionResult> {
   try {
-    const content = await readContent();
-    content.team[key] = data;
-    await writeContent(content);
+    const content = await readTeam();
+    content[key] = data;
+    await writeTeam(content);
     revalidatePath("/team", "page");
     return { success: true };
   } catch (err) {
@@ -124,43 +156,43 @@ async function withSaveTeam<K extends keyof TeamPageContent>(
 }
 
 export async function saveMeta(data: MetaContent): Promise<ActionResult> {
-  return withSave("meta", data);
+  return withSaveShared("meta", data);
 }
 
 export async function saveNavbar(data: NavbarContent): Promise<ActionResult> {
-  return withSave("navbar", data);
-}
-
-export async function saveHero(data: HeroContent): Promise<ActionResult> {
-  return withSave("hero", data);
-}
-
-export async function saveWhoWeAre(data: WhoWeAreContent): Promise<ActionResult> {
-  return withSave("whoWeAre", data);
-}
-
-export async function saveRecognitions(data: RecognitionsContent): Promise<ActionResult> {
-  return withSave("recognitions", data);
-}
-
-export async function saveFeaturedProjects(data: FeaturedProjectsContent): Promise<ActionResult> {
-  return withSave("featuredProjects", data);
-}
-
-export async function saveImpactStats(data: ImpactStatsContent): Promise<ActionResult> {
-  return withSave("impactStats", data);
-}
-
-export async function saveJoinUs(data: JoinUsContent): Promise<ActionResult> {
-  return withSave("joinUs", data);
-}
-
-export async function saveStoriesUpdates(data: StoriesUpdatesContent): Promise<ActionResult> {
-  return withSave("storiesUpdates", data);
+  return withSaveShared("navbar", data);
 }
 
 export async function saveFooter(data: FooterContent): Promise<ActionResult> {
-  return withSave("footer", data);
+  return withSaveShared("footer", data);
+}
+
+export async function saveHero(data: HeroContent): Promise<ActionResult> {
+  return withSaveHome("hero", data);
+}
+
+export async function saveWhoWeAre(data: WhoWeAreContent): Promise<ActionResult> {
+  return withSaveHome("whoWeAre", data);
+}
+
+export async function saveRecognitions(data: RecognitionsContent): Promise<ActionResult> {
+  return withSaveHome("recognitions", data);
+}
+
+export async function saveFeaturedProjects(data: FeaturedProjectsContent): Promise<ActionResult> {
+  return withSaveHome("featuredProjects", data);
+}
+
+export async function saveImpactStats(data: ImpactStatsContent): Promise<ActionResult> {
+  return withSaveHome("impactStats", data);
+}
+
+export async function saveJoinUs(data: JoinUsContent): Promise<ActionResult> {
+  return withSaveHome("joinUs", data);
+}
+
+export async function saveStoriesUpdates(data: StoriesUpdatesContent): Promise<ActionResult> {
+  return withSaveHome("storiesUpdates", data);
 }
 
 // ─── What We Do ───────────────────────────────────────────────────────────────

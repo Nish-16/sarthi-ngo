@@ -1,11 +1,13 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { readContent } from "@/lib/content";
+import { readShared, readAbout } from "@/lib/content";
 import AboutHero from "@/components/sections/about/AboutHero";
 import VisionMissionValues from "@/components/sections/about/VisionMissionValues";
 import WhyYouth from "@/components/sections/about/WhyYouth";
 import Recognition from "@/components/sections/about/Recognition";
 import SharedLeadershipBlock from "@/components/sections/about/SharedLeadershipBlock";
+
+export const revalidate = 3600; // ISR: revalidate every 1 hour
 
 export const metadata = {
   title: "About Us | Sarthi NGO",
@@ -14,12 +16,11 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  const content = await readContent();
-  const { about } = content;
+  const [shared, about] = await Promise.all([readShared(), readAbout()]);
 
   return (
     <>
-      <Navbar content={content.navbar} />
+      <Navbar content={shared.navbar} />
       <main className="flex flex-1 flex-col">
         <AboutHero content={about.hero} />
         <VisionMissionValues content={about.visionMissionValues} />
@@ -27,7 +28,7 @@ export default async function AboutPage() {
         <Recognition content={about.recognition} />
         <SharedLeadershipBlock content={about.sharedLeadership} />
       </main>
-      <Footer content={content.footer} />
+      <Footer content={shared.footer} />
     </>
   );
 }
