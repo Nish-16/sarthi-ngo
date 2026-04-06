@@ -9,8 +9,8 @@ import ImpactStats from "@/components/sections/ImpactStats";
 import JoinUs from "@/components/sections/JoinUs";
 import StoriesUpdates from "@/components/sections/StoriesUpdates";
 
-export default function Home() {
-  const content = readContent();
+export default async function Home() {
+  const content = await readContent();
 
   return (
     <>

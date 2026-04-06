@@ -12,8 +12,8 @@ export const metadata = {
     "Meet the passionate leaders, coordinators, and volunteers driving change at Sarthi.",
 };
 
-export default function TeamPage() {
-  const content = readContent();
+export default async function TeamPage() {
+  const content = await readContent();
   const { hero, grid } = content.team;
 
   return (

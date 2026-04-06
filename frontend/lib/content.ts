@@ -1,14 +1,20 @@
-import fs from "fs";
-import path from "path";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "./firebase";
 import type { PageContent } from "@/types/content";
 
-const CONTENT_PATH = path.join(process.cwd(), "content", "page-content.json");
+const COLLECTION = process.env.FIREBASE_COLLECTION ?? "dev_content";
+const DOC_ID = "page";
 
-export function readContent(): PageContent {
-  const raw = fs.readFileSync(CONTENT_PATH, "utf-8");
-  return JSON.parse(raw) as PageContent;
+export async function readContent(): Promise<PageContent> {
+  const ref = doc(db, COLLECTION, DOC_ID);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) {
+    throw new Error(`Content document not found in collection "${COLLECTION}"`);
+  }
+  return snap.data() as PageContent;
 }
 
-export function writeContent(content: PageContent): void {
-  fs.writeFileSync(CONTENT_PATH, JSON.stringify(content, null, 2), "utf-8");
+export async function writeContent(content: PageContent): Promise<void> {
+  const ref = doc(db, COLLECTION, DOC_ID);
+  await setDoc(ref, content);
 }

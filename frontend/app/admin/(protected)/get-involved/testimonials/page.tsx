@@ -1,7 +1,7 @@
 import { readContent } from "@/lib/content";
 import TestimonialsForm from "@/components/admin/forms/get-involved/TestimonialsForm";
 
-export default function GetInvolvedTestimonialsAdminPage() {
-  const { getInvolved } = readContent();
+export default async function GetInvolvedTestimonialsAdminPage() {
+  const { getInvolved } = await readContent();
   return <TestimonialsForm initial={getInvolved.testimonials} />;
 }

@@ -7,7 +7,9 @@
       "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('link'\\) || k.toLowerCase\\(\\).includes\\('mail'\\) || k.toLowerCase\\(\\).includes\\('social'\\)\\)\\)\")",
       "Bash(sed:*)",
       "Bash(python3 -c ':*)",
-      "Bash(node -e ':*)"
+      "Bash(node -e ':*)",
+      "Bash(node -e \"require\\('firebase/app'\\); console.log\\('firebase ok'\\)\")",
+      "Bash(node:*)"
     ]
   }
 }

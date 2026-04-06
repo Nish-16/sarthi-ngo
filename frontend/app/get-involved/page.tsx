@@ -19,8 +19,8 @@ export const metadata = {
     "Volunteer, intern, donate, or collaborate with Sarthi. Join 1,200+ changemakers building youth-led community impact across India.",
 };
 
-export default function GetInvolvedPage() {
-  const content = readContent();
+export default async function GetInvolvedPage() {
+  const content = await readContent();
   const {
     hero,
     involvementGrid,

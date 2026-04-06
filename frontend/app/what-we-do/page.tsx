@@ -10,8 +10,8 @@ import ApproachSection from "@/components/sections/what-we-do/ApproachSection";
 import ImpactSection from "@/components/sections/what-we-do/ImpactSection";
 import { ArrowRight, Sparkles } from "lucide-react";
 
-export default function WhatWeDoPage() {
-  const content = readContent();
+export default async function WhatWeDoPage() {
+  const content = await readContent();
   const wwd = content.whatWeDo;
 
   return (

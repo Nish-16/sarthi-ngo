@@ -13,8 +13,8 @@ export const metadata = {
     "Learn about Sarthi's mission, youth-first approach, values, and recognition.",
 };
 
-export default function AboutPage() {
-  const content = readContent();
+export default async function AboutPage() {
+  const content = await readContent();
   const { about } = content;
 
   return (
