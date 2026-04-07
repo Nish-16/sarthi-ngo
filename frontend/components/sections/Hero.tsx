@@ -25,13 +25,7 @@ export default function Hero({ content }: { content: HeroContent }) {
             {/* Headline */}
             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black text-slate-900 leading-[1.05] tracking-tight">
               {content.headline}{" "}
-              <span className="relative">
-                <span className="text-indigo-600">{content.headlineAccent}</span>
-                <span
-                  className="absolute -bottom-1 left-0 right-0 h-1 bg-orange-400 rounded-full"
-                  aria-hidden="true"
-                />
-              </span>{" "}
+              <span className="text-indigo-600">{content.headlineAccent}</span>{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
                 {content.headlineEnd}
               </span>

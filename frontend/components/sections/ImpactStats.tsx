@@ -58,7 +58,7 @@ export default function ImpactStats({
                 <Icon className="w-5 h-5" />
               </div>
               <p
-                className={`text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br ${stat.gradient} leading-none mb-2`}
+                className={`text-2xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br ${stat.gradient} leading-none mb-2`}
               >
                 {stat.value}
               </p>

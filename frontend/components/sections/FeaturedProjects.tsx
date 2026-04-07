@@ -9,9 +9,9 @@ export default function FeaturedProjects({
   content: FeaturedProjectsContent;
 }) {
   return (
-    <section id="projects" className="py-24 bg-white overflow-hidden">
+    <section id="projects" className="py-16 bg-white overflow-hidden">
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-6">
           <div>
             <span className="text-sm font-bold text-orange-500 uppercase tracking-widest">
               {content.eyebrow}

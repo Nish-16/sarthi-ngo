@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Container from "../ui/Container";
 import Button from "../ui/Button";
@@ -21,20 +22,22 @@ export default function Navbar({ content }: { content: NavbarContent }) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || menuOpen
           ? "bg-white/90 backdrop-blur-md shadow-sm shadow-slate-200/50"
           : "bg-transparent"
       }`}
     >
       <Container>
-        <nav className="flex items-center justify-between h-18 py-4">
+        <nav className="flex items-center justify-between h-20 py-4">
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
-              {content.logoText.charAt(0)}
-            </span>
-            <span className="font-bold text-xl tracking-tight text-slate-900">
-              {content.logoText}
-            </span>
+            <Image
+              src="/sarthi-logo.png"
+              alt={content.logoText}
+              width={120}
+              height={40}
+              className="h-10 md:h-16 w-auto object-contain group-hover:scale-105 transition-transform"
+              priority
+            />
           </Link>
 
           <ul className="hidden md:flex items-center gap-1">
