@@ -64,7 +64,7 @@ export default function RecognitionForm({
   return (
     <SectionShell
       title="Recognition"
-      description="Dark recognition and partner strip section."
+      description="Flow diagram layout — left anchor text branching to recognition nodes on the right, plus partner logo strip."
       onSave={async () => setResult(await saveAboutRecognition(data))}
       saveResult={result}
     >

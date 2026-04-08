@@ -5,7 +5,6 @@ import AboutHero from "@/components/sections/about/AboutHero";
 import VisionMissionValues from "@/components/sections/about/VisionMissionValues";
 import WhyYouth from "@/components/sections/about/WhyYouth";
 import Recognition from "@/components/sections/about/Recognition";
-import SharedLeadershipBlock from "@/components/sections/about/SharedLeadershipBlock";
 
 export const revalidate = 3600; // ISR: revalidate every 1 hour
 
@@ -26,7 +25,6 @@ export default async function AboutPage() {
         <VisionMissionValues content={about.visionMissionValues} />
         <WhyYouth content={about.whyYouth} />
         <Recognition content={about.recognition} />
-        <SharedLeadershipBlock content={about.sharedLeadership} />
       </main>
       <Footer content={shared.footer} />
     </>

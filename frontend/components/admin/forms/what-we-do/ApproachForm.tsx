@@ -71,7 +71,7 @@ export default function ApproachForm({ initial }: { initial: WwdApproachContent 
       </FormGroup>
 
       <FormGroup title="Image & Quote">
-        <ImageUploader label="Aside Image" value={data.image} onChange={(url) => set("image", url)} aspectRatio="3/4" />
+        <ImageUploader label="Primary Image" value={data.image} onChange={(url) => set("image", url)} aspectRatio="16/9" />
         <Field label="Image Alt Text">
           <Input value={data.imageAlt} onChange={(v) => set("imageAlt", v)} />
         </Field>
@@ -83,6 +83,34 @@ export default function ApproachForm({ initial }: { initial: WwdApproachContent 
             className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
           />
         </Field>
+      </FormGroup>
+
+      <FormGroup title="Gallery Photos (Carousel)">
+        <p className="text-xs text-slate-400 -mt-1 mb-1">
+          Add extra photos to display alongside the primary image in the carousel. The primary image above is always shown first.
+        </p>
+        <ArrayField<{ src: string; alt: string }>
+          items={data.images ?? []}
+          onChange={(v) => set("images", v)}
+          createItem={() => ({ src: "", alt: "" })}
+          renderItem={(img, _i, onChangeItem) => (
+            <div className="flex flex-col gap-3">
+              <ImageUploader
+                label="Photo"
+                value={img.src}
+                onChange={(url) => onChangeItem({ ...img, src: url })}
+                aspectRatio="16/9"
+              />
+              <Field label="Alt Text">
+                <Input
+                  value={img.alt}
+                  onChange={(v) => onChangeItem({ ...img, alt: v })}
+                  placeholder="A short description of the photo"
+                />
+              </Field>
+            </div>
+          )}
+        />
       </FormGroup>
 
       <FormGroup title="Steps">

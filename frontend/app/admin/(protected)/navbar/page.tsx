@@ -1,7 +1,7 @@
-import { readContent } from "@/lib/content";
+import { readShared } from "@/lib/content";
 import NavbarForm from "@/components/admin/forms/NavbarForm";
 
 export default async function NavbarAdminPage() {
-  const { navbar } = await readContent();
-  return <NavbarForm initial={navbar} />;
+  const shared = await readShared();
+  return <NavbarForm initial={shared.navbar} />;
 }

@@ -94,11 +94,6 @@ const groups: PageGroup[] = [
         label: "Recognition",
         icon: Trophy,
       },
-      {
-        href: "/admin/about/shared-leadership",
-        label: "Shared Leadership",
-        icon: GitBranch,
-      },
     ],
   },
   {

@@ -64,7 +64,7 @@ export default function VisionMissionValuesForm({
   return (
     <SectionShell
       title="Vision Mission Values"
-      description="Three pillar cards section."
+      description="Asymmetric bento grid — Vision, Mission, Values. Styles are fixed per pillar position; only icon, title, tag, and description are editable."
       onSave={async () => setResult(await saveAboutVisionMissionValues(data))}
       saveResult={result}
     >
@@ -142,22 +142,10 @@ export default function VisionMissionValuesForm({
                   onChange={(v) => onChange({ ...item, description: v })}
                 />
               </Field>
-              <Field label="Background Classes">
-                <Input
-                  value={item.bg}
-                  onChange={(v) => onChange({ ...item, bg: v })}
-                />
-              </Field>
               <Field label="Icon Background Classes">
                 <Input
                   value={item.iconBg}
                   onChange={(v) => onChange({ ...item, iconBg: v })}
-                />
-              </Field>
-              <Field label="Accent Classes">
-                <Input
-                  value={item.accent}
-                  onChange={(v) => onChange({ ...item, accent: v })}
                 />
               </Field>
             </div>

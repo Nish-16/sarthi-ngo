@@ -256,6 +256,7 @@ export interface WwdApproachContent {
   imageAlt: string;
   quoteCard: string;
   steps: WwdApproachStep[];
+  images?: { src: string; alt: string }[];
 }
 
 export interface WwdImpactStatItem {

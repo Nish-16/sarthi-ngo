@@ -1,7 +1,7 @@
-import { readContent } from "@/lib/content";
+import { readAbout } from "@/lib/content";
 import AboutHeroForm from "@/components/admin/forms/about/HeroForm";
 
 export default async function AboutHeroAdminPage() {
-  const { about } = await readContent();
+  const about = await readAbout();
   return <AboutHeroForm initial={about.hero} />;
 }

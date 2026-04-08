@@ -49,22 +49,21 @@ export default function ProjectsSection({ content }: Props) {
         </div>
 
         {primary && secondary && (
-          <div className="grid lg:grid-cols-12 gap-6 items-start">
+          <div className="grid lg:grid-cols-2 gap-6">
             {/* Primary card */}
-            <article className="lg:col-span-7 relative rounded-3xl bg-slate-900 text-white overflow-hidden min-h-[440px] group">
+            <article className="relative rounded-3xl bg-slate-900 text-white overflow-hidden min-h-[500px] group">
               <div className="absolute inset-0">
                 <Image
                   src={primary.image}
                   alt={primary.name}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: "linear-gradient(145deg, rgba(15,23,42,0.15), rgba(15,23,42,0.88))",
-                    clipPath: primary.clipPath,
+                    background: "linear-gradient(160deg, rgba(15,23,42,0.10), rgba(15,23,42,0.85))",
                   }}
                 />
               </div>
@@ -74,7 +73,7 @@ export default function ProjectsSection({ content }: Props) {
                 {primary.tagline}
               </div>
 
-              <div className="relative h-full flex flex-col justify-end p-8 md:p-10 pt-20">
+              <div className="relative h-full flex flex-col justify-end p-8 md:p-10 pt-24">
                 <h3 className="text-3xl md:text-4xl font-black tracking-tight">{primary.name}</h3>
                 <p className="mt-4 text-slate-200 leading-relaxed max-w-xl">{primary.description}</p>
                 <div className="mt-7">
@@ -86,30 +85,33 @@ export default function ProjectsSection({ content }: Props) {
               </div>
             </article>
 
-            {/* Secondary card */}
-            <article className="lg:col-span-5 relative lg:mt-14 rounded-3xl bg-white border border-slate-100 overflow-hidden shadow-xl shadow-slate-200/50 group">
-              <div className="relative h-60 overflow-hidden">
+            {/* Secondary card — same full-bleed style */}
+            <article className="relative rounded-3xl bg-slate-900 text-white overflow-hidden min-h-[500px] group">
+              <div className="absolute inset-0">
                 <Image
                   src={secondary.image}
                   alt={secondary.name}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 38vw"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${secondary.accent}`}
-                  style={{ clipPath: secondary.clipPath }}
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(160deg, rgba(15,23,42,0.10), rgba(15,23,42,0.85))",
+                  }}
                 />
-                <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
-                  <SecondaryIcon className="w-3.5 h-3.5" />
-                  {secondary.tagline}
-                </div>
               </div>
 
-              <div className="p-7 md:p-8">
-                <h3 className="text-2xl font-black text-slate-900 tracking-tight">{secondary.name}</h3>
-                <p className="mt-3 text-slate-600 leading-relaxed">{secondary.description}</p>
-                <div className="mt-6">
+              <div className="absolute top-6 left-6 z-10 flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                <SecondaryIcon className="w-3.5 h-3.5" />
+                {secondary.tagline}
+              </div>
+
+              <div className="relative h-full flex flex-col justify-end p-8 md:p-10 pt-24">
+                <h3 className="text-3xl md:text-4xl font-black tracking-tight">{secondary.name}</h3>
+                <p className="mt-4 text-slate-200 leading-relaxed max-w-xl">{secondary.description}</p>
+                <div className="mt-7">
                   <Button href="/get-involved" variant="outline" size="sm">
                     Learn More
                     <ArrowRight className="w-4 h-4" />

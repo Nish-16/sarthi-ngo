@@ -9,7 +9,9 @@
       "Bash(python3 -c ':*)",
       "Bash(node -e ':*)",
       "Bash(node -e \"require\\('firebase/app'\\); console.log\\('firebase ok'\\)\")",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(npx next:*)",
+      "Bash(node_modules/.bin/tsc --noEmit)"
     ]
   }
 }
