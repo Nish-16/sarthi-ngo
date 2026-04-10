@@ -4,15 +4,8 @@ import { useState } from "react";
 import SectionShell from "../SectionShell";
 import FormGroup from "../FormGroup";
 import ArrayField from "../ArrayField";
-import ImageUploader from "../ImageUploader";
 import { saveHero } from "@/app/actions/content";
-import type { HeroContent, HeroImage } from "@/types/content";
-
-const CLIP_PATHS = [
-  "polygon(0 0, 100% 0, 82% 100%, 0 100%)",
-  "polygon(18% 0, 100% 0, 82% 100%, 0 100%)",
-  "polygon(18% 0, 100% 0, 100% 100%, 0 100%)",
-];
+import type { HeroContent, HeroStat } from "@/types/content";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -66,13 +59,17 @@ export default function HeroForm({ initial }: { initial: HeroContent }) {
   return (
     <SectionShell
       title="Hero Section"
-      description="The first thing visitors see — headline, images, and CTAs."
+      description="The first thing visitors see — logo, headline, subtext, CTAs, and stats."
       onSave={handleSave}
       saveResult={result}
     >
       <FormGroup title="Text Content">
         <Field label="Badge Text">
-          <Input value={data.badge} onChange={(v) => set("badge", v)} placeholder="Youth-Led · Social Change · India" />
+          <Input
+            value={data.badge}
+            onChange={(v) => set("badge", v)}
+            placeholder="Youth-Led · Social Change · India"
+          />
         </Field>
         <div className="grid grid-cols-3 gap-3">
           <Field label="Headline (part 1)">
@@ -93,82 +90,34 @@ export default function HeroForm({ initial }: { initial: HeroContent }) {
       <FormGroup title="Call to Action">
         <div className="grid grid-cols-2 gap-3">
           <Field label="Primary CTA Label">
-            <Input value={data.ctaPrimary} onChange={(v) => set("ctaPrimary", v)} />
+            <Input value={data.ctaPrimary} onChange={(v) => set("ctaPrimary", v)} placeholder="Get Involved" />
           </Field>
           <Field label="Secondary CTA Label">
-            <Input value={data.ctaSecondary} onChange={(v) => set("ctaSecondary", v)} />
+            <Input value={data.ctaSecondary} onChange={(v) => set("ctaSecondary", v)} placeholder="Our Story" />
           </Field>
         </div>
       </FormGroup>
 
-      <FormGroup title="Statistics & Floating Card">
-        <div className="grid grid-cols-3 gap-3">
-          <Field label="Member Count">
-            <Input value={data.memberCount} onChange={(v) => set("memberCount", v)} />
-          </Field>
-          <Field label="Member Cities">
-            <Input value={data.memberCities} onChange={(v) => set("memberCities", v)} />
-          </Field>
-          <Field label="Impact Score">
-            <Input value={data.impactScore} onChange={(v) => set("impactScore", v)} placeholder="98%" />
-          </Field>
-        </div>
-        <Field label="Award Label (floating card)">
-          <Input value={data.awardLabel} onChange={(v) => set("awardLabel", v)} />
-        </Field>
-      </FormGroup>
-
-      <FormGroup title="Hero Images" description="3–5 images recommended">
-        <ArrayField<HeroImage>
+      <FormGroup title="Stats Bar" description="Displayed below the CTAs — 2 to 4 stats recommended">
+        <ArrayField<HeroStat>
           label=""
-          items={data.images}
-          onChange={(imgs) => set("images", imgs)}
-          maxItems={5}
-          createItem={() => ({ src: "", alt: "", clipPath: CLIP_PATHS[1] })}
-          renderItem={(img, _i, onChange) => (
-            <div className="flex flex-col gap-3">
-              <ImageUploader
-                label="Image"
-                value={img.src}
-                onChange={(url) => onChange({ ...img, src: url })}
-                aspectRatio="9/16"
+          items={data.stats ?? []}
+          onChange={(v) => set("stats", v)}
+          maxItems={4}
+          createItem={() => ({ value: "", label: "" })}
+          renderItem={(stat, _i, onChange) => (
+            <div className="grid grid-cols-2 gap-3">
+              <Input
+                value={stat.value}
+                onChange={(v) => onChange({ ...stat, value: v })}
+                placeholder="500+"
               />
               <Input
-                value={img.alt}
-                onChange={(v) => onChange({ ...img, alt: v })}
-                placeholder="Alt text"
+                value={stat.label}
+                onChange={(v) => onChange({ ...stat, label: v })}
+                placeholder="Active Members"
               />
-              <div className="flex flex-col gap-1">
-                <label className="text-xs font-semibold text-slate-500">Clip Path</label>
-                <select
-                  value={img.clipPath}
-                  onChange={(e) => onChange({ ...img, clipPath: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
-                >
-                  <option value="polygon(0 0, 100% 0, 82% 100%, 0 100%)">Left edge (first slice)</option>
-                  <option value="polygon(18% 0, 100% 0, 82% 100%, 0 100%)">Middle slice</option>
-                  <option value="polygon(18% 0, 100% 0, 100% 100%, 0 100%)">Right edge (last slice)</option>
-                </select>
-              </div>
             </div>
-          )}
-        />
-      </FormGroup>
-
-      <FormGroup title="Member Avatars" description="Shown in the trust strip — up to 6">
-        <ArrayField<string>
-          label=""
-          items={data.memberAvatars}
-          onChange={(v) => set("memberAvatars", v)}
-          maxItems={6}
-          createItem={() => ""}
-          renderItem={(url, _i, onChange) => (
-            <ImageUploader
-              label="Avatar"
-              value={url}
-              onChange={onChange}
-              aspectRatio="1/1"
-            />
           )}
         />
       </FormGroup>

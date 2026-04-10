@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -9,26 +9,15 @@ import Button from "../ui/Button";
 import type { NavbarContent } from "@/types/content";
 
 export default function Navbar({ content }: { content: NavbarContent }) {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || menuOpen
-          ? "bg-white/90 backdrop-blur-md shadow-sm shadow-slate-200/50"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-br from-orange-50/90 via-white/85 to-indigo-50/80 backdrop-blur-md border-b border-white/20">
       <Container>
         <nav className="flex items-center justify-between h-20 py-4">
+          
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <Image
               src="/sarthi-logo.png"
@@ -40,6 +29,7 @@ export default function Navbar({ content }: { content: NavbarContent }) {
             />
           </Link>
 
+          {/* Desktop Links */}
           <ul className="hidden md:flex items-center gap-1">
             {content.links.map((link) => (
               <li key={link.href}>
@@ -57,31 +47,28 @@ export default function Navbar({ content }: { content: NavbarContent }) {
             ))}
           </ul>
 
+          {/* CTA */}
           <div className="hidden md:block">
             <Button size="sm" href={content.ctaHref}>
               {content.ctaLabel}
             </Button>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-slate-100/60 transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <span
-              className={`block w-5 h-0.5 bg-slate-700 transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-            />
-            <span
-              className={`block w-5 h-0.5 bg-slate-700 transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block w-5 h-0.5 bg-slate-700 transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-            />
+            <span className={`block w-5 h-0.5 bg-slate-700 transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-slate-700 transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-slate-700 transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
           </button>
         </nav>
 
+        {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden pb-4 border-t border-slate-100">
+          <div className="md:hidden pb-4 border-t border-white/30 backdrop-blur-md">
             <ul className="flex flex-col gap-1 pt-3">
               {content.links.map((link) => (
                 <li key={link.href}>

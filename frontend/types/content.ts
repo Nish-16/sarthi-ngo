@@ -21,10 +21,9 @@ export interface NavbarContent {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
-export interface HeroImage {
-  src: string;
-  alt: string;
-  clipPath: string;
+export interface HeroStat {
+  value: string;
+  label: string;
 }
 
 export interface HeroContent {
@@ -35,13 +34,7 @@ export interface HeroContent {
   subtext: string;
   ctaPrimary: string;
   ctaSecondary: string;
-  memberCount: string;
-  memberSubtext: string;
-  memberCities: string;
-  impactScore: string;
-  awardLabel: string;
-  images: HeroImage[];
-  memberAvatars: string[];
+  stats: HeroStat[];
 }
 
 // ─── Who We Are ───────────────────────────────────────────────────────────────

@@ -1,176 +1,209 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Users, MapPin, TrendingUp, Sparkles } from "lucide-react";
 import Container from "../ui/Container";
 import Button from "../ui/Button";
-import { Trophy } from "lucide-react";
 import type { HeroContent } from "@/types/content";
 
-export default function Hero({ content }: { content: HeroContent }) {
-  return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/30">
-      {/* Background decorative blobs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-200/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-20 left-1/3 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-40 right-0 w-80 h-80 bg-orange-100/40 rounded-full blur-3xl pointer-events-none" />
+const CARD_ICONS = [Users, MapPin, TrendingUp];
 
-      <Container className="relative z-10 pt-24 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-          {/* Left: Text Content */}
-          <div className="flex flex-col gap-7 animate-fade-up">
+const CARD_POSITIONS = [
+  "top-6 left-0 animate-float",
+  "bottom-10 right-0 animate-float-slow",
+  "top-1/2 -translate-y-1/2 right-0 animate-float",
+] as const;
+
+export default function Hero({ content }: { content: HeroContent }) {
+  const stats = content.stats?.length
+    ? content.stats
+    : [
+        { value: "500+", label: "Active Members" },
+        { value: "12", label: "Cities" },
+        { value: "98%", label: "Impact Score" },
+      ];
+
+  return (
+    <section className="relative flex items-center overflow-hidden bg-gradient-to-br from-orange-50/70 via-white to-indigo-50/50 min-h-screen lg:h-screen">
+      {/* ── Background blobs ── */}
+      <div className="absolute -top-32 -left-32 w-[560px] h-[560px] rounded-full bg-orange-200/30 blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-[480px] h-[480px] rounded-full bg-indigo-200/30 blur-[100px] pointer-events-none" />
+
+      {/* ── Subtle dot grid ── */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <Container className="relative z-10 w-full py-28 lg:py-0">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+
+          {/* ════ LEFT: text ════ */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-5 animate-fade-up">
+
+            {/* Mobile-only logo */}
+            <div className="relative flex lg:hidden justify-center mb-2">
+              <div className="absolute inset-0 scale-150 rounded-full bg-orange-300/20 blur-2xl" />
+              <Image
+                src="/sarthi-logo.png"
+                alt="Yuva Sarthi"
+                width={120}
+                height={120}
+                className="relative z-10 w-28 h-28 drop-shadow-xl"
+                priority
+              />
+            </div>
+
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-2 rounded-full w-fit">
-              <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 bg-orange-100 border border-orange-200 text-orange-700 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
               {content.badge}
             </div>
 
             {/* Headline */}
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black text-slate-900 leading-[1.05] tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black text-slate-900 leading-[1.08] tracking-tight max-w-xl lg:max-w-none">
               {content.headline}{" "}
-              <span className="text-indigo-600">{content.headlineAccent}</span>{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+              <span className="relative inline-block text-orange-500">
+                {content.headlineAccent}
+                {/* Underline squiggle */}
+                <svg
+                  className="absolute -bottom-1 left-0 w-full"
+                  viewBox="0 0 120 8"
+                  fill="none"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M2 6 C20 2, 40 7, 60 4 C80 1, 100 6, 118 3"
+                    stroke="#f97316"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    fill="none"
+                    opacity="0.7"
+                  />
+                </svg>
+              </span>
+              {" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-500">
                 {content.headlineEnd}
               </span>
             </h1>
 
-            {/* Supporting text */}
-            <p className="text-lg text-slate-500 leading-relaxed max-w-lg">
+            {/* Subtext */}
+            <p className="text-base md:text-lg text-slate-500 leading-relaxed max-w-lg">
               {content.subtext}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4">
-              <Button size="lg" href="#join">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 pt-1">
+              <Button variant="primary" size="lg" href="/get-involved">
                 <span>{content.ctaPrimary}</span>
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Button>
-              <Button variant="ghost" size="lg" href="#about">
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-300 px-7 py-3.5 text-base border-2 border-slate-200 text-slate-700 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50"
+              >
                 {content.ctaSecondary}
-              </Button>
+              </Link>
             </div>
 
-            {/* Trust signal */}
-            <div className="flex items-center gap-6 pt-2">
-              <div className="flex -space-x-3">
-                {content.memberAvatars.map((src, i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full border-2 border-white overflow-hidden relative shadow-sm"
-                  >
-                    <Image
-                      src={src}
-                      alt="Member"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-sm font-bold text-slate-800">
-                  {content.memberCount}
-                </p>
-                <p className="text-xs text-slate-400">{content.memberCities}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Clipped Image Slices */}
-          <div className="relative flex items-center justify-center lg:justify-end h-[520px]">
-            {/* Decorative rings */}
-            <div className="absolute -top-6 -right-6 w-40 h-40 rounded-full border-2 border-dashed border-indigo-200/60 animate-float-slow pointer-events-none" />
-            <div className="absolute bottom-10 left-4 w-24 h-24 rounded-full border-2 border-orange-200/60 animate-float pointer-events-none" />
-
-            {/* Dot grids */}
-            <div
-              className="absolute top-8 left-0 w-32 h-32 opacity-30 pointer-events-none"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
-                backgroundSize: "12px 12px",
-              }}
-            />
-            <div
-              className="absolute bottom-4 right-0 w-28 h-28 opacity-20 pointer-events-none"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
-                backgroundSize: "12px 12px",
-              }}
-            />
-
-            {/* Floating cards */}
-            <div className="absolute top-12 left-8 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float pointer-events-none">
-              <p className="text-xs text-slate-400 font-medium">Impact Score</p>
-              <p className="text-2xl font-black text-indigo-600">
-                {content.impactScore}
-              </p>
-            </div>
-
-            <div className="absolute bottom-16 right-0 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float-slow pointer-events-none">
-              <div className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-amber-500" />
-                <div>
-                  <p className="text-xs text-slate-400 font-medium leading-none">
-                    Award
-                  </p>
-                  <p className="text-sm font-bold text-slate-800 leading-none mt-0.5">
-                    {content.awardLabel}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Image slices */}
-            <div className="relative flex items-stretch h-[480px] w-full max-w-[500px]">
-              {content.images.map((img, i) => (
-                <div
-                  key={i}
-                  className="relative flex-1"
-                  style={{
-                    clipPath: img.clipPath,
-                    marginLeft: i > 0 ? "-2.5rem" : "0",
-                    zIndex: i + 1,
-                  }}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover"
-                    priority={i === 0}
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/10 to-indigo-900/30" />
+            {/* Stats row */}
+            <div className="flex flex-wrap justify-center lg:justify-start items-center gap-x-8 gap-y-4 pt-5 mt-1 border-t border-slate-200 w-full max-w-lg">
+              {stats.map((stat, i) => (
+                <div key={i} className="flex flex-col items-center lg:items-start gap-0.5">
+                  <span className="text-2xl font-black text-indigo-600 leading-none">{stat.value}</span>
+                  <span className="text-xs text-slate-400 font-medium">{stat.label}</span>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* ════ RIGHT: visual ════ */}
+          <div className="hidden lg:flex items-center justify-center relative h-[520px]">
+
+            {/* ── Organic background blob ── */}
+            <div
+              className="absolute inset-6 rounded-[38%_62%_63%_37%/41%_44%_56%_59%] bg-gradient-to-br from-orange-100/60 via-amber-50/40 to-indigo-100/50"
+              style={{ filter: "blur(2px)" }}
+            />
+
+            {/* ── Corner dot grids ── */}
+            <div
+              className="absolute top-4 left-8 w-28 h-28 opacity-25 pointer-events-none"
+              style={{
+                backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+                backgroundSize: "10px 10px",
+              }}
+            />
+            <div
+              className="absolute bottom-4 right-6 w-24 h-24 opacity-20 pointer-events-none"
+              style={{
+                backgroundImage: "radial-gradient(circle, #f97316 1.5px, transparent 1.5px)",
+                backgroundSize: "10px 10px",
+              }}
+            />
+
+            {/* ── Decorative rings ── */}
+            <div className="absolute top-10 right-12 w-14 h-14 rounded-full border-2 border-dashed border-orange-300/50 animate-float-slow pointer-events-none" />
+            <div className="absolute bottom-14 left-10 w-8 h-8 rounded-full bg-indigo-200/60 animate-float pointer-events-none" />
+            <div className="absolute top-1/3 left-6 w-5 h-5 rounded-full bg-orange-300/70 animate-float-slow pointer-events-none" />
+
+            {/* ── Sparkle accents ── */}
+            <Sparkles className="absolute top-12 left-1/3 w-5 h-5 text-orange-400/60 animate-float" />
+            <Sparkles className="absolute bottom-16 right-1/3 w-4 h-4 text-indigo-400/50 animate-float-slow" />
+
+            {/* ── Central logo group ── */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+              {/* Outer spinning dashed ring */}
+              <div className="absolute w-72 h-72 rounded-full border-2 border-dashed border-orange-300/40 animate-spin-slow pointer-events-none" />
+              {/* Counter-spin ring */}
+              <div className="absolute w-56 h-56 rounded-full border border-indigo-200/50 animate-spin-slow-reverse pointer-events-none" />
+              {/* Glow */}
+              <div className="absolute w-48 h-48 rounded-full bg-gradient-to-br from-orange-200/40 to-amber-100/30 blur-xl pointer-events-none" />
+              {/* Logo */}
+              <Image
+                src="/sarthi-logo.png"
+                alt="Yuva Sarthi"
+                width={192}
+                height={192}
+                className="relative z-10 w-44 h-44 drop-shadow-2xl"
+                priority
+              />
+            </div>
+
+            {/* ── Floating stat cards ── */}
+            {stats.slice(0, 3).map((stat, i) => {
+              const Icon = CARD_ICONS[i];
+              return (
+                <div
+                  key={i}
+                  className={`absolute z-20 bg-white/90 backdrop-blur-sm shadow-xl shadow-slate-200/60 rounded-2xl px-4 py-3 pointer-events-none ${CARD_POSITIONS[i]}`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${i === 0 ? "bg-indigo-100" : i === 1 ? "bg-orange-100" : "bg-emerald-100"}`}>
+                      <Icon className={`w-4 h-4 ${i === 0 ? "text-indigo-600" : i === 1 ? "text-orange-500" : "text-emerald-600"}`} />
+                    </div>
+                    <div>
+                      <p className="text-xl font-black text-slate-800 leading-none">{stat.value}</p>
+                      <p className="text-xs text-slate-400 font-medium mt-0.5">{stat.label}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+          </div>
         </div>
       </Container>
 
-      {/* Bottom wave */}
+      {/* ── Bottom wave ── */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-        <svg
-          viewBox="0 0 1440 60"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-        >
-          <path
-            d="M0 60L1440 60L1440 20C1200 60 960 0 720 20C480 40 240 10 0 40L0 60Z"
-            fill="white"
-          />
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+          <path d="M0 60L1440 60L1440 20C1200 60 960 0 720 20C480 40 240 10 0 40L0 60Z" fill="white" />
         </svg>
       </div>
     </section>

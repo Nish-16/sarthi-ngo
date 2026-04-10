@@ -1,10 +1,12 @@
 /**
- * One-time seed script — pushes content/page-content.json into Firestore.
- * Run with: node scripts/seed-firestore.mjs [collection]
+ * One-time seed script — pushes content/page-content.json into Firestore
+ * as separate per-page documents.
+ *
+ * Run with: node scripts/seed-firestore.mjs [--prod]
  *
  * Examples:
- *   node scripts/seed-firestore.mjs dev_content   ← seed dev DB
- *   node scripts/seed-firestore.mjs content        ← seed prod DB
+ *   node scripts/seed-firestore.mjs        ← seed local project (.env.local)
+ *   node scripts/seed-firestore.mjs --prod ← seed prod project (.env.production)
  */
 
 import { initializeApp } from "firebase/app";
@@ -15,21 +17,19 @@ import { dirname, join } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const collection = process.argv[2];
-if (!collection) {
-  console.error("Usage: node scripts/seed-firestore.mjs <collection>");
-  console.error("  e.g: node scripts/seed-firestore.mjs dev_content");
-  process.exit(1);
-}
+const isProd = process.argv.includes("--prod");
+const envFile = isProd ? ".env.production" : ".env.local";
+const envPath = join(__dirname, "..", envFile);
 
-// Load env file manually (dotenv not needed — just read the vars)
-const envPath = join(__dirname, "..", ".env.local");
 const envContent = readFileSync(envPath, "utf-8");
 const env = Object.fromEntries(
   envContent
     .split("\n")
     .filter((l) => l.includes("=") && !l.startsWith("#"))
-    .map((l) => l.split("=").map((p) => p.trim()))
+    .map((l) => {
+      const idx = l.indexOf("=");
+      return [l.slice(0, idx).trim(), l.slice(idx + 1).trim()];
+    })
 );
 
 const firebaseConfig = {
@@ -41,15 +41,41 @@ const firebaseConfig = {
   appId: env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+const COLLECTION = env.FIREBASE_COLLECTION ?? "dev_content";
+
 const contentPath = join(__dirname, "..", "content", "page-content.json");
-const content = JSON.parse(readFileSync(contentPath, "utf-8"));
+const c = JSON.parse(readFileSync(contentPath, "utf-8"));
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-console.log(`Seeding "${collection}/page" in project "${firebaseConfig.projectId}"...`);
+const documents = {
+  shared: {
+    meta: c.meta,
+    navbar: c.navbar,
+    footer: c.footer,
+  },
+  home: {
+    hero: c.hero,
+    whoWeAre: c.whoWeAre,
+    recognitions: c.recognitions,
+    featuredProjects: c.featuredProjects,
+    impactStats: c.impactStats,
+    joinUs: c.joinUs,
+    storiesUpdates: c.storiesUpdates,
+  },
+  about: c.about,
+  team: c.team,
+  "get-involved": c.getInvolved,
+  "what-we-do": c.whatWeDo,
+};
 
-await setDoc(doc(db, collection, "page"), content);
+console.log(`Seeding ${Object.keys(documents).length} documents into "${COLLECTION}" in project "${firebaseConfig.projectId}" (${isProd ? "production" : "local"})...\n`);
 
-console.log("Done! Your Firestore is seeded.");
+for (const [docId, data] of Object.entries(documents)) {
+  await setDoc(doc(db, COLLECTION, docId), data);
+  console.log(`  ✓ ${docId}`);
+}
+
+console.log("\nDone!");
 process.exit(0);
