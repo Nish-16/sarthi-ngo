@@ -64,11 +64,8 @@ export default function Hero({ content }: { content: HeroContent }) {
               style={{ animationDelay: "0.18s", animationFillMode: "forwards" }}
             >
               {content.headline}{" "}
-              <span className="relative inline-block text-orange-500">
+              <span className="text-orange-500">
                 {content.headlineAccent}
-                <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 120 8" fill="none" preserveAspectRatio="none">
-                  <path d="M2 6 C20 2,40 7,60 4 C80 1,100 6,118 3" stroke="#f97316" strokeWidth="2.5" strokeLinecap="round" opacity="0.65" />
-                </svg>
               </span>
               {" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-600 animate-gradient-x">
