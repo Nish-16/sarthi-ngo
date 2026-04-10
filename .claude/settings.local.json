@@ -11,7 +11,9 @@
       "Bash(node -e \"require\\('firebase/app'\\); console.log\\('firebase ok'\\)\")",
       "Bash(node:*)",
       "Bash(npx next:*)",
-      "Bash(node_modules/.bin/tsc --noEmit)"
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(rm \"D:/Projects/sarthi-ngo/frontend/lib/firebase-admin.ts\")",
+      "Bash(npm uninstall:*)"
     ]
   }
 }

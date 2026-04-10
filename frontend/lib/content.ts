@@ -1,4 +1,5 @@
-import { getAdminDb } from "./firebase-admin";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "./firebase";
 import type {
   PageContent,
   NavbarContent,
@@ -17,7 +18,7 @@ import type {
   WhatWeDoContent,
 } from "@/types/content";
 
-const COLLECTION = process.env.FIREBASE_COLLECTION ?? process.env.NEXT_PUBLIC_FIREBASE_COLLECTION ?? "dev_content";
+const COLLECTION = process.env.FIREBASE_COLLECTION ?? "dev_content";
 
 const DOC_SHARED = "shared";
 const DOC_HOME = "home";
@@ -44,15 +45,14 @@ export type HomeContent = {
 };
 
 async function readDoc<T>(docId: string): Promise<T | null> {
-  const db = getAdminDb();
-  const snap = await db.collection(COLLECTION).doc(docId).get();
-  if (!snap.exists) return null;
+  const ref = doc(db, COLLECTION, docId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return null;
   return snap.data() as T;
 }
 
 async function writeDoc<T extends object>(docId: string, data: T): Promise<void> {
-  const db = getAdminDb();
-  await db.collection(COLLECTION).doc(docId).set(data);
+  await setDoc(doc(db, COLLECTION, docId), data);
 }
 
 async function legacyFallback(): Promise<PageContent> {
