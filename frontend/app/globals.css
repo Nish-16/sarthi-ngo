@@ -54,18 +54,28 @@
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-
-.animate-spin-slow {
-  animation: spin-slow 22s linear infinite;
-}
+.animate-spin-slow  { animation: spin-slow 22s linear infinite; }
+.animate-spin-fast  { animation: spin-slow 14s linear infinite; }
 
 @keyframes spin-slow-reverse {
   from { transform: rotate(360deg); }
   to   { transform: rotate(0deg); }
 }
+.animate-spin-slow-reverse { animation: spin-slow-reverse 30s linear infinite; }
 
-.animate-spin-slow-reverse {
-  animation: spin-slow-reverse 30s linear infinite;
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.35; transform: scale(1);    }
+  50%       { opacity: 0.65; transform: scale(1.18); }
+}
+.animate-pulse-glow { animation: pulse-glow 3.5s ease-in-out infinite; }
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% center; }
+  50%       { background-position: 100% center; }
+}
+.animate-gradient-x {
+  background-size: 200% auto;
+  animation: gradient-x 5s ease infinite;
 }
 
 @keyframes marquee {
