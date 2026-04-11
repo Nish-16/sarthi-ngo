@@ -893,36 +893,43 @@
       "trainedValue": "320+"
     },
     "collaborate": {
-      "eyebrow": "Collaborate & Partner",
-      "headline": "Build something",
-      "headlineAccent": "bigger together",
-      "description": "We partner with institutions, corporates, and changemakers who share our commitment to community-led progress. Let's co-create something that lasts.",
-      "options": [
-        {
-          "iconName": "Handshake",
-          "title": "CSR & Institutional Partnership",
-          "description": "Co-fund or co-design programs with full impact reporting, community access, and co-branding opportunities.",
-          "cta": "Explore Partnership",
-          "href": "/contact",
-          "color": "bg-white/15 border-white/20 hover:bg-white/20"
-        },
-        {
-          "iconName": "Building2",
-          "title": "School & College Collaboration",
-          "description": "Bring Sarthi programs to your institution — volunteer drives, leadership workshops, and field exposure for students.",
-          "cta": "Collaborate Now",
-          "href": "/contact",
-          "color": "bg-white/15 border-white/20 hover:bg-white/20"
-        },
-        {
-          "iconName": "Mic",
-          "title": "Invite Our Founders",
-          "description": "Book a speaker session for your event, campus, or corporate forum. We bring stories, data, and inspiration.",
-          "cta": "Send an Invite",
-          "href": "/contact",
-          "color": "bg-white/15 border-white/20 hover:bg-white/20"
-        }
-      ]
+      "eyebrow": "Become a Collaborator",
+      "headline": "Move from intention",
+      "tagline": "Join forces with us to shape the next generation through collective action and shared responsibility.",
+      "paragraphs": [
+        "Youth development is a shared responsibility — and meaningful change happens when we work together.",
+        "We invite experts, professionals, businesses, educators, and changemakers to collaborate with us by contributing your time, talent, resources, and expertise.",
+        "Whether through mentorship, skill-building, funding, materials, or strategic guidance, your partnership can help expand opportunities for young people.",
+        "Together, we can align our strengths, amplify our impact, and build a future where every young person has the support and opportunities they deserve."
+      ],
+      "closingText": "Be more than a contributor — be a co-creator of change. Together, we can accelerate youth potential and build the future we want to see.",
+      "collaboratorTypes": ["Experts", "Professionals", "Businesses", "Educators", "Changemakers"],
+      "contributionModes": ["Mentorship", "Skill-building", "Funding", "Materials", "Strategic guidance"],
+      "ctaLabel": "Partner With Us",
+      "ctaHref": "/contact"
+    },
+    "inviteFounders": {
+      "eyebrow": "Invite Our Founders",
+      "headline": "Bring real-world changemaking to your campus",
+      "quote": "Bring lived experience, bold conversations, and real-world changemaking to your campus — invite our founders to ignite purpose-driven leadership in your students.",
+      "subheadline": "Bring real-world changemaking into your campus.",
+      "paragraphs": [
+        "Our founders deliver engaging, experience-driven sessions on youth leadership, social impact careers, navigating challenges in the development sector, and building purpose-driven pathways.",
+        "Through honest stories, practical insights, and interactive dialogue, they equip young people with clarity, courage, and actionable direction.",
+        "Invite them to spark ideas, shift mindsets, and inspire the next generation of changemakers."
+      ],
+      "keywords": [
+        "Social action",
+        "Sustainable change",
+        "Meaningful change",
+        "Purpose-driven leadership",
+        "Work in partnership with youth",
+        "Human rights",
+        "Dignity",
+        "Socially just"
+      ],
+      "ctaLabel": "Send an Invite",
+      "ctaHref": "/contact"
     }
   },
   "team": {

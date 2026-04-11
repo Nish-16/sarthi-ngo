@@ -1,5 +1,6 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
+import localPageContent from "@/content/page-content.json";
 import type {
   PageContent,
   NavbarContent,
@@ -123,11 +124,21 @@ export async function writeTeam(data: TeamPageContent): Promise<void> {
 
 // ─── Get Involved ─────────────────────────────────────────────────────────────
 
+const localGetInvolved = localPageContent.getInvolved as unknown as GetInvolvedPageContent;
+
 export async function readGetInvolved(): Promise<GetInvolvedPageContent> {
   const data = await readDoc<GetInvolvedPageContent>(DOC_GET_INVOLVED);
-  if (data) return data;
+  if (data) {
+    // Merge Firebase data with local defaults so newly-added fields degrade gracefully
+    return {
+      ...localGetInvolved,
+      ...data,
+      collaborate: { ...localGetInvolved.collaborate, ...(data.collaborate ?? {}) },
+      inviteFounders: data.inviteFounders ?? localGetInvolved.inviteFounders,
+    };
+  }
   const legacy = await legacyFallback();
-  return legacy.getInvolved;
+  return { ...localGetInvolved, ...legacy.getInvolved };
 }
 
 export async function writeGetInvolved(data: GetInvolvedPageContent): Promise<void> {

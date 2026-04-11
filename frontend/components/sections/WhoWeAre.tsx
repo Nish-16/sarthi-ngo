@@ -88,7 +88,7 @@ export default function WhoWeAre({ content }: { content: WhoWeAreContent }) {
             </div>
 
             <div className="pt-2">
-              <Button variant="outline" size="md" href="#about">
+              <Button variant="outline" size="md" href="/about">
                 {content.ctaLabel}
               </Button>
             </div>

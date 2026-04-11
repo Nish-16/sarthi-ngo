@@ -438,21 +438,27 @@ export interface GetInvolvedInternContent {
   trainedValue: string;
 }
 
-export interface GetInvolvedCollaborateOption {
-  iconName: string;
-  title: string;
-  description: string;
-  cta: string;
-  href: string;
-  color: string;
-}
-
 export interface GetInvolvedCollaborateContent {
   eyebrow: string;
   headline: string;
-  headlineAccent: string;
-  description: string;
-  options: GetInvolvedCollaborateOption[];
+  tagline: string;
+  paragraphs: string[];
+  closingText: string;
+  collaboratorTypes: string[];
+  contributionModes: string[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+export interface GetInvolvedInviteFoundersContent {
+  eyebrow: string;
+  headline: string;
+  quote: string;
+  subheadline: string;
+  paragraphs: string[];
+  keywords: string[];
+  ctaLabel: string;
+  ctaHref: string;
 }
 
 export interface GetInvolvedPageContent {
@@ -464,6 +470,7 @@ export interface GetInvolvedPageContent {
   volunteer: GetInvolvedVolunteerContent;
   intern: GetInvolvedInternContent;
   collaborate: GetInvolvedCollaborateContent;
+  inviteFounders: GetInvolvedInviteFoundersContent;
 }
 
 // ─── About Page ───────────────────────────────────────────────────────────────

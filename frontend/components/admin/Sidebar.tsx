@@ -140,6 +140,11 @@ const groups: PageGroup[] = [
         label: "Collaborate",
         icon: Link2,
       },
+      {
+        href: "/admin/get-involved/invite-founders",
+        label: "Invite Founders",
+        icon: Sparkles,
+      },
     ],
   },
   {

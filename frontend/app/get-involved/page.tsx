@@ -10,6 +10,7 @@ import Testimonials from "@/components/sections/get-involved/Testimonials";
 import VolunteerSection from "@/components/sections/get-involved/VolunteerSection";
 import InternSection from "@/components/sections/get-involved/InternSection";
 import CollaborateSection from "@/components/sections/get-involved/CollaborateSection";
+import InviteFoundersSection from "@/components/sections/get-involved/InviteFoundersSection";
 import { Sparkles, ArrowRight, ArrowDown } from "lucide-react";
 import Image from "next/image";
 
@@ -32,6 +33,7 @@ export default async function GetInvolvedPage() {
     volunteer,
     intern,
     collaborate,
+    inviteFounders,
   } = getInvolved;
 
   return (
@@ -209,6 +211,7 @@ export default async function GetInvolvedPage() {
         <VolunteerSection content={volunteer} />
         <InternSection content={intern} />
         <CollaborateSection content={collaborate} />
+        <InviteFoundersSection content={inviteFounders} />
       </main>
       <Footer content={shared.footer} />
     </>

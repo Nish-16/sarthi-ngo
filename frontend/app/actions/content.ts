@@ -41,6 +41,7 @@ import type {
   GetInvolvedVolunteerContent,
   GetInvolvedInternContent,
   GetInvolvedCollaborateContent,
+  GetInvolvedInviteFoundersContent,
   TeamPageContent,
   TeamHeroContent,
   TeamGridContent,
@@ -275,6 +276,10 @@ export async function saveGetInvolvedIntern(data: GetInvolvedInternContent): Pro
 
 export async function saveGetInvolvedCollaborate(data: GetInvolvedCollaborateContent): Promise<ActionResult> {
   return withSaveGetInvolved("collaborate", data);
+}
+
+export async function saveGetInvolvedInviteFounders(data: GetInvolvedInviteFoundersContent): Promise<ActionResult> {
+  return withSaveGetInvolved("inviteFounders", data);
 }
 
 // ─── Team ─────────────────────────────────────────────────────────────────────

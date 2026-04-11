@@ -4,8 +4,8 @@ import { useState } from "react";
 import SectionShell from "../../SectionShell";
 import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
-import { saveGetInvolvedCollaborate } from "@/app/actions/content";
-import type { GetInvolvedCollaborateContent } from "@/types/content";
+import { saveGetInvolvedInviteFounders } from "@/app/actions/content";
+import type { GetInvolvedInviteFoundersContent } from "@/types/content";
 
 function Field({
   label,
@@ -58,40 +58,46 @@ function TextArea({
   );
 }
 
-export default function CollaborateForm({
+export default function InviteFoundersForm({
   initial,
 }: {
-  initial: GetInvolvedCollaborateContent;
+  initial: GetInvolvedInviteFoundersContent;
 }) {
-  const [data, setData] = useState<GetInvolvedCollaborateContent>(initial);
+  const [data, setData] = useState<GetInvolvedInviteFoundersContent>(initial);
   const [result, setResult] = useState<{
     success?: boolean;
     error?: string;
   } | null>(null);
 
-  function set<K extends keyof GetInvolvedCollaborateContent>(
+  function set<K extends keyof GetInvolvedInviteFoundersContent>(
     key: K,
-    value: GetInvolvedCollaborateContent[K],
+    value: GetInvolvedInviteFoundersContent[K],
   ) {
     setData((d) => ({ ...d, [key]: value }));
   }
 
   return (
     <SectionShell
-      title="Collaborate Section"
-      description="Narrative collaboration section — who can join and how."
-      onSave={async () => setResult(await saveGetInvolvedCollaborate(data))}
+      title="Invite Founders Section"
+      description="Speaker invite section — quote, description, and focus area keywords."
+      onSave={async () => setResult(await saveGetInvolvedInviteFounders(data))}
       saveResult={result}
     >
       <FormGroup title="Header">
         <Field label="Eyebrow">
           <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
         </Field>
-        <Field label="Headline (before gradient accent)">
+        <Field label="Headline">
           <Input value={data.headline} onChange={(v) => set("headline", v)} />
         </Field>
-        <Field label="Tagline">
-          <TextArea value={data.tagline} onChange={(v) => set("tagline", v)} />
+      </FormGroup>
+
+      <FormGroup title="Quote Block">
+        <Field label="Quote (displayed in the highlighted block)">
+          <TextArea value={data.quote} onChange={(v) => set("quote", v)} rows={4} />
+        </Field>
+        <Field label="Subheadline (below the quote)">
+          <Input value={data.subheadline} onChange={(v) => set("subheadline", v)} />
         </Field>
       </FormGroup>
 
@@ -106,30 +112,10 @@ export default function CollaborateForm({
         />
       </FormGroup>
 
-      <FormGroup title="Closing Text">
-        <Field label="Closing / Italicised call to action">
-          <TextArea
-            value={data.closingText}
-            onChange={(v) => set("closingText", v)}
-          />
-        </Field>
-      </FormGroup>
-
-      <FormGroup title="Who Can Collaborate">
+      <FormGroup title="Keywords / Focus Areas">
         <ArrayField<string>
-          items={data.collaboratorTypes}
-          onChange={(v) => set("collaboratorTypes", v)}
-          createItem={() => ""}
-          renderItem={(item, _i, onChange) => (
-            <Input value={item} onChange={onChange} />
-          )}
-        />
-      </FormGroup>
-
-      <FormGroup title="Contribution Modes">
-        <ArrayField<string>
-          items={data.contributionModes}
-          onChange={(v) => set("contributionModes", v)}
+          items={data.keywords}
+          onChange={(v) => set("keywords", v)}
           createItem={() => ""}
           renderItem={(item, _i, onChange) => (
             <Input value={item} onChange={onChange} />
