@@ -371,12 +371,3 @@ npm run lint
 npm run build
 ```
 
-4. Document new env vars or setup changes in this README
-
----
-
-If you want, I can also add:
-
-- a `.env.example` file generated from this README
-- a contributor-focused `docs/ARCHITECTURE.md`
-- API request/response examples for upload and admin actions
