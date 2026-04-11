@@ -188,6 +188,9 @@ export interface WwdInitiativeItem {
   clipPath: string;
   accent: string;
   iconName: string;
+  problem?: string;
+  whatWeDo?: string;
+  ourWork?: string;
 }
 
 export interface WwdSignatureProjectsContent {
@@ -205,6 +208,9 @@ export interface WwdPreviousProjectItem {
   iconName: string;
   accent: string;
   tag: string;
+  problem?: string;
+  whatWeDo?: string;
+  ourWork?: string;
 }
 
 export interface WwdPreviousProjectsContent {

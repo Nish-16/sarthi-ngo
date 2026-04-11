@@ -1,9 +1,16 @@
 import Image from "next/image";
-import Button from "@/components/ui/Button";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { ArrowRight } from "lucide-react";
 import { getIcon } from "@/lib/icon-map";
 import type { WwdSignatureProjectsContent } from "@/types/content";
+
+function toSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
 
 interface Props {
   content: WwdSignatureProjectsContent;
@@ -24,7 +31,8 @@ export default function ProjectsSection({ content }: Props) {
       <div
         className="absolute top-16 left-4 w-32 h-32 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
@@ -38,7 +46,9 @@ export default function ProjectsSection({ content }: Props) {
             <h2 className="mt-3 text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
               {content.headline}{" "}
               <span className="relative inline-block">
-                <span className="text-indigo-600">{content.headlineAccent}</span>
+                <span className="text-indigo-600">
+                  {content.headlineAccent}
+                </span>
                 <span className="absolute -bottom-1 left-0 right-0 h-1 bg-orange-400 rounded-full" />
               </span>
             </h2>
@@ -51,74 +61,94 @@ export default function ProjectsSection({ content }: Props) {
         {primary && secondary && (
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Primary card */}
-            <article className="relative rounded-3xl bg-slate-900 text-white overflow-hidden min-h-[500px] group">
-              <div className="absolute inset-0">
-                <Image
-                  src={primary.image}
-                  alt={primary.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(160deg, rgba(15,23,42,0.10), rgba(15,23,42,0.85))",
-                  }}
-                />
-              </div>
-
-              <div className="absolute top-6 left-6 z-10 flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
-                <PrimaryIcon className="w-3.5 h-3.5" />
-                {primary.tagline}
-              </div>
-
-              <div className="relative h-full flex flex-col justify-end p-8 md:p-10 pt-24">
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight">{primary.name}</h3>
-                <p className="mt-4 text-slate-200 leading-relaxed max-w-xl">{primary.description}</p>
-                <div className="mt-7">
-                  <Button href="/get-involved" variant="secondary" size="sm">
-                    Learn More
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
+            <Link
+              href={`/what-we-do/${toSlug(primary.name)}`}
+              className="block group"
+            >
+              <article className="relative rounded-3xl bg-slate-900 text-white overflow-hidden min-h-[500px] cursor-pointer">
+                <div className="absolute inset-0">
+                  <Image
+                    src={primary.image}
+                    alt={primary.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(160deg, rgba(15,23,42,0.10), rgba(15,23,42,0.85))",
+                    }}
+                  />
                 </div>
-              </div>
-            </article>
+
+                <div className="absolute top-6 left-6 z-10 flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                  <PrimaryIcon className="w-3.5 h-3.5" />
+                  {primary.tagline}
+                </div>
+
+                <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-10 pt-24">
+                  <h3 className="text-3xl md:text-4xl font-black tracking-tight">
+                    {primary.name}
+                  </h3>
+                  <p className="mt-4 text-slate-200 leading-relaxed max-w-xl">
+                    {primary.description}
+                  </p>
+                  <div className="mt-7">
+                    <div className="inline-flex items-center gap-2 font-semibold rounded-full px-4 py-2 text-sm bg-orange-500 text-white shadow-lg shadow-orange-500/30 transition-all duration-300">
+                      Learn More
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </Link>
 
             {/* Secondary card — same full-bleed style */}
-            <article className="relative rounded-3xl bg-slate-900 text-white overflow-hidden min-h-[500px] group">
-              <div className="absolute inset-0">
-                <Image
-                  src={secondary.image}
-                  alt={secondary.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(160deg, rgba(15,23,42,0.10), rgba(15,23,42,0.85))",
-                  }}
-                />
-              </div>
-
-              <div className="absolute top-6 left-6 z-10 flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
-                <SecondaryIcon className="w-3.5 h-3.5" />
-                {secondary.tagline}
-              </div>
-
-              <div className="relative h-full flex flex-col justify-end p-8 md:p-10 pt-24">
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight">{secondary.name}</h3>
-                <p className="mt-4 text-slate-200 leading-relaxed max-w-xl">{secondary.description}</p>
-                <div className="mt-7">
-                  <Button href="/get-involved" variant="outline" size="sm">
-                    Learn More
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
+            <Link
+              href={`/what-we-do/${toSlug(secondary.name)}`}
+              className="block group"
+            >
+              <article className="relative rounded-3xl bg-slate-900 text-white overflow-hidden min-h-[500px] cursor-pointer">
+                <div className="absolute inset-0">
+                  <Image
+                    src={secondary.image}
+                    alt={secondary.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(160deg, rgba(15,23,42,0.10), rgba(15,23,42,0.85))",
+                    }}
+                  />
                 </div>
-              </div>
-            </article>
+
+                <div className="absolute top-6 left-6 z-10 flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                  <SecondaryIcon className="w-3.5 h-3.5" />
+                  {secondary.tagline}
+                </div>
+
+                <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-10 pt-24">
+                  <h3 className="text-3xl md:text-4xl font-black tracking-tight">
+                    {secondary.name}
+                  </h3>
+                  <p className="mt-4 text-slate-200 leading-relaxed max-w-xl">
+                    {secondary.description}
+                  </p>
+                  <div className="mt-7">
+                    <div className="inline-flex items-center gap-2 font-semibold rounded-full px-4 py-2 text-sm border-2 border-indigo-400 text-indigo-300 transition-all duration-300 group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600">
+                      Learn More
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </Link>
           </div>
         )}
       </Container>

@@ -91,6 +91,9 @@ export default function SignatureProjectsForm({ initial }: { initial: WwdSignatu
             clipPath: CLIP_PATHS[0].value,
             accent: ACCENTS[0].value,
             iconName: "Users",
+            problem: "",
+            whatWeDo: "",
+            ourWork: "",
           })}
           renderItem={(item, _i, onChange) => (
             <div className="flex flex-col gap-3">
@@ -102,7 +105,7 @@ export default function SignatureProjectsForm({ initial }: { initial: WwdSignatu
                   <Input value={item.tagline} onChange={(v) => onChange({ ...item, tagline: v })} placeholder="Youth Expression Lab" />
                 </Field>
               </div>
-              <Field label="Description">
+              <Field label="Short Description (shown on card)">
                 <textarea
                   value={item.description}
                   rows={2}
@@ -111,6 +114,45 @@ export default function SignatureProjectsForm({ initial }: { initial: WwdSignatu
                 />
               </Field>
               <ImageUploader label="Image" value={item.image} onChange={(url) => onChange({ ...item, image: url })} aspectRatio="16/9" />
+
+              <div className="border-t border-slate-100 pt-3 mt-1">
+                <p className="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">Detail Page Content</p>
+                <div className="flex flex-col gap-3">
+                  <Field label="Problem">
+                    <textarea
+                      value={item.problem ?? ""}
+                      rows={5}
+                      placeholder={"Describe the problem this project addresses...\n\nUse - for bullet points:\n- Point one\n- Point two"}
+                      onChange={(e) => onChange({ ...item, problem: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+                    />
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Start lines with <code className="bg-slate-100 px-1 rounded text-slate-600">-</code> to render as bullet points, e.g. <code className="bg-slate-100 px-1 rounded text-slate-600">- Point one</code>
+                    </p>
+                  </Field>
+                  <Field label="What We Do">
+                    <textarea
+                      value={item.whatWeDo ?? ""}
+                      rows={4}
+                      placeholder={"Each line shows as a highlighted block.\nUse - for bullet points:\n- Run free weekend school\n- Teach financial literacy"}
+                      onChange={(e) => onChange({ ...item, whatWeDo: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+                    />
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Plain lines appear as highlighted blocks · Start with <code className="bg-slate-100 px-1 rounded text-slate-600">-</code> for bullet points
+                    </p>
+                  </Field>
+                  <Field label="Our Work">
+                    <textarea
+                      value={item.ourWork ?? ""}
+                      rows={5}
+                      placeholder="Full description of the project, impact, reach..."
+                      onChange={(e) => onChange({ ...item, ourWork: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+                    />
+                  </Field>
+                </div>
+              </div>
               <div className="grid grid-cols-3 gap-2">
                 <div className="flex flex-col gap-1">
                   <label className="text-xs font-semibold text-slate-500">Icon</label>

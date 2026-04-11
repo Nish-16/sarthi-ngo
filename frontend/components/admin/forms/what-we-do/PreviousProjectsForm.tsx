@@ -82,7 +82,7 @@ export default function PreviousProjectsForm({ initial }: { initial: WwdPrevious
         <ArrayField<WwdPreviousProjectItem>
           items={data.projects}
           onChange={(v) => set("projects", v)}
-          createItem={() => ({ title: "", description: "", image: "", iconName: "BookOpen", accent: ACCENTS[0].value, tag: "" })}
+          createItem={() => ({ title: "", description: "", image: "", iconName: "BookOpen", accent: ACCENTS[0].value, tag: "", problem: "", whatWeDo: "", ourWork: "" })}
           renderItem={(proj, _i, onChange) => (
             <div className="flex flex-col gap-3">
               <div className="grid grid-cols-2 gap-3">
@@ -93,7 +93,7 @@ export default function PreviousProjectsForm({ initial }: { initial: WwdPrevious
                   <Input value={proj.tag} onChange={(v) => onChange({ ...proj, tag: v })} placeholder="Education" />
                 </Field>
               </div>
-              <Field label="Description">
+              <Field label="Short Description (shown on card)">
                 <textarea
                   value={proj.description}
                   rows={2}
@@ -102,6 +102,45 @@ export default function PreviousProjectsForm({ initial }: { initial: WwdPrevious
                 />
               </Field>
               <ImageUploader label="Image" value={proj.image} onChange={(url) => onChange({ ...proj, image: url })} aspectRatio="4/3" />
+
+              <div className="border-t border-slate-100 pt-3 mt-1">
+                <p className="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-3">Detail Page Content</p>
+                <div className="flex flex-col gap-3">
+                  <Field label="Problem">
+                    <textarea
+                      value={proj.problem ?? ""}
+                      rows={5}
+                      placeholder={"Describe the problem this project addresses...\n\nUse - for bullet points:\n- Point one\n- Point two"}
+                      onChange={(e) => onChange({ ...proj, problem: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+                    />
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Start lines with <code className="bg-slate-100 px-1 rounded text-slate-600">-</code> to render as bullet points, e.g. <code className="bg-slate-100 px-1 rounded text-slate-600">- Point one</code>
+                    </p>
+                  </Field>
+                  <Field label="What We Do">
+                    <textarea
+                      value={proj.whatWeDo ?? ""}
+                      rows={4}
+                      placeholder={"Each line shows as a highlighted block.\nUse - for bullet points:\n- Run free weekend school\n- Teach financial literacy"}
+                      onChange={(e) => onChange({ ...proj, whatWeDo: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+                    />
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Plain lines appear as highlighted blocks · Start with <code className="bg-slate-100 px-1 rounded text-slate-600">-</code> for bullet points
+                    </p>
+                  </Field>
+                  <Field label="Our Work">
+                    <textarea
+                      value={proj.ourWork ?? ""}
+                      rows={5}
+                      placeholder="Full description of the project, impact, reach..."
+                      onChange={(e) => onChange({ ...proj, ourWork: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
+                    />
+                  </Field>
+                </div>
+              </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-1">
                   <label className="text-xs font-semibold text-slate-500">Icon</label>

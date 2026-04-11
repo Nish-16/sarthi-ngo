@@ -1,8 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { ArrowUpRight } from "lucide-react";
 import { getIcon } from "@/lib/icon-map";
 import type { WwdPreviousProjectsContent } from "@/types/content";
+
+function toSlug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
 
 interface Props {
   content: WwdPreviousProjectsContent;
@@ -46,9 +51,10 @@ export default function PreviousProjects({ content }: Props) {
           {content.projects.map((project, index) => {
             const Icon = getIcon(project.iconName);
             return (
-              <article
+              <Link
                 key={project.title}
-                className={`group rounded-3xl overflow-hidden border border-slate-100 bg-white shadow-sm hover:shadow-2xl hover:shadow-indigo-100/60 transition-all duration-500 hover:-translate-y-2 ${
+                href={`/what-we-do/${toSlug(project.title)}`}
+                className={`block group rounded-3xl overflow-hidden border border-slate-100 bg-white shadow-sm hover:shadow-2xl hover:shadow-indigo-100/60 transition-all duration-500 hover:-translate-y-2 ${
                   index % 2 === 1 ? "xl:translate-y-10" : ""
                 }`}
               >
@@ -78,7 +84,7 @@ export default function PreviousProjects({ content }: Props) {
                     Read more <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>

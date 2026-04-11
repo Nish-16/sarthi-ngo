@@ -13,7 +13,11 @@
       "Bash(npx next:*)",
       "Bash(node_modules/.bin/tsc --noEmit)",
       "Bash(rm \"D:/Projects/sarthi-ngo/frontend/lib/firebase-admin.ts\")",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(dir D:/Projects/sarthi-ngo/frontend)",
+      "Bash(npx --prefix D:/Projects/sarthi-ngo/frontend tsc --noEmit)",
+      "Bash(npx --prefix D:/Projects/sarthi-ngo/frontend tsc -p D:/Projects/sarthi-ngo/frontend/tsconfig.json --noEmit)",
+      "Bash(D:/Projects/sarthi-ngo/frontend/node_modules/.bin/tsc:*)"
     ]
   }
 }
