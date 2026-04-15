@@ -46,7 +46,7 @@ export default function RecognitionsForm({ initial }: { initial: RecognitionsCon
       saveResult={result}
     >
       <FormGroup title="Section Header">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Eyebrow">
             <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
           </Field>
@@ -74,8 +74,8 @@ export default function RecognitionsForm({ initial }: { initial: RecognitionsCon
           onChange={(v) => set("organizations", v)}
           createItem={() => ({ name: "", abbr: "" })}
           renderItem={(org, _i, onChange) => (
-            <div className="grid grid-cols-3 gap-2">
-              <div className="col-span-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <div className="md:col-span-2">
                 <Input value={org.name} onChange={(v) => onChange({ ...org, name: v })} placeholder="Organization name" />
               </div>
               <Input value={org.abbr} onChange={(v) => onChange({ ...org, abbr: v })} placeholder="Abbr" />
@@ -91,14 +91,14 @@ export default function RecognitionsForm({ initial }: { initial: RecognitionsCon
           onChange={(v) => set("awards", v)}
           createItem={() => ({ icon: "🏆", title: "", year: "" })}
           renderItem={(award, _i, onChange) => (
-            <div className="grid grid-cols-12 gap-2">
-              <div className="col-span-1">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
+              <div className="md:col-span-1">
                 <Input value={award.icon} onChange={(v) => onChange({ ...award, icon: v })} placeholder="🏆" />
               </div>
-              <div className="col-span-8">
+              <div className="md:col-span-8">
                 <Input value={award.title} onChange={(v) => onChange({ ...award, title: v })} placeholder="Award title" />
               </div>
-              <div className="col-span-3">
+              <div className="md:col-span-3">
                 <Input value={award.year} onChange={(v) => onChange({ ...award, year: v })} placeholder="2024" />
               </div>
             </div>

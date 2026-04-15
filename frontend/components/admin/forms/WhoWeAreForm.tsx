@@ -60,7 +60,7 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
       saveResult={result}
     >
       <FormGroup title="Section Header">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Eyebrow Label">
             <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
           </Field>
@@ -68,7 +68,7 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
             <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Headline (before accent)">
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
@@ -76,7 +76,7 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
             <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Years Value">
             <Input value={data.yearsValue} onChange={(v) => set("yearsValue", v)} placeholder="6+" />
           </Field>

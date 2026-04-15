@@ -71,7 +71,7 @@ export default function HeroForm({ initial }: { initial: HeroContent }) {
             placeholder="Youth-Led · Social Change · India"
           />
         </Field>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <Field label="Headline (part 1)">
             <Input value={data.headline} onChange={(v) => set("headline", v)} placeholder="Answer to" />
           </Field>
@@ -88,7 +88,7 @@ export default function HeroForm({ initial }: { initial: HeroContent }) {
       </FormGroup>
 
       <FormGroup title="Call to Action">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Primary CTA Label">
             <Input value={data.ctaPrimary} onChange={(v) => set("ctaPrimary", v)} placeholder="Get Involved" />
           </Field>
@@ -106,7 +106,7 @@ export default function HeroForm({ initial }: { initial: HeroContent }) {
           maxItems={4}
           createItem={() => ({ value: "", label: "" })}
           renderItem={(stat, _i, onChange) => (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <Input
                 value={stat.value}
                 onChange={(v) => onChange({ ...stat, value: v })}

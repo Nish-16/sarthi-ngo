@@ -141,7 +141,7 @@ export default function JoinUsForm({ initial }: { initial: JoinUsContent }) {
         <Field label="Eyebrow">
           <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
         </Field>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Headline">
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
@@ -160,7 +160,7 @@ export default function JoinUsForm({ initial }: { initial: JoinUsContent }) {
       </FormGroup>
 
       <FormGroup title="Call to Action">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Primary CTA Label">
             <Input value={data.ctaPrimary} onChange={(v) => set("ctaPrimary", v)} />
           </Field>

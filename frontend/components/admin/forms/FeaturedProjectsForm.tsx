@@ -63,7 +63,7 @@ export default function FeaturedProjectsForm({ initial }: { initial: FeaturedPro
       saveResult={result}
     >
       <FormGroup title="Section Header">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Eyebrow">
             <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
           </Field>
@@ -71,7 +71,7 @@ export default function FeaturedProjectsForm({ initial }: { initial: FeaturedPro
             <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Headline">
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
@@ -104,7 +104,7 @@ export default function FeaturedProjectsForm({ initial }: { initial: FeaturedPro
                 onChange={(url) => onChange({ ...proj, image: url })}
                 aspectRatio="16/9"
               />
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex flex-col gap-1">
                   <label className="text-xs font-semibold text-slate-500">Tag Label</label>
                   <Input value={proj.tag} onChange={(v) => onChange({ ...proj, tag: v })} placeholder="Education" />

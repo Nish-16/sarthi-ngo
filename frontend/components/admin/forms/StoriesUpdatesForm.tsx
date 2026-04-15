@@ -50,7 +50,7 @@ export default function StoriesUpdatesForm({ initial }: { initial: StoriesUpdate
       saveResult={result}
     >
       <FormGroup title="Section Header">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Eyebrow">
             <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
           </Field>
@@ -58,7 +58,7 @@ export default function StoriesUpdatesForm({ initial }: { initial: StoriesUpdate
             <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Headline">
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
@@ -87,7 +87,7 @@ export default function StoriesUpdatesForm({ initial }: { initial: StoriesUpdate
                 aspectRatio="4/3"
               />
               <Input value={item.title} onChange={(v) => onChange({ ...item, title: v })} placeholder="Story title" />
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex flex-col gap-1">
                   <label className="text-xs font-semibold text-slate-500">Category</label>
                   <select
