@@ -8,7 +8,13 @@ import ImageUploader from "../ImageUploader";
 import { saveFeaturedProjects } from "@/app/actions/content";
 import type { FeaturedProjectsContent, ProjectItem } from "@/types/content";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -17,8 +23,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -41,17 +53,36 @@ const TAG_COLORS = [
 ];
 
 const CLIP_PATHS = [
-  { label: "Bottom-right slant", value: "polygon(0 0, 100% 0, 100% 88%, 0 100%)" },
-  { label: "Diagonal left-right", value: "polygon(0 8%, 100% 0, 100% 100%, 0 92%)" },
-  { label: "Top-right slant", value: "polygon(0 0, 100% 8%, 100% 100%, 0 100%)" },
+  {
+    label: "Bottom-right slant",
+    value: "polygon(0 0, 100% 0, 100% 88%, 0 100%)",
+  },
+  {
+    label: "Diagonal left-right",
+    value: "polygon(0 8%, 100% 0, 100% 100%, 0 92%)",
+  },
+  {
+    label: "Top-right slant",
+    value: "polygon(0 0, 100% 8%, 100% 100%, 0 100%)",
+  },
   { label: "Straight", value: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" },
 ];
 
-export default function FeaturedProjectsForm({ initial }: { initial: FeaturedProjectsContent }) {
+export default function FeaturedProjectsForm({
+  initial,
+}: {
+  initial: FeaturedProjectsContent;
+}) {
   const [data, setData] = useState<FeaturedProjectsContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
-  function set<K extends keyof FeaturedProjectsContent>(key: K, value: FeaturedProjectsContent[K]) {
+  function set<K extends keyof FeaturedProjectsContent>(
+    key: K,
+    value: FeaturedProjectsContent[K],
+  ) {
     setData((d) => ({ ...d, [key]: value }));
   }
 
@@ -76,7 +107,10 @@ export default function FeaturedProjectsForm({ initial }: { initial: FeaturedPro
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
           <Field label="Headline Accent">
-            <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
+            <Input
+              value={data.headlineAccent}
+              onChange={(v) => set("headlineAccent", v)}
+            />
           </Field>
         </div>
       </FormGroup>
@@ -106,40 +140,68 @@ export default function FeaturedProjectsForm({ initial }: { initial: FeaturedPro
               />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs font-semibold text-slate-500">Tag Label</label>
-                  <Input value={proj.tag} onChange={(v) => onChange({ ...proj, tag: v })} placeholder="Education" />
+                  <label className="text-xs font-semibold text-slate-500">
+                    Tag Label
+                  </label>
+                  <Input
+                    value={proj.tag}
+                    onChange={(v) => onChange({ ...proj, tag: v })}
+                    placeholder="Education"
+                  />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs font-semibold text-slate-500">Tag Color</label>
+                  <label className="text-xs font-semibold text-slate-500">
+                    Tag Color
+                  </label>
                   <select
                     value={proj.tagColor}
-                    onChange={(e) => onChange({ ...proj, tagColor: e.target.value })}
+                    onChange={(e) =>
+                      onChange({ ...proj, tagColor: e.target.value })
+                    }
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
                   >
                     {TAG_COLORS.map((c) => (
-                      <option key={c.value} value={c.value}>{c.label}</option>
+                      <option key={c.value} value={c.value}>
+                        {c.label}
+                      </option>
                     ))}
                   </select>
                 </div>
               </div>
-              <Input value={proj.title} onChange={(v) => onChange({ ...proj, title: v })} placeholder="Project title" />
+              <Input
+                value={proj.title}
+                onChange={(v) => onChange({ ...proj, title: v })}
+                placeholder="Project title"
+              />
               <textarea
                 value={proj.description}
                 rows={2}
                 placeholder="Short description"
-                onChange={(e) => onChange({ ...proj, description: e.target.value })}
+                onChange={(e) =>
+                  onChange({ ...proj, description: e.target.value })
+                }
                 className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white resize-none"
               />
-              <Input value={proj.stat} onChange={(v) => onChange({ ...proj, stat: v })} placeholder="12,000+ students reached" />
+              <Input
+                value={proj.stat}
+                onChange={(v) => onChange({ ...proj, stat: v })}
+                placeholder="12,000+ students reached"
+              />
               <div className="flex flex-col gap-1">
-                <label className="text-xs font-semibold text-slate-500">Image Clip Path</label>
+                <label className="text-xs font-semibold text-slate-500">
+                  Image Clip Path
+                </label>
                 <select
                   value={proj.clipPath}
-                  onChange={(e) => onChange({ ...proj, clipPath: e.target.value })}
+                  onChange={(e) =>
+                    onChange({ ...proj, clipPath: e.target.value })
+                  }
                   className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
                 >
                   {CLIP_PATHS.map((c) => (
-                    <option key={c.value} value={c.value}>{c.label}</option>
+                    <option key={c.value} value={c.value}>
+                      {c.label}
+                    </option>
                   ))}
                 </select>
               </div>

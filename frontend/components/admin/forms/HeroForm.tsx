@@ -7,7 +7,13 @@ import ArrayField from "../ArrayField";
 import { saveHero } from "@/app/actions/content";
 import type { HeroContent, HeroStat } from "@/types/content";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -16,8 +22,16 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder, className = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string; className?: string;
+function Input({
+  value,
+  onChange,
+  placeholder,
+  className = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  className?: string;
 }) {
   return (
     <input
@@ -30,8 +44,14 @@ function Input({ value, onChange, placeholder, className = "" }: {
   );
 }
 
-function Textarea({ value, onChange, rows = 3 }: {
-  value: string; onChange: (v: string) => void; rows?: number;
+function Textarea({
+  value,
+  onChange,
+  rows = 3,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  rows?: number;
 }) {
   return (
     <textarea
@@ -45,7 +65,10 @@ function Textarea({ value, onChange, rows = 3 }: {
 
 export default function HeroForm({ initial }: { initial: HeroContent }) {
   const [data, setData] = useState<HeroContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
   function set<K extends keyof HeroContent>(key: K, value: HeroContent[K]) {
     setData((d) => ({ ...d, [key]: value }));
@@ -73,32 +96,59 @@ export default function HeroForm({ initial }: { initial: HeroContent }) {
         </Field>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <Field label="Headline (part 1)">
-            <Input value={data.headline} onChange={(v) => set("headline", v)} placeholder="Answer to" />
+            <Input
+              value={data.headline}
+              onChange={(v) => set("headline", v)}
+              placeholder="Answer to"
+            />
           </Field>
           <Field label="Accent Word">
-            <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} placeholder="responsible" />
+            <Input
+              value={data.headlineAccent}
+              onChange={(v) => set("headlineAccent", v)}
+              placeholder="responsible"
+            />
           </Field>
           <Field label="Headline (end)">
-            <Input value={data.headlineEnd} onChange={(v) => set("headlineEnd", v)} placeholder="youth driving social change" />
+            <Input
+              value={data.headlineEnd}
+              onChange={(v) => set("headlineEnd", v)}
+              placeholder="youth driving social change"
+            />
           </Field>
         </div>
         <Field label="Supporting Text">
-          <Textarea value={data.subtext} onChange={(v) => set("subtext", v)} rows={3} />
+          <Textarea
+            value={data.subtext}
+            onChange={(v) => set("subtext", v)}
+            rows={3}
+          />
         </Field>
       </FormGroup>
 
       <FormGroup title="Call to Action">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Primary CTA Label">
-            <Input value={data.ctaPrimary} onChange={(v) => set("ctaPrimary", v)} placeholder="Get Involved" />
+            <Input
+              value={data.ctaPrimary}
+              onChange={(v) => set("ctaPrimary", v)}
+              placeholder="Get Involved"
+            />
           </Field>
           <Field label="Secondary CTA Label">
-            <Input value={data.ctaSecondary} onChange={(v) => set("ctaSecondary", v)} placeholder="Our Story" />
+            <Input
+              value={data.ctaSecondary}
+              onChange={(v) => set("ctaSecondary", v)}
+              placeholder="Our Story"
+            />
           </Field>
         </div>
       </FormGroup>
 
-      <FormGroup title="Stats Bar" description="Displayed below the CTAs — 2 to 4 stats recommended">
+      <FormGroup
+        title="Stats Bar"
+        description="Displayed below the CTAs — 2 to 4 stats recommended"
+      >
         <ArrayField<HeroStat>
           label=""
           items={data.stats ?? []}

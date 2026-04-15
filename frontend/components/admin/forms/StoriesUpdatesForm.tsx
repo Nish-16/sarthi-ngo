@@ -6,9 +6,19 @@ import FormGroup from "../FormGroup";
 import ArrayField from "../ArrayField";
 import ImageUploader from "../ImageUploader";
 import { saveStoriesUpdates } from "@/app/actions/content";
-import type { StoriesUpdatesContent, StoryItem, StorySize } from "@/types/content";
+import type {
+  StoriesUpdatesContent,
+  StoryItem,
+  StorySize,
+} from "@/types/content";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -17,8 +27,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -34,11 +50,21 @@ function Input({ value, onChange, placeholder = "" }: {
 const CATEGORIES = ["Story", "Update", "Event"];
 const SIZES: StorySize[] = ["tall", "normal", "wide"];
 
-export default function StoriesUpdatesForm({ initial }: { initial: StoriesUpdatesContent }) {
+export default function StoriesUpdatesForm({
+  initial,
+}: {
+  initial: StoriesUpdatesContent;
+}) {
   const [data, setData] = useState<StoriesUpdatesContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
-  function set<K extends keyof StoriesUpdatesContent>(key: K, value: StoriesUpdatesContent[K]) {
+  function set<K extends keyof StoriesUpdatesContent>(
+    key: K,
+    value: StoriesUpdatesContent[K],
+  ) {
     setData((d) => ({ ...d, [key]: value }));
   }
 
@@ -63,21 +89,34 @@ export default function StoriesUpdatesForm({ initial }: { initial: StoriesUpdate
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
           <Field label="Headline Accent">
-            <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
+            <Input
+              value={data.headlineAccent}
+              onChange={(v) => set("headlineAccent", v)}
+            />
           </Field>
         </div>
       </FormGroup>
 
-      <FormGroup title="Stories" description="4 recommended — first item: tall, last item: wide">
+      <FormGroup
+        title="Stories"
+        description="4 recommended — first item: tall, last item: wide"
+      >
         <p className="text-xs text-slate-400 bg-slate-50 rounded-lg px-3 py-2">
-          Use <strong>tall</strong> for the first item (left column, 2 rows), <strong>normal</strong> for middle items, and <strong>wide</strong> for the last item (2 columns).
+          Use <strong>tall</strong> for the first item (left column, 2 rows),{" "}
+          <strong>normal</strong> for middle items, and <strong>wide</strong>{" "}
+          for the last item (2 columns).
         </p>
         <ArrayField<StoryItem>
           label=""
           items={data.items}
           onChange={(v) => set("items", v)}
           maxItems={6}
-          createItem={() => ({ image: "", size: "normal", category: "Story", title: "" })}
+          createItem={() => ({
+            image: "",
+            size: "normal",
+            category: "Story",
+            title: "",
+          })}
           renderItem={(item, _i, onChange) => (
             <div className="flex flex-col gap-3">
               <ImageUploader
@@ -86,26 +125,42 @@ export default function StoriesUpdatesForm({ initial }: { initial: StoriesUpdate
                 onChange={(url) => onChange({ ...item, image: url })}
                 aspectRatio="4/3"
               />
-              <Input value={item.title} onChange={(v) => onChange({ ...item, title: v })} placeholder="Story title" />
+              <Input
+                value={item.title}
+                onChange={(v) => onChange({ ...item, title: v })}
+                placeholder="Story title"
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs font-semibold text-slate-500">Category</label>
+                  <label className="text-xs font-semibold text-slate-500">
+                    Category
+                  </label>
                   <select
                     value={item.category}
-                    onChange={(e) => onChange({ ...item, category: e.target.value })}
+                    onChange={(e) =>
+                      onChange({ ...item, category: e.target.value })
+                    }
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
                   >
-                    {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
+                    {CATEGORIES.map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs font-semibold text-slate-500">Grid Size</label>
+                  <label className="text-xs font-semibold text-slate-500">
+                    Grid Size
+                  </label>
                   <select
                     value={item.size}
-                    onChange={(e) => onChange({ ...item, size: e.target.value as StorySize })}
+                    onChange={(e) =>
+                      onChange({ ...item, size: e.target.value as StorySize })
+                    }
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
                   >
-                    {SIZES.map((s) => <option key={s}>{s}</option>)}
+                    {SIZES.map((s) => (
+                      <option key={s}>{s}</option>
+                    ))}
                   </select>
                 </div>
               </div>

@@ -8,7 +8,13 @@ import ImageUploader from "../ImageUploader";
 import { saveWhoWeAre } from "@/app/actions/content";
 import type { WhoWeAreContent } from "@/types/content";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -17,8 +23,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -31,8 +43,14 @@ function Input({ value, onChange, placeholder = "" }: {
   );
 }
 
-function Textarea({ value, onChange, rows = 3 }: {
-  value: string; onChange: (v: string) => void; rows?: number;
+function Textarea({
+  value,
+  onChange,
+  rows = 3,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  rows?: number;
 }) {
   return (
     <textarea
@@ -44,11 +62,21 @@ function Textarea({ value, onChange, rows = 3 }: {
   );
 }
 
-export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) {
+export default function WhoWeAreForm({
+  initial,
+}: {
+  initial: WhoWeAreContent;
+}) {
   const [data, setData] = useState<WhoWeAreContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
-  function set<K extends keyof WhoWeAreContent>(key: K, value: WhoWeAreContent[K]) {
+  function set<K extends keyof WhoWeAreContent>(
+    key: K,
+    value: WhoWeAreContent[K],
+  ) {
     setData((d) => ({ ...d, [key]: value }));
   }
 
@@ -73,25 +101,44 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
           <Field label="Headline Accent">
-            <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
+            <Input
+              value={data.headlineAccent}
+              onChange={(v) => set("headlineAccent", v)}
+            />
           </Field>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Years Value">
-            <Input value={data.yearsValue} onChange={(v) => set("yearsValue", v)} placeholder="6+" />
+            <Input
+              value={data.yearsValue}
+              onChange={(v) => set("yearsValue", v)}
+              placeholder="6+"
+            />
           </Field>
           <Field label="Years Label">
-            <Input value={data.yearsLabel} onChange={(v) => set("yearsLabel", v)} placeholder="Years of Impact" />
+            <Input
+              value={data.yearsLabel}
+              onChange={(v) => set("yearsLabel", v)}
+              placeholder="Years of Impact"
+            />
           </Field>
         </div>
       </FormGroup>
 
       <FormGroup title="Content">
         <Field label="Description Paragraph 1">
-          <Textarea value={data.description1} onChange={(v) => set("description1", v)} rows={4} />
+          <Textarea
+            value={data.description1}
+            onChange={(v) => set("description1", v)}
+            rows={4}
+          />
         </Field>
         <Field label="Description Paragraph 2">
-          <Textarea value={data.description2} onChange={(v) => set("description2", v)} rows={4} />
+          <Textarea
+            value={data.description2}
+            onChange={(v) => set("description2", v)}
+            rows={4}
+          />
         </Field>
         <ArrayField<string>
           label="Values (pills displayed below description)"
@@ -99,7 +146,11 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
           onChange={(v) => set("values", v)}
           createItem={() => ""}
           renderItem={(val, _i, onChange) => (
-            <Input value={val} onChange={onChange} placeholder="🌱 Sustainability" />
+            <Input
+              value={val}
+              onChange={onChange}
+              placeholder="🌱 Sustainability"
+            />
           )}
         />
       </FormGroup>
@@ -112,7 +163,10 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
           aspectRatio="4/3"
         />
         <Field label="Main Image Alt Text">
-          <Input value={data.mainImageAlt} onChange={(v) => set("mainImageAlt", v)} />
+          <Input
+            value={data.mainImageAlt}
+            onChange={(v) => set("mainImageAlt", v)}
+          />
         </Field>
         <ImageUploader
           label="Secondary Image (floating card)"
@@ -121,7 +175,10 @@ export default function WhoWeAreForm({ initial }: { initial: WhoWeAreContent }) 
           aspectRatio="1/1"
         />
         <Field label="Secondary Image Alt Text">
-          <Input value={data.secondaryImageAlt} onChange={(v) => set("secondaryImageAlt", v)} />
+          <Input
+            value={data.secondaryImageAlt}
+            onChange={(v) => set("secondaryImageAlt", v)}
+          />
         </Field>
       </FormGroup>
     </SectionShell>

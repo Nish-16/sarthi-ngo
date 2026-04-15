@@ -7,7 +7,13 @@ import ArrayField from "../ArrayField";
 import { saveRecognitions } from "@/app/actions/content";
 import type { RecognitionsContent, OrgItem, AwardItem } from "@/types/content";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -16,8 +22,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -30,11 +42,21 @@ function Input({ value, onChange, placeholder = "" }: {
   );
 }
 
-export default function RecognitionsForm({ initial }: { initial: RecognitionsContent }) {
+export default function RecognitionsForm({
+  initial,
+}: {
+  initial: RecognitionsContent;
+}) {
   const [data, setData] = useState<RecognitionsContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
-  function set<K extends keyof RecognitionsContent>(key: K, value: RecognitionsContent[K]) {
+  function set<K extends keyof RecognitionsContent>(
+    key: K,
+    value: RecognitionsContent[K],
+  ) {
     setData((d) => ({ ...d, [key]: value }));
   }
 
@@ -51,7 +73,10 @@ export default function RecognitionsForm({ initial }: { initial: RecognitionsCon
             <Input value={data.eyebrow} onChange={(v) => set("eyebrow", v)} />
           </Field>
           <Field label="Headline Accent">
-            <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
+            <Input
+              value={data.headlineAccent}
+              onChange={(v) => set("headlineAccent", v)}
+            />
           </Field>
         </div>
         <Field label="Headline (before accent)">
@@ -76,9 +101,17 @@ export default function RecognitionsForm({ initial }: { initial: RecognitionsCon
           renderItem={(org, _i, onChange) => (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               <div className="md:col-span-2">
-                <Input value={org.name} onChange={(v) => onChange({ ...org, name: v })} placeholder="Organization name" />
+                <Input
+                  value={org.name}
+                  onChange={(v) => onChange({ ...org, name: v })}
+                  placeholder="Organization name"
+                />
               </div>
-              <Input value={org.abbr} onChange={(v) => onChange({ ...org, abbr: v })} placeholder="Abbr" />
+              <Input
+                value={org.abbr}
+                onChange={(v) => onChange({ ...org, abbr: v })}
+                placeholder="Abbr"
+              />
             </div>
           )}
         />
@@ -93,13 +126,25 @@ export default function RecognitionsForm({ initial }: { initial: RecognitionsCon
           renderItem={(award, _i, onChange) => (
             <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
               <div className="md:col-span-1">
-                <Input value={award.icon} onChange={(v) => onChange({ ...award, icon: v })} placeholder="🏆" />
+                <Input
+                  value={award.icon}
+                  onChange={(v) => onChange({ ...award, icon: v })}
+                  placeholder="🏆"
+                />
               </div>
               <div className="md:col-span-8">
-                <Input value={award.title} onChange={(v) => onChange({ ...award, title: v })} placeholder="Award title" />
+                <Input
+                  value={award.title}
+                  onChange={(v) => onChange({ ...award, title: v })}
+                  placeholder="Award title"
+                />
               </div>
               <div className="md:col-span-3">
-                <Input value={award.year} onChange={(v) => onChange({ ...award, year: v })} placeholder="2024" />
+                <Input
+                  value={award.year}
+                  onChange={(v) => onChange({ ...award, year: v })}
+                  placeholder="2024"
+                />
               </div>
             </div>
           )}

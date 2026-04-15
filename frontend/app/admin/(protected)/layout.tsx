@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Sidebar from "@/components/admin/Sidebar";
+import AdminLenis from "@/components/admin/AdminLenis";
 import { logout } from "@/app/actions/auth";
 import { COOKIE_NAME, verifyToken } from "@/lib/auth";
 
@@ -57,7 +58,7 @@ export default async function AdminLayout({
         </header>
 
         {/* Scrollable content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8">{children}</main>
+        <AdminLenis>{children}</AdminLenis>
       </div>
     </div>
   );

@@ -8,7 +8,13 @@ import { saveJoinUs } from "@/app/actions/content";
 import type { JoinUsContent } from "@/types/content";
 import { CheckCircle } from "lucide-react";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -17,8 +23,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -46,7 +58,10 @@ function JoinUsPreview({ data }: { data: JoinUsContent }) {
 
         {/* Concentric rings */}
         <div className="absolute right-[14%] top-1/2 -translate-y-1/2 w-28 h-28 rounded-full border border-white/25" />
-        <div className="absolute right-[14%] top-1/2 -translate-y-1/2 translate-x-7 w-18 h-18 rounded-full border border-white/35" style={{ width: 72, height: 72 }} />
+        <div
+          className="absolute right-[14%] top-1/2 -translate-y-1/2 translate-x-7 w-18 h-18 rounded-full border border-white/35"
+          style={{ width: 72, height: 72 }}
+        />
         <div className="absolute right-[14%] top-1/2 -translate-y-1/2 translate-x-[3.25rem] w-10 h-10 rounded-full bg-white/20" />
 
         {/* Rotated squares */}
@@ -84,8 +99,12 @@ function JoinUsPreview({ data }: { data: JoinUsContent }) {
 
           <p className="text-[0.75rem] font-black text-stone-900 leading-tight">
             {data.headline || "Headline"}{" "}
-            <span className="text-amber-500">{data.headlineAccent || "accent"}</span>{" "}
-            <span className="text-stone-400 font-light italic">in your community?</span>
+            <span className="text-amber-500">
+              {data.headlineAccent || "accent"}
+            </span>{" "}
+            <span className="text-stone-400 font-light italic">
+              in your community?
+            </span>
           </p>
 
           <p className="text-[0.58rem] text-stone-500 line-clamp-2 leading-relaxed">
@@ -104,7 +123,10 @@ function JoinUsPreview({ data }: { data: JoinUsContent }) {
           {data.badges.length > 0 && (
             <div className="flex flex-wrap gap-x-2 gap-y-1 mt-0.5">
               {data.badges.slice(0, 3).map((b) => (
-                <span key={b} className="flex items-center gap-0.5 text-[0.48rem] text-stone-400">
+                <span
+                  key={b}
+                  className="flex items-center gap-0.5 text-[0.48rem] text-stone-400"
+                >
                   <CheckCircle className="w-2 h-2 text-emerald-500 shrink-0" />
                   {b}
                 </span>
@@ -113,14 +135,19 @@ function JoinUsPreview({ data }: { data: JoinUsContent }) {
           )}
         </div>
       </div>
-      <p className="text-xs text-slate-400">Updates as you edit the fields below.</p>
+      <p className="text-xs text-slate-400">
+        Updates as you edit the fields below.
+      </p>
     </div>
   );
 }
 
 export default function JoinUsForm({ initial }: { initial: JoinUsContent }) {
   const [data, setData] = useState<JoinUsContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
   function set<K extends keyof JoinUsContent>(key: K, value: JoinUsContent[K]) {
     setData((d) => ({ ...d, [key]: value }));
@@ -146,7 +173,10 @@ export default function JoinUsForm({ initial }: { initial: JoinUsContent }) {
             <Input value={data.headline} onChange={(v) => set("headline", v)} />
           </Field>
           <Field label="Headline Accent">
-            <Input value={data.headlineAccent} onChange={(v) => set("headlineAccent", v)} />
+            <Input
+              value={data.headlineAccent}
+              onChange={(v) => set("headlineAccent", v)}
+            />
           </Field>
         </div>
         <Field label="Description">
@@ -162,14 +192,24 @@ export default function JoinUsForm({ initial }: { initial: JoinUsContent }) {
       <FormGroup title="Call to Action">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Field label="Primary CTA Label">
-            <Input value={data.ctaPrimary} onChange={(v) => set("ctaPrimary", v)} />
+            <Input
+              value={data.ctaPrimary}
+              onChange={(v) => set("ctaPrimary", v)}
+            />
           </Field>
           <Field label="Secondary CTA Label">
-            <Input value={data.ctaSecondary} onChange={(v) => set("ctaSecondary", v)} />
+            <Input
+              value={data.ctaSecondary}
+              onChange={(v) => set("ctaSecondary", v)}
+            />
           </Field>
         </div>
         <Field label="Secondary CTA Href">
-          <Input value={data.ctaSecondaryHref} onChange={(v) => set("ctaSecondaryHref", v)} placeholder="#projects" />
+          <Input
+            value={data.ctaSecondaryHref}
+            onChange={(v) => set("ctaSecondaryHref", v)}
+            placeholder="#projects"
+          />
         </Field>
       </FormGroup>
 
@@ -180,7 +220,11 @@ export default function JoinUsForm({ initial }: { initial: JoinUsContent }) {
           onChange={(v) => set("badges", v)}
           createItem={() => ""}
           renderItem={(badge, _i, onChange) => (
-            <Input value={badge} onChange={onChange} placeholder="Free to join" />
+            <Input
+              value={badge}
+              onChange={onChange}
+              placeholder="Free to join"
+            />
           )}
         />
       </FormGroup>
