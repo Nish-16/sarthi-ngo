@@ -6,10 +6,25 @@ import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
 import { saveGetInvolvedIntern } from "@/app/actions/content";
 import { iconNames } from "@/lib/icon-map";
+import { toPickerHex } from "@/lib/color";
 import type {
   GetInvolvedInternContent,
   GetInvolvedOpportunityItem,
 } from "@/types/content";
+
+const DEFAULT_OPPORTUNITY_COLOR = "#6366f1";
+const GET_INVOLVED_DESTINATIONS = [
+  { label: "Get Involved options section", value: "#get-involved-options" },
+  { label: "Volunteer section", value: "#volunteer" },
+  { label: "Intern section", value: "#intern" },
+  { label: "Collaborate section", value: "#collaborate" },
+  { label: "Invite Founders section", value: "#invite-founders" },
+  { label: "Home", value: "/" },
+  { label: "About", value: "/about" },
+  { label: "What We Do", value: "/what-we-do" },
+  { label: "Get Involved", value: "/get-involved" },
+  { label: "Team", value: "/team" },
+] as const;
 
 function Field({
   label,
@@ -40,6 +55,42 @@ function Input({
       onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
     />
+  );
+}
+
+function SelectInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const hasPreset = GET_INVOLVED_DESTINATIONS.some(
+    (item) => item.value === value,
+  );
+  const selectedValue = hasPreset ? value : "__custom__";
+
+  return (
+    <div className="flex flex-col gap-2">
+      <select
+        value={selectedValue}
+        onChange={(e) => {
+          const nextValue = e.target.value;
+          onChange(nextValue === "__custom__" ? "" : nextValue);
+        }}
+        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+      >
+        {GET_INVOLVED_DESTINATIONS.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+        <option value="__custom__">Custom link</option>
+      </select>
+      {selectedValue === "__custom__" ? (
+        <Input value={value} onChange={onChange} />
+      ) : null}
+    </div>
   );
 }
 
@@ -95,8 +146,11 @@ export default function InternForm({
           <Field label="CTA Label">
             <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
           </Field>
-          <Field label="CTA Link">
-            <Input value={data.ctaHref} onChange={(v) => set("ctaHref", v)} />
+          <Field label="CTA Destination">
+            <SelectInput
+              value={data.ctaHref}
+              onChange={(v) => set("ctaHref", v)}
+            />
           </Field>
         </div>
       </FormGroup>
@@ -144,7 +198,7 @@ export default function InternForm({
             iconName: "Users",
             title: "",
             description: "",
-            color: "bg-indigo-50 text-indigo-600 border-indigo-100",
+            color: DEFAULT_OPPORTUNITY_COLOR,
           })}
           renderItem={(item, _i, onChange) => (
             <div className="grid grid-cols-2 gap-3">
@@ -178,10 +232,12 @@ export default function InternForm({
                   onChange={(v) => onChange({ ...item, description: v })}
                 />
               </Field>
-              <Field label="Color Classes">
-                <Input
-                  value={item.color}
-                  onChange={(v) => onChange({ ...item, color: v })}
+              <Field label="Color">
+                <input
+                  type="color"
+                  value={toPickerHex(item.color, DEFAULT_OPPORTUNITY_COLOR)}
+                  onChange={(e) => onChange({ ...item, color: e.target.value })}
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
             </div>

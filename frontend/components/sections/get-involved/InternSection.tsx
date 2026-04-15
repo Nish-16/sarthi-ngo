@@ -3,6 +3,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
 import { getIcon } from "@/lib/icon-map";
+import { hexToRgba, isHexColor } from "@/lib/color";
 import type { GetInvolvedInternContent } from "@/types/content";
 
 export default function InternSection({
@@ -33,7 +34,7 @@ export default function InternSection({
               aria-hidden="true"
             />
 
-            <div className="relative rounded-3xl overflow-hidden min-h-[420px] shadow-2xl shadow-purple-200/30">
+            <div className="relative rounded-3xl overflow-hidden min-h-105 shadow-2xl shadow-purple-200/30">
               <Image
                 src={content.image}
                 alt={content.imageAlt}
@@ -41,7 +42,7 @@ export default function InternSection({
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 48vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900/50 via-transparent to-transparent" />
             </div>
 
             {/* floating badge */}
@@ -71,7 +72,7 @@ export default function InternSection({
             </p>
             <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
               {content.headline}{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-indigo-600">
                 {content.headlineAccent}
               </span>
             </h2>
@@ -82,10 +83,21 @@ export default function InternSection({
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {content.opportunities.map((opportunity) => {
                 const Icon = getIcon(opportunity.iconName);
+                const opportunityColor = opportunity.color.trim();
+                const useHex = isHexColor(opportunityColor);
                 return (
                   <div
                     key={opportunity.title}
-                    className={`flex gap-3 p-4 rounded-2xl border ${opportunity.color}`}
+                    className={`flex gap-3 p-4 rounded-2xl border ${useHex ? "" : opportunity.color}`}
+                    style={
+                      useHex
+                        ? {
+                            color: opportunityColor,
+                            backgroundColor: hexToRgba(opportunityColor, 0.1),
+                            borderColor: hexToRgba(opportunityColor, 0.35),
+                          }
+                        : undefined
+                    }
                   >
                     <Icon className="w-4 h-4 shrink-0 mt-0.5" />
                     <div>

@@ -6,9 +6,20 @@ import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
 import ImageUploader from "../../ImageUploader";
 import { saveTeamGrid } from "@/app/actions/content";
-import type { TeamGridContent, TeamGroupContent, TeamMemberContent } from "@/types/content";
+import { toPickerHex } from "@/lib/color";
+import type {
+  TeamGridContent,
+  TeamGroupContent,
+  TeamMemberContent,
+} from "@/types/content";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -17,8 +28,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -31,18 +48,7 @@ function Input({ value, onChange, placeholder = "" }: {
   );
 }
 
-const ACCENT_COLORS = [
-  { label: "Indigo", value: "bg-indigo-500" },
-  { label: "Purple", value: "bg-purple-500" },
-  { label: "Cyan", value: "bg-cyan-500" },
-  { label: "Orange", value: "bg-orange-500" },
-  { label: "Emerald", value: "bg-emerald-500" },
-  { label: "Rose", value: "bg-rose-500" },
-  { label: "Amber", value: "bg-amber-500" },
-  { label: "Teal", value: "bg-teal-500" },
-  { label: "Pink", value: "bg-pink-500" },
-  { label: "Sky", value: "bg-sky-500" },
-];
+const DEFAULT_ACCENT_COLOR = "#6366f1";
 
 function MemberEditor({
   member,
@@ -61,48 +67,68 @@ function MemberEditor({
       />
       <div className="grid grid-cols-2 gap-2">
         <Field label="Name">
-          <Input value={member.name} onChange={(v) => onChange({ ...member, name: v })} placeholder="Arjun Mehta" />
+          <Input
+            value={member.name}
+            onChange={(v) => onChange({ ...member, name: v })}
+            placeholder="Arjun Mehta"
+          />
         </Field>
         <Field label="Department">
-          <Input value={member.department} onChange={(v) => onChange({ ...member, department: v })} placeholder="Leadership" />
+          <Input
+            value={member.department}
+            onChange={(v) => onChange({ ...member, department: v })}
+            placeholder="Leadership"
+          />
         </Field>
       </div>
       <Field label="Role">
-        <Input value={member.role} onChange={(v) => onChange({ ...member, role: v })} placeholder="Founder & Executive Director" />
+        <Input
+          value={member.role}
+          onChange={(v) => onChange({ ...member, role: v })}
+          placeholder="Founder & Executive Director"
+        />
       </Field>
       <div className="grid grid-cols-2 gap-2">
         <Field label="LinkedIn URL">
-          <Input value={member.linkedin} onChange={(v) => onChange({ ...member, linkedin: v })} placeholder="https://linkedin.com/in/..." />
+          <Input
+            value={member.linkedin}
+            onChange={(v) => onChange({ ...member, linkedin: v })}
+            placeholder="https://linkedin.com/in/..."
+          />
         </Field>
         <Field label="Email">
-          <Input value={member.email} onChange={(v) => onChange({ ...member, email: v })} placeholder="name@sarthi.org" />
+          <Input
+            value={member.email}
+            onChange={(v) => onChange({ ...member, email: v })}
+            placeholder="name@sarthi.org"
+          />
         </Field>
       </div>
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-semibold text-slate-700">Accent Colour</label>
-        <div className="flex flex-wrap gap-2">
-          {ACCENT_COLORS.map((c) => (
-            <button
-              key={c.value}
-              type="button"
-              onClick={() => onChange({ ...member, accentColor: c.value })}
-              title={c.label}
-              className={`w-6 h-6 rounded-full ${c.value} transition-all ${
-                member.accentColor === c.value
-                  ? "ring-2 ring-offset-2 ring-indigo-500 scale-110"
-                  : "hover:scale-105"
-              }`}
-            />
-          ))}
-        </div>
+        <label className="text-sm font-semibold text-slate-700">
+          Accent Colour
+        </label>
+        <input
+          type="color"
+          value={toPickerHex(member.accentColor, DEFAULT_ACCENT_COLOR)}
+          onChange={(e) => onChange({ ...member, accentColor: e.target.value })}
+          className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
+        />
       </div>
     </div>
   );
 }
 
-export default function TeamGridForm({ initial }: { initial: TeamGridContent }) {
+export default function TeamGridForm({
+  initial,
+}: {
+  initial: TeamGridContent;
+}) {
   const [data, setData] = useState<TeamGridContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
   return (
     <SectionShell
@@ -111,7 +137,10 @@ export default function TeamGridForm({ initial }: { initial: TeamGridContent }) 
       onSave={async () => setResult(await saveTeamGrid(data))}
       saveResult={result}
     >
-      <FormGroup title="Groups" description="Each group has a title, subtitle, and its own set of members">
+      <FormGroup
+        title="Groups"
+        description="Each group has a title, subtitle, and its own set of members"
+      >
         <ArrayField<TeamGroupContent>
           items={data.groups}
           onChange={(groups) => setData({ groups })}
@@ -147,7 +176,7 @@ export default function TeamGridForm({ initial }: { initial: TeamGridContent }) 
                     image: "",
                     linkedin: "",
                     email: "",
-                    accentColor: "bg-indigo-500",
+                    accentColor: DEFAULT_ACCENT_COLOR,
                   })}
                   renderItem={(member, _j, onMemberChange) => (
                     <MemberEditor member={member} onChange={onMemberChange} />

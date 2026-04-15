@@ -10,11 +10,15 @@ export const metadata = {
   robots: "noindex, nofollow",
 };
 
-export default async function AdminLayout({ children }: { children: ReactNode }) {
+export default async function AdminLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   // Defense-in-depth: verify session on every server render, not just at the proxy
   const cookieStore = await cookies();
   const token = cookieStore.get(COOKIE_NAME)?.value;
-  if (!token || !verifyToken(token)) {
+  if (!token || !(await verifyToken(token))) {
     redirect("/admin/login");
   }
   return (
@@ -34,8 +38,18 @@ export default async function AdminLayout({ children }: { children: ReactNode })
               type="submit"
               className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-red-500 font-medium transition-colors px-3 py-1.5 rounded-lg hover:bg-red-50"
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
               </svg>
               Sign out
             </button>
@@ -43,9 +57,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
         </header>
 
         {/* Scrollable content */}
-        <main className="flex-1 overflow-y-auto p-8">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto p-8">{children}</main>
       </div>
     </div>
   );

@@ -6,10 +6,14 @@ import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
 import { saveGetInvolvedStats } from "@/app/actions/content";
 import { iconNames } from "@/lib/icon-map";
+import { toPickerHex } from "@/lib/color";
 import type {
   GetInvolvedStatItem,
   GetInvolvedStatsContent,
 } from "@/types/content";
+
+const DEFAULT_STAT_COLOR = "#6366f1";
+const DEFAULT_ICON_BOX_COLOR = "#818cf8";
 
 function Field({
   label,
@@ -94,8 +98,8 @@ export default function StatsForm({
             label: "",
             description: "",
             iconName: "Users",
-            gradient: "from-indigo-400 to-purple-400",
-            iconColor: "bg-indigo-400/15 text-indigo-300 border-indigo-400/20",
+            gradient: DEFAULT_STAT_COLOR,
+            iconColor: DEFAULT_ICON_BOX_COLOR,
           })}
           renderItem={(item, _i, onChange) => (
             <div className="grid grid-cols-2 gap-3">
@@ -135,16 +139,24 @@ export default function StatsForm({
                   ))}
                 </select>
               </div>
-              <Field label="Gradient Classes">
-                <Input
-                  value={item.gradient}
-                  onChange={(v) => onChange({ ...item, gradient: v })}
+              <Field label="Stat Color">
+                <input
+                  type="color"
+                  value={toPickerHex(item.gradient, DEFAULT_STAT_COLOR)}
+                  onChange={(e) =>
+                    onChange({ ...item, gradient: e.target.value })
+                  }
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
-              <Field label="Icon Box Classes">
-                <Input
-                  value={item.iconColor}
-                  onChange={(v) => onChange({ ...item, iconColor: v })}
+              <Field label="Icon Box Color">
+                <input
+                  type="color"
+                  value={toPickerHex(item.iconColor, DEFAULT_ICON_BOX_COLOR)}
+                  onChange={(e) =>
+                    onChange({ ...item, iconColor: e.target.value })
+                  }
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
             </div>

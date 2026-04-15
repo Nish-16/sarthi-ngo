@@ -14,6 +14,11 @@ import InviteFoundersSection from "@/components/sections/get-involved/InviteFoun
 import { Sparkles, ArrowRight, ArrowDown } from "lucide-react";
 import Image from "next/image";
 
+const HERO_IMAGE_CLIP_PRESETS = [
+  "polygon(0 0, 100% 0, 85% 100%, 0 100%)",
+  "polygon(20% 0, 100% 0, 100% 100%, 5% 100%)",
+] as const;
+
 export const revalidate = 3600; // ISR: revalidate every 1 hour
 
 export const metadata = {
@@ -23,7 +28,10 @@ export const metadata = {
 };
 
 export default async function GetInvolvedPage() {
-  const [shared, getInvolved] = await Promise.all([readShared(), readGetInvolved()]);
+  const [shared, getInvolved] = await Promise.all([
+    readShared(),
+    readGetInvolved(),
+  ]);
   const {
     hero,
     involvementGrid,
@@ -41,7 +49,7 @@ export default async function GetInvolvedPage() {
       <Navbar content={shared.navbar} />
       <main className="flex flex-1 flex-col">
         {/* ── Hero ──────────────────────────────────────────────────── */}
-        <section className="relative min-h-[82vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/30 pt-28 pb-0">
+        <section className="relative min-h-[82vh] flex items-center overflow-hidden bg-linear-to-br from-slate-50 via-indigo-50/40 to-purple-50/30 pt-28 pb-0">
           {/* blobs */}
           <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-200/30 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 left-1/3 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -129,7 +137,7 @@ export default async function GetInvolvedPage() {
               </div>
 
               {/* Right: image slices */}
-              <div className="relative flex items-center justify-center lg:justify-end h-[500px]">
+              <div className="relative flex items-center justify-center lg:justify-end h-125">
                 {/* floating card */}
                 <div className="absolute top-10 left-4 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float pointer-events-none border border-slate-100">
                   <p className="text-xs text-slate-400 font-medium">
@@ -149,13 +157,16 @@ export default async function GetInvolvedPage() {
                 </div>
 
                 {/* image slices */}
-                <div className="relative flex items-stretch h-[460px] w-full max-w-[480px]">
+                <div className="relative flex items-stretch h-115 w-full max-w-120">
                   {hero.images.map((img, i) => (
                     <div
                       key={i}
                       className="relative flex-1"
                       style={{
-                        clipPath: img.clipPath,
+                        clipPath:
+                          HERO_IMAGE_CLIP_PRESETS[
+                            i % HERO_IMAGE_CLIP_PRESETS.length
+                          ],
                         marginLeft: i > 0 ? "-2.5rem" : "0",
                         zIndex: i + 1,
                       }}
@@ -168,7 +179,7 @@ export default async function GetInvolvedPage() {
                         priority={i === 0}
                         sizes="(max-width: 768px) 100vw, 25vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/10 to-indigo-900/30" />
+                      <div className="absolute inset-0 bg-linear-to-b from-indigo-900/10 to-indigo-900/30" />
                     </div>
                   ))}
                 </div>

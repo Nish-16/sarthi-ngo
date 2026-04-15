@@ -11,6 +11,19 @@ import type {
   AboutHeroStat,
 } from "@/types/content";
 
+const PAGE_DESTINATIONS = [
+  { label: "Home", value: "/" },
+  { label: "About", value: "/about" },
+  { label: "What We Do", value: "/what-we-do" },
+  { label: "Get Involved", value: "/get-involved" },
+  { label: "Team", value: "/team" },
+] as const;
+
+const IMAGE_CLIP_PRESETS = [
+  "polygon(0 0, 100% 0, 85% 100%, 0 100%)",
+  "polygon(20% 0, 100% 0, 100% 100%, 5% 100%)",
+] as const;
+
 function Field({
   label,
   children,
@@ -43,6 +56,44 @@ function Input({
       onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
     />
+  );
+}
+
+function SelectInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const hasPreset = PAGE_DESTINATIONS.some((item) => item.value === value);
+  const selectedValue = hasPreset ? value : "__custom__";
+
+  return (
+    <div className="flex flex-col gap-2">
+      <select
+        value={selectedValue}
+        onChange={(e) => {
+          const nextValue = e.target.value;
+          onChange(nextValue === "__custom__" ? "" : nextValue);
+        }}
+        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+      >
+        {PAGE_DESTINATIONS.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+        <option value="__custom__">Custom link</option>
+      </select>
+      {selectedValue === "__custom__" ? (
+        <Input
+          value={value}
+          onChange={onChange}
+          placeholder="/custom-page or #section"
+        />
+      ) : null}
+    </div>
   );
 }
 
@@ -101,8 +152,8 @@ export default function AboutHeroForm({
               onChange={(v) => set("ctaPrimary", v)}
             />
           </Field>
-          <Field label="Primary CTA Link">
-            <Input
+          <Field label="Primary CTA Destination">
+            <SelectInput
               value={data.ctaPrimaryHref}
               onChange={(v) => set("ctaPrimaryHref", v)}
             />
@@ -113,39 +164,10 @@ export default function AboutHeroForm({
               onChange={(v) => set("ctaSecondary", v)}
             />
           </Field>
-          <Field label="Secondary CTA Link">
-            <Input
+          <Field label="Secondary CTA Destination">
+            <SelectInput
               value={data.ctaSecondaryHref}
               onChange={(v) => set("ctaSecondaryHref", v)}
-            />
-          </Field>
-        </div>
-      </FormGroup>
-
-      <FormGroup title="Floating Cards">
-        <div className="grid grid-cols-2 gap-3">
-          <Field label="Top Card Label">
-            <Input
-              value={data.topCardLabel}
-              onChange={(v) => set("topCardLabel", v)}
-            />
-          </Field>
-          <Field label="Top Card Value">
-            <Input
-              value={data.topCardValue}
-              onChange={(v) => set("topCardValue", v)}
-            />
-          </Field>
-          <Field label="Bottom Card Label">
-            <Input
-              value={data.bottomCardLabel}
-              onChange={(v) => set("bottomCardLabel", v)}
-            />
-          </Field>
-          <Field label="Bottom Card Value">
-            <Input
-              value={data.bottomCardValue}
-              onChange={(v) => set("bottomCardValue", v)}
             />
           </Field>
         </div>
@@ -182,7 +204,7 @@ export default function AboutHeroForm({
           createItem={() => ({
             src: "",
             alt: "",
-            clipPath: "polygon(0 0, 100% 0, 85% 100%, 0 100%)",
+            clipPath: IMAGE_CLIP_PRESETS[0],
           })}
           renderItem={(item, _i, onChange) => (
             <div className="grid grid-cols-1 gap-3">
@@ -198,12 +220,9 @@ export default function AboutHeroForm({
                   onChange={(v) => onChange({ ...item, alt: v })}
                 />
               </Field>
-              <Field label="Clip Path">
-                <Input
-                  value={item.clipPath}
-                  onChange={(v) => onChange({ ...item, clipPath: v })}
-                />
-              </Field>
+              <p className="text-xs text-slate-500">
+                Shape style is automatic for consistency.
+              </p>
             </div>
           )}
         />

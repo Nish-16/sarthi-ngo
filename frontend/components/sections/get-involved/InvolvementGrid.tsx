@@ -3,6 +3,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { ArrowRight, Mic } from "lucide-react";
 import { getIcon } from "@/lib/icon-map";
+import { hexToRgba, isHexColor } from "@/lib/color";
 import type { GetInvolvedGridContent } from "@/types/content";
 
 function InviteCard({
@@ -17,7 +18,7 @@ function InviteCard({
   href: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-cyan-600 text-white p-8 md:p-10">
+    <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-indigo-700 via-indigo-600 to-cyan-600 text-white p-8 md:p-10">
       {/* inner decorations */}
       <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/10 blur-3xl pointer-events-none" />
       <div
@@ -101,7 +102,7 @@ export default function InvolvementGrid({
         {/* Bento grid */}
         <div className="grid lg:grid-cols-6 gap-5">
           {/* Featured Volunteer card */}
-          <article className="lg:col-span-4 relative rounded-3xl overflow-hidden min-h-[340px] group">
+          <article className="lg:col-span-4 relative rounded-3xl overflow-hidden min-h-85 group">
             <div className="absolute inset-0">
               <Image
                 src={content.featured.image}
@@ -110,7 +111,7 @@ export default function InvolvementGrid({
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 65vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-900/20 via-slate-900/40 to-slate-900/90" />
+              <div className="absolute inset-0 bg-linear-to-br from-slate-900/20 via-slate-900/40 to-slate-900/90" />
             </div>
             <div className="relative h-full flex flex-col justify-end p-8 md:p-10 text-white">
               <div className="w-11 h-11 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center mb-5">
@@ -141,13 +142,32 @@ export default function InvolvementGrid({
           {primaryCard &&
             (() => {
               const Icon = getIcon(primaryCard.iconName);
+              const primaryAccent = primaryCard.accent.trim();
+              const usePrimaryHexAccent = isHexColor(primaryAccent);
+              const primaryIconBg = primaryCard.iconBg.trim();
+              const usePrimaryHexIconBg = isHexColor(primaryIconBg);
               return (
                 <article
                   key={primaryCard.title}
-                  className={`lg:col-span-2 group rounded-3xl border p-7 hover:shadow-xl hover:shadow-indigo-100/60 hover:-translate-y-1 transition-all duration-300 ${primaryCard.accent}`}
+                  className={`lg:col-span-2 group rounded-3xl border p-7 hover:shadow-xl hover:shadow-indigo-100/60 hover:-translate-y-1 transition-all duration-300 ${usePrimaryHexAccent ? "" : primaryCard.accent}`}
+                  style={
+                    usePrimaryHexAccent
+                      ? {
+                          backgroundColor: hexToRgba(primaryAccent, 0.12),
+                          borderColor: hexToRgba(primaryAccent, 0.35),
+                        }
+                      : undefined
+                  }
                 >
                   <div
-                    className={`w-11 h-11 rounded-2xl ${primaryCard.iconBg} flex items-center justify-center text-white shadow-lg mb-6`}
+                    className={`w-11 h-11 rounded-2xl flex items-center justify-center text-white shadow-lg mb-6 ${usePrimaryHexIconBg ? "" : primaryCard.iconBg}`}
+                    style={
+                      usePrimaryHexIconBg
+                        ? {
+                            backgroundColor: primaryIconBg,
+                          }
+                        : undefined
+                    }
                   >
                     <Icon className="w-5 h-5" />
                   </div>
@@ -173,13 +193,32 @@ export default function InvolvementGrid({
           {/* Member, Donate, Collaborate */}
           {secondaryCards.map((card) => {
             const Icon = getIcon(card.iconName);
+            const cardAccent = card.accent.trim();
+            const useHexAccent = isHexColor(cardAccent);
+            const iconBg = card.iconBg.trim();
+            const useHexIconBg = isHexColor(iconBg);
             return (
               <article
                 key={card.title}
-                className={`lg:col-span-2 group rounded-3xl border p-7 hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300 ${card.accent}`}
+                className={`lg:col-span-2 group rounded-3xl border p-7 hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300 ${useHexAccent ? "" : card.accent}`}
+                style={
+                  useHexAccent
+                    ? {
+                        backgroundColor: hexToRgba(cardAccent, 0.12),
+                        borderColor: hexToRgba(cardAccent, 0.35),
+                      }
+                    : undefined
+                }
               >
                 <div
-                  className={`w-11 h-11 rounded-2xl ${card.iconBg} flex items-center justify-center text-white shadow-lg mb-6`}
+                  className={`w-11 h-11 rounded-2xl flex items-center justify-center text-white shadow-lg mb-6 ${useHexIconBg ? "" : card.iconBg}`}
+                  style={
+                    useHexIconBg
+                      ? {
+                          backgroundColor: iconBg,
+                        }
+                      : undefined
+                  }
                 >
                   <Icon className="w-5 h-5" />
                 </div>

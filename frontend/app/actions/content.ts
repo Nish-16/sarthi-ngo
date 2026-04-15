@@ -1,13 +1,23 @@
 "use server";
 
+import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import {
-  readShared, writeShared, SharedContent,
-  readHome, writeHome, HomeContent,
-  readAbout, writeAbout,
-  readTeam, writeTeam,
-  readGetInvolved, writeGetInvolved,
-  readWhatWeDo, writeWhatWeDo,
+  readShared,
+  writeShared,
+  SharedContent,
+  readHome,
+  writeHome,
+  HomeContent,
+  readAbout,
+  writeAbout,
+  readTeam,
+  writeTeam,
+  readGetInvolved,
+  writeGetInvolved,
+  readWhatWeDo,
+  writeWhatWeDo,
 } from "@/lib/content";
 import type {
   HeroContent,
@@ -46,16 +56,39 @@ import type {
   TeamHeroContent,
   TeamGridContent,
 } from "@/types/content";
+import { COOKIE_NAME, verifyToken } from "@/lib/auth";
+import { isAllowedRequestOrigin, sanitizeInput } from "@/lib/security";
 
 type ActionResult = { success: true } | { error: string };
+
+async function requireAdminSession(): Promise<ActionResult | null> {
+  const headerStore = await headers();
+  if (!isAllowedRequestOrigin(headerStore)) {
+    return { error: "Forbidden" };
+  }
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get(COOKIE_NAME)?.value;
+
+  if (!token || !(await verifyToken(token))) {
+    return { error: "Unauthorized" };
+  }
+
+  return null;
+}
 
 async function withSaveShared<K extends keyof SharedContent>(
   key: K,
   data: SharedContent[K],
 ): Promise<ActionResult> {
+  const authError = await requireAdminSession();
+  if (authError) {
+    return authError;
+  }
+
   try {
     const content = await readShared();
-    content[key] = data;
+    content[key] = sanitizeInput(data);
     await writeShared(content);
     // Shared content (navbar/footer) appears on all pages
     revalidatePath("/", "layout");
@@ -70,9 +103,14 @@ async function withSaveHome<K extends keyof HomeContent>(
   key: K,
   data: HomeContent[K],
 ): Promise<ActionResult> {
+  const authError = await requireAdminSession();
+  if (authError) {
+    return authError;
+  }
+
   try {
     const content = await readHome();
-    content[key] = data;
+    content[key] = sanitizeInput(data);
     await writeHome(content);
     revalidatePath("/", "page");
     return { success: true };
@@ -86,9 +124,15 @@ async function withSaveWwd<K extends keyof WwdContent>(
   key: K,
   data: WwdContent[K],
 ): Promise<ActionResult> {
+  const authError = await requireAdminSession();
+  if (authError) {
+    return authError;
+  }
+
   try {
     const content = await readWhatWeDo();
-    (content as unknown as Record<string, unknown>)[key as string] = data;
+    (content as unknown as Record<string, unknown>)[key as string] =
+      sanitizeInput(data);
     await writeWhatWeDo(content);
     revalidatePath("/what-we-do", "page");
     return { success: true };
@@ -112,9 +156,14 @@ async function withSaveAbout<K extends keyof AboutPageContent>(
   key: K,
   data: AboutPageContent[K],
 ): Promise<ActionResult> {
+  const authError = await requireAdminSession();
+  if (authError) {
+    return authError;
+  }
+
   try {
     const content = await readAbout();
-    content[key] = data;
+    content[key] = sanitizeInput(data);
     await writeAbout(content);
     revalidatePath("/about", "page");
     return { success: true };
@@ -128,9 +177,14 @@ async function withSaveGetInvolved<K extends keyof GetInvolvedPageContent>(
   key: K,
   data: GetInvolvedPageContent[K],
 ): Promise<ActionResult> {
+  const authError = await requireAdminSession();
+  if (authError) {
+    return authError;
+  }
+
   try {
     const content = await readGetInvolved();
-    content[key] = data;
+    content[key] = sanitizeInput(data);
     await writeGetInvolved(content);
     revalidatePath("/get-involved", "page");
     return { success: true };
@@ -144,9 +198,14 @@ async function withSaveTeam<K extends keyof TeamPageContent>(
   key: K,
   data: TeamPageContent[K],
 ): Promise<ActionResult> {
+  const authError = await requireAdminSession();
+  if (authError) {
+    return authError;
+  }
+
   try {
     const content = await readTeam();
-    content[key] = data;
+    content[key] = sanitizeInput(data);
     await writeTeam(content);
     revalidatePath("/team", "page");
     return { success: true };
@@ -172,19 +231,27 @@ export async function saveHero(data: HeroContent): Promise<ActionResult> {
   return withSaveHome("hero", data);
 }
 
-export async function saveWhoWeAre(data: WhoWeAreContent): Promise<ActionResult> {
+export async function saveWhoWeAre(
+  data: WhoWeAreContent,
+): Promise<ActionResult> {
   return withSaveHome("whoWeAre", data);
 }
 
-export async function saveRecognitions(data: RecognitionsContent): Promise<ActionResult> {
+export async function saveRecognitions(
+  data: RecognitionsContent,
+): Promise<ActionResult> {
   return withSaveHome("recognitions", data);
 }
 
-export async function saveFeaturedProjects(data: FeaturedProjectsContent): Promise<ActionResult> {
+export async function saveFeaturedProjects(
+  data: FeaturedProjectsContent,
+): Promise<ActionResult> {
   return withSaveHome("featuredProjects", data);
 }
 
-export async function saveImpactStats(data: ImpactStatsContent): Promise<ActionResult> {
+export async function saveImpactStats(
+  data: ImpactStatsContent,
+): Promise<ActionResult> {
   return withSaveHome("impactStats", data);
 }
 
@@ -192,7 +259,9 @@ export async function saveJoinUs(data: JoinUsContent): Promise<ActionResult> {
   return withSaveHome("joinUs", data);
 }
 
-export async function saveStoriesUpdates(data: StoriesUpdatesContent): Promise<ActionResult> {
+export async function saveStoriesUpdates(
+  data: StoriesUpdatesContent,
+): Promise<ActionResult> {
   return withSaveHome("storiesUpdates", data);
 }
 
@@ -202,92 +271,134 @@ export async function saveWwdHero(data: WwdHeroContent): Promise<ActionResult> {
   return withSaveWwd("hero", data);
 }
 
-export async function saveWwdSignatureProjects(data: WwdSignatureProjectsContent): Promise<ActionResult> {
+export async function saveWwdSignatureProjects(
+  data: WwdSignatureProjectsContent,
+): Promise<ActionResult> {
   return withSaveWwd("signatureProjects", data);
 }
 
-export async function saveWwdPreviousProjects(data: WwdPreviousProjectsContent): Promise<ActionResult> {
+export async function saveWwdPreviousProjects(
+  data: WwdPreviousProjectsContent,
+): Promise<ActionResult> {
   return withSaveWwd("previousProjects", data);
 }
 
-export async function saveWwdProblem(data: WwdProblemContent): Promise<ActionResult> {
+export async function saveWwdProblem(
+  data: WwdProblemContent,
+): Promise<ActionResult> {
   return withSaveWwd("problem", data);
 }
 
-export async function saveWwdApproach(data: WwdApproachContent): Promise<ActionResult> {
+export async function saveWwdApproach(
+  data: WwdApproachContent,
+): Promise<ActionResult> {
   return withSaveWwd("approach", data);
 }
 
-export async function saveWwdImpact(data: WwdImpactContent): Promise<ActionResult> {
+export async function saveWwdImpact(
+  data: WwdImpactContent,
+): Promise<ActionResult> {
   return withSaveWwd("impact", data);
 }
 
 // ─── About ────────────────────────────────────────────────────────────────────
 
-export async function saveAboutHero(data: AboutHeroContent): Promise<ActionResult> {
+export async function saveAboutHero(
+  data: AboutHeroContent,
+): Promise<ActionResult> {
   return withSaveAbout("hero", data);
 }
 
-export async function saveAboutVisionMissionValues(data: AboutVisionMissionValuesContent): Promise<ActionResult> {
+export async function saveAboutVisionMissionValues(
+  data: AboutVisionMissionValuesContent,
+): Promise<ActionResult> {
   return withSaveAbout("visionMissionValues", data);
 }
 
-export async function saveAboutWhyYouth(data: AboutWhyYouthContent): Promise<ActionResult> {
+export async function saveAboutWhyYouth(
+  data: AboutWhyYouthContent,
+): Promise<ActionResult> {
   return withSaveAbout("whyYouth", data);
 }
 
-export async function saveAboutRecognition(data: AboutRecognitionContent): Promise<ActionResult> {
+export async function saveAboutRecognition(
+  data: AboutRecognitionContent,
+): Promise<ActionResult> {
   return withSaveAbout("recognition", data);
 }
 
-export async function saveAboutSharedLeadership(data: AboutSharedLeadershipContent): Promise<ActionResult> {
+export async function saveAboutSharedLeadership(
+  data: AboutSharedLeadershipContent,
+): Promise<ActionResult> {
   return withSaveAbout("sharedLeadership", data);
 }
 
 // ─── Get Involved ─────────────────────────────────────────────────────────────
 
-export async function saveGetInvolvedHero(data: GetInvolvedHeroContent): Promise<ActionResult> {
+export async function saveGetInvolvedHero(
+  data: GetInvolvedHeroContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("hero", data);
 }
 
-export async function saveGetInvolvedInvolvementGrid(data: GetInvolvedGridContent): Promise<ActionResult> {
+export async function saveGetInvolvedInvolvementGrid(
+  data: GetInvolvedGridContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("involvementGrid", data);
 }
 
-export async function saveGetInvolvedWhyJoin(data: GetInvolvedWhyJoinContent): Promise<ActionResult> {
+export async function saveGetInvolvedWhyJoin(
+  data: GetInvolvedWhyJoinContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("whyJoin", data);
 }
 
-export async function saveGetInvolvedTestimonials(data: GetInvolvedTestimonialsContent): Promise<ActionResult> {
+export async function saveGetInvolvedTestimonials(
+  data: GetInvolvedTestimonialsContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("testimonials", data);
 }
 
-export async function saveGetInvolvedStats(data: GetInvolvedStatsContent): Promise<ActionResult> {
+export async function saveGetInvolvedStats(
+  data: GetInvolvedStatsContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("stats", data);
 }
 
-export async function saveGetInvolvedVolunteer(data: GetInvolvedVolunteerContent): Promise<ActionResult> {
+export async function saveGetInvolvedVolunteer(
+  data: GetInvolvedVolunteerContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("volunteer", data);
 }
 
-export async function saveGetInvolvedIntern(data: GetInvolvedInternContent): Promise<ActionResult> {
+export async function saveGetInvolvedIntern(
+  data: GetInvolvedInternContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("intern", data);
 }
 
-export async function saveGetInvolvedCollaborate(data: GetInvolvedCollaborateContent): Promise<ActionResult> {
+export async function saveGetInvolvedCollaborate(
+  data: GetInvolvedCollaborateContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("collaborate", data);
 }
 
-export async function saveGetInvolvedInviteFounders(data: GetInvolvedInviteFoundersContent): Promise<ActionResult> {
+export async function saveGetInvolvedInviteFounders(
+  data: GetInvolvedInviteFoundersContent,
+): Promise<ActionResult> {
   return withSaveGetInvolved("inviteFounders", data);
 }
 
 // ─── Team ─────────────────────────────────────────────────────────────────────
 
-export async function saveTeamHero(data: TeamHeroContent): Promise<ActionResult> {
+export async function saveTeamHero(
+  data: TeamHeroContent,
+): Promise<ActionResult> {
   return withSaveTeam("hero", data);
 }
 
-export async function saveTeamGrid(data: TeamGridContent): Promise<ActionResult> {
+export async function saveTeamGrid(
+  data: TeamGridContent,
+): Promise<ActionResult> {
   return withSaveTeam("grid", data);
 }

@@ -34,6 +34,12 @@ const PILLAR_STYLES = [
   },
 ];
 
+const PILLAR_ICON_BG = [
+  "bg-gradient-to-r from-indigo-500 to-purple-500",
+  "bg-gradient-to-r from-orange-500 to-rose-500",
+  "bg-gradient-to-r from-cyan-500 to-teal-500",
+];
+
 export default function VisionMissionValues({
   content,
 }: {
@@ -43,10 +49,7 @@ export default function VisionMissionValues({
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden bg-white py-24"
-    >
+    <section ref={ref} className="relative overflow-hidden bg-white py-24">
       {/* Blobs */}
       <div className="pointer-events-none absolute left-0 top-10 h-64 w-64 rounded-full bg-indigo-100/60 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-0 h-64 w-64 rounded-full bg-cyan-100/60 blur-3xl" />
@@ -55,7 +58,8 @@ export default function VisionMissionValues({
       <div
         className="absolute bottom-10 left-6 w-32 h-32 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
@@ -75,7 +79,9 @@ export default function VisionMissionValues({
             <h2 className="mt-3 text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
               {content.headline}{" "}
               <span className="relative inline-block">
-                <span className="text-indigo-600">{content.headlineAccent}</span>
+                <span className="text-indigo-600">
+                  {content.headlineAccent}
+                </span>
                 <span className="absolute -bottom-1 left-0 right-0 h-1 bg-orange-400 rounded-full" />
               </span>
             </h2>
@@ -90,13 +96,18 @@ export default function VisionMissionValues({
           {content.pillars.map((pillar, i) => {
             const Icon = getIcon(pillar.iconName);
             const style = PILLAR_STYLES[i];
+            const iconBg = PILLAR_ICON_BG[i % PILLAR_ICON_BG.length];
 
             return (
               <motion.article
                 key={pillar.title}
                 initial={{ opacity: 0, y: 28 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.15 + i * 0.15, ease: "easeOut" }}
+                transition={{
+                  duration: 0.55,
+                  delay: 0.15 + i * 0.15,
+                  ease: "easeOut",
+                }}
                 className={`group relative ${style.wrapper}`}
               >
                 <div
@@ -118,15 +129,19 @@ export default function VisionMissionValues({
                   <div className="relative z-10 flex flex-col gap-5 h-full">
                     {/* Icon */}
                     <div
-                      className={`w-12 h-12 rounded-2xl ${pillar.iconBg} flex items-center justify-center text-white shadow-lg shrink-0`}
+                      className={`w-12 h-12 rounded-2xl ${iconBg} flex items-center justify-center text-white shadow-lg shrink-0`}
                     >
                       <Icon className="w-6 h-6" />
                     </div>
 
                     {/* Tag + accent bar */}
                     <div className="flex items-center gap-3">
-                      <div className={`h-1 w-14 rounded-full ${style.accentBar}`} />
-                      <span className={`text-[10px] font-bold uppercase tracking-widest ${style.tagColor}`}>
+                      <div
+                        className={`h-1 w-14 rounded-full ${style.accentBar}`}
+                      />
+                      <span
+                        className={`text-[10px] font-bold uppercase tracking-widest ${style.tagColor}`}
+                      >
                         {pillar.tag}
                       </span>
                     </div>

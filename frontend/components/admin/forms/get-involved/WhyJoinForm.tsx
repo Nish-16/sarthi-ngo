@@ -6,10 +6,13 @@ import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
 import { saveGetInvolvedWhyJoin } from "@/app/actions/content";
 import { iconNames } from "@/lib/icon-map";
+import { toPickerHex } from "@/lib/color";
 import type {
   GetInvolvedWhyJoinBenefit,
   GetInvolvedWhyJoinContent,
 } from "@/types/content";
+
+const DEFAULT_BENEFIT_COLOR = "#6366f1";
 
 function Field({
   label,
@@ -124,7 +127,7 @@ export default function WhyJoinForm({
             iconName: "Star",
             title: "",
             description: "",
-            color: "bg-indigo-50 text-indigo-600 border-indigo-100",
+            color: DEFAULT_BENEFIT_COLOR,
           })}
           renderItem={(item, _i, onChange) => (
             <div className="grid grid-cols-2 gap-3">
@@ -158,10 +161,12 @@ export default function WhyJoinForm({
                   onChange={(v) => onChange({ ...item, description: v })}
                 />
               </Field>
-              <Field label="Color Classes">
-                <Input
-                  value={item.color}
-                  onChange={(v) => onChange({ ...item, color: v })}
+              <Field label="Color">
+                <input
+                  type="color"
+                  value={toPickerHex(item.color, DEFAULT_BENEFIT_COLOR)}
+                  onChange={(e) => onChange({ ...item, color: e.target.value })}
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
             </div>

@@ -3,6 +3,13 @@ import Container from "@/components/ui/Container";
 import { getIcon } from "@/lib/icon-map";
 import type { AboutWhyYouthContent } from "@/types/content";
 
+const REASON_COLOR_PRESETS = [
+  "bg-indigo-50 text-indigo-600 border-indigo-100",
+  "bg-orange-50 text-orange-600 border-orange-100",
+  "bg-cyan-50 text-cyan-700 border-cyan-100",
+  "bg-purple-50 text-purple-600 border-purple-100",
+];
+
 export default function WhyYouth({
   content,
 }: {
@@ -80,12 +87,14 @@ export default function WhyYouth({
 
             {/* reason pills */}
             <div className="mt-8 grid grid-cols-2 gap-3">
-              {content.reasons.map((reason) => {
+              {content.reasons.map((reason, index) => {
                 const Icon = getIcon(reason.iconName);
+                const colorClass =
+                  REASON_COLOR_PRESETS[index % REASON_COLOR_PRESETS.length];
                 return (
                   <div
                     key={reason.label}
-                    className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl border text-sm font-semibold ${reason.color}`}
+                    className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl border text-sm font-semibold ${colorClass}`}
                   >
                     <Icon className="w-4 h-4 shrink-0" />
                     <span>{reason.label}</span>

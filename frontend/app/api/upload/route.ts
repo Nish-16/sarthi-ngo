@@ -1,19 +1,51 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
 import { cookies } from "next/headers";
 import { COOKIE_NAME, verifyToken } from "@/lib/auth";
+import {
+  consumeRateLimit,
+  detectImageMime,
+  getClientIp,
+  isAllowedRequestOrigin,
+} from "@/lib/security";
+import { uploadImageToCloudinary } from "@/lib/cloudinary";
 
-const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+const MAX_BYTES = 2 * 1024 * 1024; // 2 MB
+const ALLOWED_TYPES = ["image/jpeg", "image/png"];
+const UPLOAD_ATTEMPT_LIMIT = 10;
+const UPLOAD_ATTEMPT_WINDOW_MS = 60 * 1000;
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   // Auth check
   const cookieStore = await cookies();
   const token = cookieStore.get(COOKIE_NAME)?.value;
-  if (!token || !verifyToken(token)) {
+  if (!token || !(await verifyToken(token))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isAllowedRequestOrigin(request.headers, request.nextUrl.origin)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  const clientIp = getClientIp(request.headers);
+  const rateLimit = consumeRateLimit(
+    `upload:${clientIp}`,
+    UPLOAD_ATTEMPT_LIMIT,
+    UPLOAD_ATTEMPT_WINDOW_MS,
+  );
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "Too many upload attempts. Try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rateLimit.retryAfterSeconds) },
+      },
+    );
+  }
+
+  const contentLength = Number(request.headers.get("content-length") ?? "0");
+  if (contentLength > MAX_BYTES + 256 * 1024) {
+    return NextResponse.json({ error: "Payload too large" }, { status: 413 });
   }
 
   const formData = await request.formData();
@@ -24,24 +56,34 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 
   if (!ALLOWED_TYPES.includes(file.type)) {
-    return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid file type. Only JPEG and PNG are allowed." },
+      { status: 400 },
+    );
   }
 
   if (file.size > MAX_BYTES) {
     return NextResponse.json(
       { error: "File exceeds 5 MB limit" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
-  // Sanitize filename and prepend timestamp
-  const ext = path.extname(file.name).toLowerCase().replace(/[^.a-z0-9]/g, "");
-  const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
-
-  await fs.mkdir(UPLOAD_DIR, { recursive: true });
-
   const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(path.join(UPLOAD_DIR, safeName), buffer);
+  const detectedMime = detectImageMime(buffer);
+  if (!detectedMime || detectedMime !== file.type) {
+    return NextResponse.json(
+      { error: "File content does not match the declared image type." },
+      { status: 400 },
+    );
+  }
 
-  return NextResponse.json({ url: `/uploads/${safeName}` });
+  let url: string;
+  try {
+    url = await uploadImageToCloudinary(buffer);
+  } catch {
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+  }
+
+  return NextResponse.json({ url });
 }

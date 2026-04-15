@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Container from "@/components/ui/Container";
+import { hexToRgba, isHexColor } from "@/lib/color";
 import type { GetInvolvedTestimonialsContent } from "@/types/content";
 
 export default function Testimonials({
@@ -28,44 +29,57 @@ export default function Testimonials({
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {content.items.map(({ quote, name, role, image, accent, tag }) => (
-            <article
-              key={name}
-              className={`group relative bg-slate-50 rounded-3xl p-7 border border-slate-100 border-t-2 hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300 ${accent}`}
-            >
-              {/* decorative quote mark */}
-              <span className="absolute top-5 right-6 text-6xl font-black text-slate-200 leading-none select-none pointer-events-none">
-                "
-              </span>
+          {content.items.map(({ quote, name, role, image, accent, tag }) => {
+            const accentColor = accent.trim();
+            const useHexAccent = isHexColor(accentColor);
 
-              {/* tag */}
-              <span className="inline-block text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
-                {tag}
-              </span>
+            return (
+              <article
+                key={name}
+                className={`group relative bg-slate-50 rounded-3xl p-7 border border-slate-100 border-t-2 hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300 ${useHexAccent ? "" : accent}`}
+                style={
+                  useHexAccent
+                    ? {
+                        borderTopColor: accentColor,
+                        boxShadow: `0 10px 25px ${hexToRgba(accentColor, 0.15)}`,
+                      }
+                    : undefined
+                }
+              >
+                {/* decorative quote mark */}
+                <span className="absolute top-5 right-6 text-6xl font-black text-slate-200 leading-none select-none pointer-events-none">
+                  "
+                </span>
 
-              <p className="text-slate-700 leading-relaxed text-[15px] relative z-10">
-                "{quote}"
-              </p>
+                {/* tag */}
+                <span className="inline-block text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
+                  {tag}
+                </span>
 
-              <div className="mt-6 pt-5 border-t border-slate-200 flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 ring-2 ring-white shadow-md">
-                  <Image
-                    src={image}
-                    alt={name}
-                    fill
-                    className="object-cover object-top"
-                    sizes="40px"
-                  />
+                <p className="text-slate-700 leading-relaxed text-[15px] relative z-10">
+                  "{quote}"
+                </p>
+
+                <div className="mt-6 pt-5 border-t border-slate-200 flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 ring-2 ring-white shadow-md">
+                    <Image
+                      src={image}
+                      alt={name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="40px"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900 leading-none">
+                      {name}
+                    </p>
+                    <p className="text-xs text-slate-400 mt-0.5">{role}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-bold text-slate-900 leading-none">
-                    {name}
-                  </p>
-                  <p className="text-xs text-slate-400 mt-0.5">{role}</p>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </Container>
     </section>

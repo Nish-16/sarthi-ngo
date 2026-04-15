@@ -4,6 +4,11 @@ import Button from "@/components/ui/Button";
 import { Sparkles, ArrowRight } from "lucide-react";
 import type { AboutHeroContent } from "@/types/content";
 
+const IMAGE_CLIP_PRESETS = [
+  "polygon(0 0, 100% 0, 85% 100%, 0 100%)",
+  "polygon(20% 0, 100% 0, 100% 100%, 5% 100%)",
+] as const;
+
 export default function AboutHero({ content }: { content: AboutHeroContent }) {
   return (
     <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/30 pt-28 pb-0">
@@ -90,26 +95,6 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
 
           {/* Right: image slices */}
           <div className="relative flex items-center justify-center lg:justify-end h-[500px]">
-            {/* floating card top */}
-            <div className="absolute top-10 left-4 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float pointer-events-none border border-slate-100">
-              <p className="text-xs text-slate-400 font-medium">
-                {content.topCardLabel}
-              </p>
-              <p className="text-2xl font-black text-indigo-600">
-                {content.topCardValue}
-              </p>
-            </div>
-
-            {/* floating card bottom */}
-            <div className="absolute bottom-16 right-0 z-20 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl px-4 py-3 animate-float-slow pointer-events-none border border-slate-100">
-              <p className="text-xs text-slate-400 font-medium">
-                {content.bottomCardLabel}
-              </p>
-              <p className="text-2xl font-black text-indigo-600">
-                {content.bottomCardValue}
-              </p>
-            </div>
-
             {/* image slices */}
             <div className="relative flex items-stretch h-[460px] w-full max-w-[480px]">
               {content.images.map((img, i) => (
@@ -117,7 +102,7 @@ export default function AboutHero({ content }: { content: AboutHeroContent }) {
                   key={i}
                   className="relative flex-1"
                   style={{
-                    clipPath: img.clipPath,
+                    clipPath: IMAGE_CLIP_PRESETS[i % IMAGE_CLIP_PRESETS.length],
                     marginLeft: i > 0 ? "-2.5rem" : "0",
                     zIndex: i + 1,
                   }}

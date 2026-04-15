@@ -64,7 +64,7 @@ export default function VisionMissionValuesForm({
   return (
     <SectionShell
       title="Vision Mission Values"
-      description="Asymmetric bento grid — Vision, Mission, Values. Styles are fixed per pillar position; only icon, title, tag, and description are editable."
+      description="Asymmetric bento grid — Vision, Mission, Values. Colors and styling are automatic. You only edit icon, title, tag, and description."
       onSave={async () => setResult(await saveAboutVisionMissionValues(data))}
       saveResult={result}
     >
@@ -140,12 +140,6 @@ export default function VisionMissionValuesForm({
                 <Input
                   value={item.description}
                   onChange={(v) => onChange({ ...item, description: v })}
-                />
-              </Field>
-              <Field label="Icon Background Classes">
-                <Input
-                  value={item.iconBg}
-                  onChange={(v) => onChange({ ...item, iconBg: v })}
                 />
               </Field>
             </div>

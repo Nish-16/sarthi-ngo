@@ -5,10 +5,13 @@ import SectionShell from "../../SectionShell";
 import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
 import { saveGetInvolvedTestimonials } from "@/app/actions/content";
+import { toPickerHex } from "@/lib/color";
 import type {
   GetInvolvedTestimonialItem,
   GetInvolvedTestimonialsContent,
 } from "@/types/content";
+
+const DEFAULT_TESTIMONIAL_ACCENT = "#6366f1";
 
 function Field({
   label,
@@ -93,7 +96,7 @@ export default function TestimonialsForm({
             name: "",
             role: "",
             image: "",
-            accent: "border-t-indigo-500",
+            accent: DEFAULT_TESTIMONIAL_ACCENT,
             tag: "Volunteer",
           })}
           renderItem={(item, _i, onChange) => (
@@ -122,10 +125,14 @@ export default function TestimonialsForm({
                   onChange={(v) => onChange({ ...item, image: v })}
                 />
               </Field>
-              <Field label="Accent Class">
-                <Input
-                  value={item.accent}
-                  onChange={(v) => onChange({ ...item, accent: v })}
+              <Field label="Card Accent Color">
+                <input
+                  type="color"
+                  value={toPickerHex(item.accent, DEFAULT_TESTIMONIAL_ACCENT)}
+                  onChange={(e) =>
+                    onChange({ ...item, accent: e.target.value })
+                  }
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
               <Field label="Quote">

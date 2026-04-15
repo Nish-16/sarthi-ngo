@@ -64,7 +64,7 @@ export default function RecognitionForm({
   return (
     <SectionShell
       title="Recognition"
-      description="Flow diagram layout — left anchor text branching to recognition nodes on the right, plus partner logo strip."
+      description="Flow diagram layout — left anchor text branching to recognition nodes on the right, plus partner logo strip. Colors are automatic."
       onSave={async () => setResult(await saveAboutRecognition(data))}
       saveResult={result}
     >
@@ -128,18 +128,6 @@ export default function RecognitionForm({
                   ))}
                 </select>
               </div>
-              <Field label="Accent Classes">
-                <Input
-                  value={item.accent}
-                  onChange={(v) => onChange({ ...item, accent: v })}
-                />
-              </Field>
-              <Field label="Icon Color Classes">
-                <Input
-                  value={item.iconColor}
-                  onChange={(v) => onChange({ ...item, iconColor: v })}
-                />
-              </Field>
               <div className="col-span-2">
                 <ArrayField<string>
                   items={item.details}

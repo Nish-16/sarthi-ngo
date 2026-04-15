@@ -64,7 +64,7 @@ export default function WhyYouthForm({
   return (
     <SectionShell
       title="Why Youth"
-      description="Image + reasons section."
+      description="Image + reasons section. Colors are automatic; you only edit text and icons."
       onSave={async () => setResult(await saveAboutWhyYouth(data))}
       saveResult={result}
     >
@@ -155,12 +155,6 @@ export default function WhyYouthForm({
                   ))}
                 </select>
               </div>
-              <Field label="Color Classes">
-                <Input
-                  value={item.color}
-                  onChange={(v) => onChange({ ...item, color: v })}
-                />
-              </Field>
             </div>
           )}
         />

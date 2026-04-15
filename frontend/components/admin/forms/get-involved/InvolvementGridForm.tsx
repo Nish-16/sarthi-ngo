@@ -6,12 +6,29 @@ import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
 import { saveGetInvolvedInvolvementGrid } from "@/app/actions/content";
 import { iconNames } from "@/lib/icon-map";
+import { toPickerHex } from "@/lib/color";
 import type {
   GetInvolvedGridCard,
   GetInvolvedGridContent,
   GetInvolvedGridFeatured,
   GetInvolvedGridInvite,
 } from "@/types/content";
+
+const GET_INVOLVED_DESTINATIONS = [
+  { label: "Get Involved options section", value: "#get-involved-options" },
+  { label: "Volunteer section", value: "#volunteer" },
+  { label: "Intern section", value: "#intern" },
+  { label: "Collaborate section", value: "#collaborate" },
+  { label: "Invite Founders section", value: "#invite-founders" },
+  { label: "Home", value: "/" },
+  { label: "About", value: "/about" },
+  { label: "What We Do", value: "/what-we-do" },
+  { label: "Get Involved", value: "/get-involved" },
+  { label: "Team", value: "/team" },
+] as const;
+
+const DEFAULT_CARD_BG = "#eef2ff";
+const DEFAULT_ICON_BG = "#6366f1";
 
 function Field({
   label,
@@ -45,6 +62,46 @@ function Input({
       onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
     />
+  );
+}
+
+function SelectInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const hasPreset = GET_INVOLVED_DESTINATIONS.some(
+    (item) => item.value === value,
+  );
+  const selectedValue = hasPreset ? value : "__custom__";
+
+  return (
+    <div className="flex flex-col gap-2">
+      <select
+        value={selectedValue}
+        onChange={(e) => {
+          const nextValue = e.target.value;
+          onChange(nextValue === "__custom__" ? "" : nextValue);
+        }}
+        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+      >
+        {GET_INVOLVED_DESTINATIONS.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+        <option value="__custom__">Custom link</option>
+      </select>
+      {selectedValue === "__custom__" ? (
+        <Input
+          value={value}
+          onChange={onChange}
+          placeholder="/custom-page or #section"
+        />
+      ) : null}
+    </div>
   );
 }
 
@@ -128,8 +185,8 @@ export default function InvolvementGridForm({
               onChange={(v) => set("featured", { ...data.featured, cta: v })}
             />
           </Field>
-          <Field label="CTA Link">
-            <Input
+          <Field label="CTA Destination">
+            <SelectInput
               value={data.featured.href}
               onChange={(v) => set("featured", { ...data.featured, href: v })}
             />
@@ -169,8 +226,8 @@ export default function InvolvementGridForm({
             description: "",
             cta: "",
             href: "",
-            accent: "bg-indigo-50 border-indigo-100",
-            iconBg: "bg-gradient-to-br from-indigo-500 to-purple-500",
+            accent: DEFAULT_CARD_BG,
+            iconBg: DEFAULT_ICON_BG,
             ctaVariant: "outline",
           })}
           renderItem={(card, _i, onChange) => (
@@ -205,16 +262,24 @@ export default function InvolvementGridForm({
                   onChange={(v) => onChange({ ...card, description: v })}
                 />
               </Field>
-              <Field label="Accent Classes">
-                <Input
-                  value={card.accent}
-                  onChange={(v) => onChange({ ...card, accent: v })}
+              <Field label="Card Background Color">
+                <input
+                  type="color"
+                  value={toPickerHex(card.accent, DEFAULT_CARD_BG)}
+                  onChange={(e) =>
+                    onChange({ ...card, accent: e.target.value })
+                  }
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
-              <Field label="Icon Background Classes">
-                <Input
-                  value={card.iconBg}
-                  onChange={(v) => onChange({ ...card, iconBg: v })}
+              <Field label="Icon Background Color">
+                <input
+                  type="color"
+                  value={toPickerHex(card.iconBg, DEFAULT_ICON_BG)}
+                  onChange={(e) =>
+                    onChange({ ...card, iconBg: e.target.value })
+                  }
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
               <div className="flex flex-col gap-1.5">
@@ -244,8 +309,8 @@ export default function InvolvementGridForm({
                   onChange={(v) => onChange({ ...card, cta: v })}
                 />
               </Field>
-              <Field label="CTA Link">
-                <Input
+              <Field label="CTA Destination">
+                <SelectInput
                   value={card.href}
                   onChange={(v) => onChange({ ...card, href: v })}
                 />
@@ -278,8 +343,8 @@ export default function InvolvementGridForm({
                   onChange={(v) => set("invite", { ...invite, description: v })}
                 />
               </Field>
-              <Field label="CTA Link">
-                <Input
+              <Field label="CTA Destination">
+                <SelectInput
                   value={invite.href}
                   onChange={(v) => set("invite", { ...invite, href: v })}
                 />

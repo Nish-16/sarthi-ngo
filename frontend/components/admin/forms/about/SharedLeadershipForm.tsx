@@ -6,10 +6,13 @@ import FormGroup from "../../FormGroup";
 import ArrayField from "../../ArrayField";
 import { saveAboutSharedLeadership } from "@/app/actions/content";
 import { iconNames } from "@/lib/icon-map";
+import { toPickerHex } from "@/lib/color";
 import type {
   AboutSharedLeadershipContent,
   AboutSharedLeadershipPrinciple,
 } from "@/types/content";
+
+const DEFAULT_PRINCIPLE_COLOR = "#6366f1";
 
 function Field({
   label,
@@ -108,7 +111,7 @@ export default function SharedLeadershipForm({
           createItem={() => ({
             iconName: "Network",
             label: "",
-            color: "bg-indigo-400/20 text-indigo-300 border-indigo-400/30",
+            color: DEFAULT_PRINCIPLE_COLOR,
           })}
           renderItem={(item, _i, onChange) => (
             <div className="grid grid-cols-2 gap-3">
@@ -136,10 +139,12 @@ export default function SharedLeadershipForm({
                   ))}
                 </select>
               </div>
-              <Field label="Color Classes">
-                <Input
-                  value={item.color}
-                  onChange={(v) => onChange({ ...item, color: v })}
+              <Field label="Color">
+                <input
+                  type="color"
+                  value={toPickerHex(item.color, DEFAULT_PRINCIPLE_COLOR)}
+                  onChange={(e) => onChange({ ...item, color: e.target.value })}
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-white p-1 cursor-pointer"
                 />
               </Field>
             </div>

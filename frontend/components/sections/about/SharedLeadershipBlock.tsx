@@ -2,6 +2,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
 import { getIcon } from "@/lib/icon-map";
+import { hexToRgba, isHexColor } from "@/lib/color";
 import type { AboutSharedLeadershipContent } from "@/types/content";
 
 export default function SharedLeadershipBlock({
@@ -57,13 +58,33 @@ export default function SharedLeadershipBlock({
             <div className="grid grid-cols-2 gap-4">
               {content.principles.map((principle) => {
                 const Icon = getIcon(principle.iconName);
+                const principleColor = principle.color.trim();
+                const useHex = isHexColor(principleColor);
                 return (
                   <div
                     key={principle.label}
-                    className={`rounded-2xl border backdrop-blur-sm p-5 flex flex-col gap-3 hover:bg-white/10 transition-colors duration-300 ${principle.color}`}
+                    className={`rounded-2xl border backdrop-blur-sm p-5 flex flex-col gap-3 hover:bg-white/10 transition-colors duration-300 ${useHex ? "" : principle.color}`}
+                    style={
+                      useHex
+                        ? {
+                            color: "#ffffff",
+                            backgroundColor: hexToRgba(principleColor, 0.18),
+                            borderColor: hexToRgba(principleColor, 0.4),
+                          }
+                        : undefined
+                    }
                   >
                     <div
-                      className={`w-10 h-10 rounded-xl border flex items-center justify-center ${principle.color}`}
+                      className={`w-10 h-10 rounded-xl border flex items-center justify-center ${useHex ? "" : principle.color}`}
+                      style={
+                        useHex
+                          ? {
+                              color: "#ffffff",
+                              backgroundColor: hexToRgba(principleColor, 0.25),
+                              borderColor: hexToRgba(principleColor, 0.45),
+                            }
+                          : undefined
+                      }
                     >
                       <Icon className="w-5 h-5" />
                     </div>

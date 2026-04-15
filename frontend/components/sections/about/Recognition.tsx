@@ -18,14 +18,37 @@ interface NodeProps {
   inView: boolean;
 }
 
-function RecognitionNode({ title, iconName, accent, iconColor, details, index, inView }: NodeProps) {
+const NODE_STYLE_PRESETS = [
+  { accent: "border-l-indigo-400", iconColor: "bg-indigo-100 text-indigo-600" },
+  { accent: "border-l-orange-400", iconColor: "bg-orange-100 text-orange-600" },
+  { accent: "border-l-cyan-400", iconColor: "bg-cyan-100 text-cyan-700" },
+  { accent: "border-l-purple-400", iconColor: "bg-purple-100 text-purple-600" },
+  {
+    accent: "border-l-emerald-400",
+    iconColor: "bg-emerald-100 text-emerald-600",
+  },
+];
+
+function RecognitionNode({
+  title,
+  iconName,
+  accent,
+  iconColor,
+  details,
+  index,
+  inView,
+}: NodeProps) {
   const Icon = getIcon(iconName);
 
   return (
     <motion.article
       initial={{ opacity: 0, x: 32 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.55 + index * 0.12, ease: "easeOut" }}
+      transition={{
+        duration: 0.5,
+        delay: 0.55 + index * 0.12,
+        ease: "easeOut",
+      }}
       className={`
         group relative rounded-2xl border border-slate-200 border-l-2 p-5
         bg-white shadow-sm shadow-slate-100
@@ -35,14 +58,21 @@ function RecognitionNode({ title, iconName, accent, iconColor, details, index, i
       `}
     >
       <div className="flex items-start gap-4">
-        <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${iconColor}`}>
+        <div
+          className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${iconColor}`}
+        >
           <Icon className="w-4 h-4" />
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-bold text-slate-900 mb-2 leading-snug">{title}</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-2 leading-snug">
+            {title}
+          </h3>
           <ul className="space-y-1.5">
             {details.map((detail) => (
-              <li key={detail} className="flex gap-2 items-start text-xs text-slate-500 leading-relaxed">
+              <li
+                key={detail}
+                className="flex gap-2 items-start text-xs text-slate-500 leading-relaxed"
+              >
                 <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 shrink-0" />
                 <span>{detail}</span>
               </li>
@@ -56,7 +86,13 @@ function RecognitionNode({ title, iconName, accent, iconColor, details, index, i
 
 /* ─── SVG connecting lines (desktop only) ───────────────────────────────── */
 
-function ConnectionLines({ count, animate }: { count: number; animate: boolean }) {
+function ConnectionLines({
+  count,
+  animate,
+}: {
+  count: number;
+  animate: boolean;
+}) {
   // Y positions (as % of SVG height) for each node midpoint
   const nodeYs = [10, 26, 44, 63, 80].slice(0, count);
 
@@ -75,7 +111,8 @@ function ConnectionLines({ count, animate }: { count: number; animate: boolean }
 
       {/* Anchor dot */}
       <motion.circle
-        cx="50%" cy="50%"
+        cx="50%"
+        cy="50%"
         r="4"
         fill="#6366f1"
         initial={{ opacity: 0, scale: 0 }}
@@ -102,14 +139,18 @@ function ConnectionLines({ count, animate }: { count: number; animate: boolean }
 
 /* ─── Main Section ──────────────────────────────────────────────────────── */
 
-export default function Recognition({ content }: { content: AboutRecognitionContent }) {
+export default function Recognition({
+  content,
+}: {
+  content: AboutRecognitionContent;
+}) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 py-24"
+      className="relative overflow-hidden bg-linear-to-br from-slate-50 via-white to-indigo-50/40 py-24"
     >
       {/* Blobs */}
       <div className="pointer-events-none absolute left-0 top-10 h-72 w-72 rounded-full bg-indigo-200/30 blur-3xl" />
@@ -119,7 +160,8 @@ export default function Recognition({ content }: { content: AboutRecognitionCont
       <div
         className="absolute top-10 right-10 w-36 h-36 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
@@ -129,7 +171,6 @@ export default function Recognition({ content }: { content: AboutRecognitionCont
       <Container className="relative z-10">
         {/* ── DESKTOP: 3-col (left | connector | right) | MOBILE: stacked ── */}
         <div className="relative flex flex-col gap-10 lg:grid lg:grid-cols-[2fr_0.6fr_3fr] lg:gap-0 lg:items-center">
-
           {/* LEFT — anchor */}
           <motion.div
             initial={{ opacity: 0, x: -28 }}
@@ -143,7 +184,9 @@ export default function Recognition({ content }: { content: AboutRecognitionCont
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
               {content.headline}{" "}
               <span className="relative inline-block">
-                <span className="text-indigo-600">{content.headlineAccent}</span>
+                <span className="text-indigo-600">
+                  {content.headlineAccent}
+                </span>
                 <span className="absolute -bottom-1 left-0 right-0 h-1 bg-orange-400 rounded-full" />
               </span>
             </h2>
@@ -173,15 +216,30 @@ export default function Recognition({ content }: { content: AboutRecognitionCont
           </motion.div>
 
           {/* CENTER — SVG lines */}
-          <div className="relative hidden lg:block h-full min-h-[360px]" aria-hidden="true">
+          <div
+            className="relative hidden lg:block h-full min-h-90"
+            aria-hidden="true"
+          >
             <ConnectionLines count={content.blocks.length} animate={inView} />
           </div>
 
           {/* RIGHT — nodes */}
           <div className="flex flex-col gap-3">
-            {content.blocks.map((block, i) => (
-              <RecognitionNode key={block.title} {...block} index={i} inView={inView} />
-            ))}
+            {content.blocks.map((block, i) => {
+              const style = NODE_STYLE_PRESETS[i % NODE_STYLE_PRESETS.length];
+              return (
+                <RecognitionNode
+                  key={block.title}
+                  title={block.title}
+                  iconName={block.iconName}
+                  details={block.details}
+                  accent={style.accent}
+                  iconColor={style.iconColor}
+                  index={i}
+                  inView={inView}
+                />
+              );
+            })}
           </div>
         </div>
 

@@ -7,6 +7,19 @@ import ArrayField from "../../ArrayField";
 import { saveGetInvolvedVolunteer } from "@/app/actions/content";
 import type { GetInvolvedVolunteerContent } from "@/types/content";
 
+const GET_INVOLVED_DESTINATIONS = [
+  { label: "Get Involved options section", value: "#get-involved-options" },
+  { label: "Volunteer section", value: "#volunteer" },
+  { label: "Intern section", value: "#intern" },
+  { label: "Collaborate section", value: "#collaborate" },
+  { label: "Invite Founders section", value: "#invite-founders" },
+  { label: "Home", value: "/" },
+  { label: "About", value: "/about" },
+  { label: "What We Do", value: "/what-we-do" },
+  { label: "Get Involved", value: "/get-involved" },
+  { label: "Team", value: "/team" },
+] as const;
+
 function Field({
   label,
   children,
@@ -36,6 +49,42 @@ function Input({
       onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
     />
+  );
+}
+
+function SelectInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const hasPreset = GET_INVOLVED_DESTINATIONS.some(
+    (item) => item.value === value,
+  );
+  const selectedValue = hasPreset ? value : "__custom__";
+
+  return (
+    <div className="flex flex-col gap-2">
+      <select
+        value={selectedValue}
+        onChange={(e) => {
+          const nextValue = e.target.value;
+          onChange(nextValue === "__custom__" ? "" : nextValue);
+        }}
+        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+      >
+        {GET_INVOLVED_DESTINATIONS.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+        <option value="__custom__">Custom link</option>
+      </select>
+      {selectedValue === "__custom__" ? (
+        <Input value={value} onChange={onChange} />
+      ) : null}
+    </div>
   );
 }
 
@@ -91,8 +140,11 @@ export default function VolunteerForm({
           <Field label="CTA Label">
             <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
           </Field>
-          <Field label="CTA Link">
-            <Input value={data.ctaHref} onChange={(v) => set("ctaHref", v)} />
+          <Field label="CTA Destination">
+            <SelectInput
+              value={data.ctaHref}
+              onChange={(v) => set("ctaHref", v)}
+            />
           </Field>
         </div>
       </FormGroup>

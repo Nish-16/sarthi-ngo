@@ -1,14 +1,43 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import crypto from "crypto";
 import { COOKIE_NAME, COOKIE_MAX_AGE, createToken } from "@/lib/auth";
+import {
+  consumeRateLimit,
+  getClientIp,
+  isAllowedRequestOrigin,
+  resetRateLimit,
+} from "@/lib/security";
+
+const LOGIN_ATTEMPT_LIMIT = 5;
+const LOGIN_ATTEMPT_WINDOW_MS = 60 * 1000;
 
 export async function login(
   _prevState: { error?: string } | null,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ error: string }> {
+  const headerStore = await headers();
+
+  if (!isAllowedRequestOrigin(headerStore)) {
+    return { error: "Forbidden request origin." };
+  }
+
+  const clientIp = getClientIp(headerStore);
+  const rateKey = `login:${clientIp}`;
+  const rateLimit = consumeRateLimit(
+    rateKey,
+    LOGIN_ATTEMPT_LIMIT,
+    LOGIN_ATTEMPT_WINDOW_MS,
+  );
+
+  if (!rateLimit.allowed) {
+    return {
+      error: `Too many login attempts. Try again in ${rateLimit.retryAfterSeconds}s.`,
+    };
+  }
+
   const username = (formData.get("username") as string) ?? "";
   const password = (formData.get("password") as string) ?? "";
 
@@ -33,15 +62,17 @@ export async function login(
     return { error: "Incorrect username or password." };
   }
 
-  const token = createToken();
+  const token = await createToken();
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, token, {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "strict",
     path: "/",
     maxAge: COOKIE_MAX_AGE,
     secure: process.env.NODE_ENV === "production",
   });
+
+  resetRateLimit(rateKey);
 
   redirect("/admin");
 }

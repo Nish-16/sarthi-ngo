@@ -7,6 +7,25 @@ import ArrayField from "../ArrayField";
 import { saveFooter } from "@/app/actions/content";
 import type { FooterContent, FooterLinkGroup, FooterLinkItem } from "@/types/content";
 
+const FOOTER_DESTINATIONS = [
+  { label: "Home", value: "/" },
+  { label: "About", value: "/about" },
+  { label: "What We Do", value: "/what-we-do" },
+  { label: "Get Involved", value: "/get-involved" },
+  { label: "Team", value: "/team" },
+  { label: "Home: Who We Are", value: "#who-we-are" },
+  { label: "Home: Impact", value: "#impact" },
+  { label: "Home: Stories", value: "#stories-updates" },
+  { label: "Home: Projects", value: "#featured-projects" },
+  { label: "Home: Join Us", value: "#join-us" },
+  { label: "Get Involved: Volunteer", value: "/get-involved#volunteer" },
+  { label: "Get Involved: Intern", value: "/get-involved#intern" },
+  {
+    label: "Get Involved: Collaborate",
+    value: "/get-involved#collaborate",
+  },
+] as const;
+
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -27,6 +46,41 @@ function Input({ value, onChange, placeholder = "" }: {
       onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
     />
+  );
+}
+
+function SelectInput({ value, onChange }: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const hasPreset = FOOTER_DESTINATIONS.some((item) => item.value === value);
+  const selectedValue = hasPreset ? value : "__custom__";
+
+  return (
+    <div className="flex flex-col gap-2">
+      <select
+        value={selectedValue}
+        onChange={(e) => {
+          const nextValue = e.target.value;
+          onChange(nextValue === "__custom__" ? "" : nextValue);
+        }}
+        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+      >
+        {FOOTER_DESTINATIONS.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+        <option value="__custom__">Custom link</option>
+      </select>
+      {selectedValue === "__custom__" ? (
+        <Input
+          value={value}
+          onChange={onChange}
+          placeholder="/custom-page or #section"
+        />
+      ) : null}
+    </div>
   );
 }
 
@@ -55,7 +109,7 @@ function LinkGroupEditor({
         renderItem={(link, _i, onLinkChange) => (
           <div className="grid grid-cols-2 gap-2">
             <Input value={link.label} onChange={(v) => onLinkChange({ ...link, label: v })} placeholder="Label" />
-            <Input value={link.href} onChange={(v) => onLinkChange({ ...link, href: v })} placeholder="#href" />
+            <SelectInput value={link.href} onChange={(v) => onLinkChange({ ...link, href: v })} />
           </div>
         )}
       />

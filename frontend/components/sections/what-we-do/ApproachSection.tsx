@@ -1,6 +1,7 @@
 import Container from "@/components/ui/Container";
 import PhotoCarousel from "@/components/ui/PhotoCarousel";
 import { getIcon } from "@/lib/icon-map";
+import { hexToRgba, isHexColor } from "@/lib/color";
 import type { WwdApproachContent } from "@/types/content";
 
 interface Props {
@@ -21,7 +22,8 @@ export default function ApproachSection({ content }: Props) {
       <div
         className="absolute top-12 right-8 w-36 h-36 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+          backgroundImage:
+            "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
           backgroundSize: "12px 12px",
         }}
       />
@@ -47,17 +49,41 @@ export default function ApproachSection({ content }: Props) {
             {content.steps.map((step, index) => {
               const Icon = getIcon(step.iconName);
               const isLast = index === content.steps.length - 1;
+              const stepColor = step.color.trim();
+              const useHex = isHexColor(stepColor);
               return (
-                <div key={step.title} className="relative flex gap-5 pb-10 last:pb-0 group">
+                <div
+                  key={step.title}
+                  className="relative flex gap-5 pb-10 last:pb-0 group"
+                >
                   {/* Connector line */}
                   {!isLast && (
                     <div className="absolute left-5 top-12 bottom-0 w-px bg-gradient-to-b from-indigo-200 to-transparent" />
                   )}
 
                   {/* Icon circle */}
-                  <div className="relative shrink-0 w-10 h-10 rounded-full bg-white border-2 border-indigo-100 shadow-sm flex items-center justify-center transition-all duration-300 group-hover:border-indigo-400 group-hover:shadow-md">
-                    <Icon className="w-4 h-4 text-indigo-500" />
-                    <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-indigo-600 text-[9px] font-black text-white flex items-center justify-center shadow-sm">
+                  <div
+                    className="relative shrink-0 w-10 h-10 rounded-full bg-white border-2 border-indigo-100 shadow-sm flex items-center justify-center transition-all duration-300 group-hover:border-indigo-400 group-hover:shadow-md"
+                    style={
+                      useHex
+                        ? {
+                            borderColor: hexToRgba(stepColor, 0.35),
+                          }
+                        : undefined
+                    }
+                  >
+                    <Icon
+                      className="w-4 h-4"
+                      style={useHex ? { color: stepColor } : undefined}
+                    />
+                    <span
+                      className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full text-[9px] font-black text-white flex items-center justify-center shadow-sm"
+                      style={
+                        useHex
+                          ? { backgroundColor: stepColor }
+                          : { backgroundColor: "#4f46e5" }
+                      }
+                    >
                       {index + 1}
                     </span>
                   </div>
@@ -86,7 +112,9 @@ export default function ApproachSection({ content }: Props) {
             {/* Quote card */}
             {content.quoteCard && (
               <div className="relative -mt-6 mx-4 rounded-2xl bg-indigo-600 text-white px-5 py-4 shadow-xl shadow-indigo-300/40 text-sm font-semibold leading-snug z-10">
-                <span className="text-xl font-black mr-1 opacity-40">&ldquo;</span>
+                <span className="text-xl font-black mr-1 opacity-40">
+                  &ldquo;
+                </span>
                 {content.quoteCard}
               </div>
             )}

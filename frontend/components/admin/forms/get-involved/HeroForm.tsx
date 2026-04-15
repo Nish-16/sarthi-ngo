@@ -11,6 +11,24 @@ import type {
   GetInvolvedHeroStat,
 } from "@/types/content";
 
+const GET_INVOLVED_DESTINATIONS = [
+  { label: "Get Involved options section", value: "#get-involved-options" },
+  { label: "Volunteer section", value: "#volunteer" },
+  { label: "Intern section", value: "#intern" },
+  { label: "Collaborate section", value: "#collaborate" },
+  { label: "Invite Founders section", value: "#invite-founders" },
+  { label: "Home", value: "/" },
+  { label: "About", value: "/about" },
+  { label: "What We Do", value: "/what-we-do" },
+  { label: "Get Involved", value: "/get-involved" },
+  { label: "Team", value: "/team" },
+] as const;
+
+const HERO_IMAGE_CLIP_PRESETS = [
+  "polygon(0 0, 100% 0, 85% 100%, 0 100%)",
+  "polygon(20% 0, 100% 0, 100% 100%, 5% 100%)",
+] as const;
+
 function Field({
   label,
   children,
@@ -43,6 +61,46 @@ function Input({
       onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
     />
+  );
+}
+
+function SelectInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const hasPreset = GET_INVOLVED_DESTINATIONS.some(
+    (item) => item.value === value,
+  );
+  const selectedValue = hasPreset ? value : "__custom__";
+
+  return (
+    <div className="flex flex-col gap-2">
+      <select
+        value={selectedValue}
+        onChange={(e) => {
+          const nextValue = e.target.value;
+          onChange(nextValue === "__custom__" ? "" : nextValue);
+        }}
+        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+      >
+        {GET_INVOLVED_DESTINATIONS.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+        <option value="__custom__">Custom link</option>
+      </select>
+      {selectedValue === "__custom__" ? (
+        <Input
+          value={value}
+          onChange={onChange}
+          placeholder="/custom-page or #section"
+        />
+      ) : null}
+    </div>
   );
 }
 
@@ -114,11 +172,10 @@ export default function GetInvolvedHeroForm({
               placeholder="Get Involved"
             />
           </Field>
-          <Field label="Primary CTA Link">
-            <Input
+          <Field label="Primary CTA Destination">
+            <SelectInput
               value={data.ctaPrimaryHref}
               onChange={(v) => set("ctaPrimaryHref", v)}
-              placeholder="#get-involved-options"
             />
           </Field>
         </div>
@@ -130,11 +187,10 @@ export default function GetInvolvedHeroForm({
               placeholder="Volunteer Now"
             />
           </Field>
-          <Field label="Secondary CTA Link">
-            <Input
+          <Field label="Secondary CTA Destination">
+            <SelectInput
               value={data.ctaSecondaryHref}
               onChange={(v) => set("ctaSecondaryHref", v)}
-              placeholder="#volunteer"
             />
           </Field>
         </div>
@@ -214,7 +270,7 @@ export default function GetInvolvedHeroForm({
           createItem={() => ({
             src: "",
             alt: "",
-            clipPath: "polygon(0 0, 100% 0, 85% 100%, 0 100%)",
+            clipPath: HERO_IMAGE_CLIP_PRESETS[0],
           })}
           renderItem={(img, _i, onChange) => (
             <div className="grid grid-cols-1 gap-3">
@@ -232,13 +288,9 @@ export default function GetInvolvedHeroForm({
                   placeholder="Team working together"
                 />
               </Field>
-              <Field label="Clip Path">
-                <Input
-                  value={img.clipPath}
-                  onChange={(v) => onChange({ ...img, clipPath: v })}
-                  placeholder="polygon(0 0, 100% 0, 85% 100%, 0 100%)"
-                />
-              </Field>
+              <p className="text-xs text-slate-500">
+                Image shape style is automatic.
+              </p>
             </div>
           )}
         />
