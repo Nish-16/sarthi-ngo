@@ -5,7 +5,11 @@ import SectionShell from "../SectionShell";
 import FormGroup from "../FormGroup";
 import ArrayField from "../ArrayField";
 import { saveFooter } from "@/app/actions/content";
-import type { FooterContent, FooterLinkGroup, FooterLinkItem } from "@/types/content";
+import type {
+  FooterContent,
+  FooterLinkGroup,
+  FooterLinkItem,
+} from "@/types/content";
 
 const FOOTER_DESTINATIONS = [
   { label: "Home", value: "/" },
@@ -26,7 +30,13 @@ const FOOTER_DESTINATIONS = [
   },
 ] as const;
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -35,8 +45,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -49,7 +65,10 @@ function Input({ value, onChange, placeholder = "" }: {
   );
 }
 
-function SelectInput({ value, onChange }: {
+function SelectInput({
+  value,
+  onChange,
+}: {
   value: string;
   onChange: (v: string) => void;
 }) {
@@ -94,7 +113,9 @@ function LinkGroupEditor({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-1">
-        <label className="text-xs font-semibold text-slate-500">Category Name</label>
+        <label className="text-xs font-semibold text-slate-500">
+          Category Name
+        </label>
         <Input
           value={group.category}
           onChange={(v) => onChange({ ...group, category: v })}
@@ -108,8 +129,15 @@ function LinkGroupEditor({
         createItem={() => ({ label: "", href: "#" })}
         renderItem={(link, _i, onLinkChange) => (
           <div className="grid grid-cols-2 gap-2">
-            <Input value={link.label} onChange={(v) => onLinkChange({ ...link, label: v })} placeholder="Label" />
-            <SelectInput value={link.href} onChange={(v) => onLinkChange({ ...link, href: v })} />
+            <Input
+              value={link.label}
+              onChange={(v) => onLinkChange({ ...link, label: v })}
+              placeholder="Label"
+            />
+            <SelectInput
+              value={link.href}
+              onChange={(v) => onLinkChange({ ...link, href: v })}
+            />
           </div>
         )}
       />
@@ -119,7 +147,10 @@ function LinkGroupEditor({
 
 export default function FooterForm({ initial }: { initial: FooterContent }) {
   const [data, setData] = useState<FooterContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
   function set<K extends keyof FooterContent>(key: K, value: FooterContent[K]) {
     setData((d) => ({ ...d, [key]: value }));
@@ -138,7 +169,10 @@ export default function FooterForm({ initial }: { initial: FooterContent }) {
             <Input value={data.logoText} onChange={(v) => set("logoText", v)} />
           </Field>
           <Field label="Copyright Text">
-            <Input value={data.copyright} onChange={(v) => set("copyright", v)} />
+            <Input
+              value={data.copyright}
+              onChange={(v) => set("copyright", v)}
+            />
           </Field>
         </div>
         <Field label="Brand Tagline">

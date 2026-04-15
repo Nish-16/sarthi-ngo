@@ -26,7 +26,13 @@ const NAV_DESTINATIONS = [
   },
 ] as const;
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -35,8 +41,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function Input({ value, onChange, placeholder = "" }: {
-  value: string; onChange: (v: string) => void; placeholder?: string;
+function Input({
+  value,
+  onChange,
+  placeholder = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
@@ -49,7 +61,10 @@ function Input({ value, onChange, placeholder = "" }: {
   );
 }
 
-function SelectInput({ value, onChange }: {
+function SelectInput({
+  value,
+  onChange,
+}: {
   value: string;
   onChange: (v: string) => void;
 }) {
@@ -86,7 +101,10 @@ function SelectInput({ value, onChange }: {
 
 export default function NavbarForm({ initial }: { initial: NavbarContent }) {
   const [data, setData] = useState<NavbarContent>(initial);
-  const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    error?: string;
+  } | null>(null);
 
   function set<K extends keyof NavbarContent>(key: K, value: NavbarContent[K]) {
     setData((d) => ({ ...d, [key]: value }));
@@ -101,14 +119,21 @@ export default function NavbarForm({ initial }: { initial: NavbarContent }) {
     >
       <FormGroup title="Brand & CTA">
         <Field label="Logo Text">
-          <Input value={data.logoText} onChange={(v) => set("logoText", v)} placeholder="Sarthi" />
+          <Input
+            value={data.logoText}
+            onChange={(v) => set("logoText", v)}
+            placeholder="Sarthi"
+          />
         </Field>
         <div className="grid grid-cols-2 gap-3">
           <Field label="CTA Button Label">
             <Input value={data.ctaLabel} onChange={(v) => set("ctaLabel", v)} />
           </Field>
           <Field label="CTA Button Destination">
-            <SelectInput value={data.ctaHref} onChange={(v) => set("ctaHref", v)} />
+            <SelectInput
+              value={data.ctaHref}
+              onChange={(v) => set("ctaHref", v)}
+            />
           </Field>
         </div>
       </FormGroup>
@@ -121,8 +146,15 @@ export default function NavbarForm({ initial }: { initial: NavbarContent }) {
           createItem={() => ({ label: "", href: "#" })}
           renderItem={(link, _i, onChange) => (
             <div className="grid grid-cols-2 gap-2">
-              <Input value={link.label} onChange={(v) => onChange({ ...link, label: v })} placeholder="Link label" />
-              <SelectInput value={link.href} onChange={(v) => onChange({ ...link, href: v })} />
+              <Input
+                value={link.label}
+                onChange={(v) => onChange({ ...link, label: v })}
+                placeholder="Link label"
+              />
+              <SelectInput
+                value={link.href}
+                onChange={(v) => onChange({ ...link, href: v })}
+              />
             </div>
           )}
         />
