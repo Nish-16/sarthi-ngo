@@ -17,7 +17,12 @@
       "Bash(dir D:/Projects/sarthi-ngo/frontend)",
       "Bash(npx --prefix D:/Projects/sarthi-ngo/frontend tsc --noEmit)",
       "Bash(npx --prefix D:/Projects/sarthi-ngo/frontend tsc -p D:/Projects/sarthi-ngo/frontend/tsconfig.json --noEmit)",
-      "Bash(D:/Projects/sarthi-ngo/frontend/node_modules/.bin/tsc:*)"
+      "Bash(D:/Projects/sarthi-ngo/frontend/node_modules/.bin/tsc:*)",
+      "Bash(where python *)",
+      "Bash(where python3 *)",
+      "Bash(where py *)",
+      "Bash(ls /c/Python*)",
+      "Read(//c/Users/nishe/AppData/Local/Programs/Python/**)"
     ]
   }
 }

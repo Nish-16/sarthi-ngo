@@ -10,6 +10,14 @@ const awardColors = [
   "bg-purple-50 text-purple-500",
 ];
 
+const defaultOrgLogos: Record<string, string> = {
+  "NITI Aayog": "https://logo.clearbit.com/niti.gov.in",
+  "Youth Ki Awaaz": "https://logo.clearbit.com/youthkiawaaz.com",
+  "Ashoka Changemakers": "https://logo.clearbit.com/ashoka.org",
+  "UN Youth India": "https://logo.clearbit.com/un.org",
+  "Forbes 30U30": "https://logo.clearbit.com/forbes.com",
+};
+
 export default function Recognitions({
   content,
 }: {
@@ -32,21 +40,38 @@ export default function Recognitions({
         </div>
 
         {/* Logo belt — infinite marquee */}
-        <div className="relative mb-14 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="relative mb-14 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <div className="flex w-max animate-marquee gap-6 items-center">
-            {[...content.organizations, ...content.organizations].map((org, i) => (
-              <div
-                key={`${org.name}-${i}`}
-                className="group flex items-center gap-3 bg-white border border-slate-100 rounded-2xl px-6 py-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 cursor-default shrink-0"
-              >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-xs font-black shadow-sm shadow-indigo-300/30 group-hover:scale-105 transition-transform">
-                  {org.abbr.slice(0, 2)}
-                </div>
-                <span className="text-slate-600 font-semibold text-sm group-hover:text-indigo-700 transition-colors">
-                  {org.name}
-                </span>
-              </div>
-            ))}
+            {[...content.organizations, ...content.organizations].map(
+              (org, i) => {
+                const logoSrc = org.logo?.trim() || defaultOrgLogos[org.name];
+
+                return (
+                  <div
+                    key={`${org.name}-${i}`}
+                    className="group flex flex-col items-center justify-start px-3 py-2 transition-all duration-300 cursor-default shrink-0 min-w-40"
+                  >
+                    <div className="w-24 h-24 mx-auto flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+                      {logoSrc ? (
+                        <img
+                          src={logoSrc}
+                          alt={`${org.name} logo`}
+                          className="w-20 h-20 object-contain"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 text-white text-sm font-black shadow-sm shadow-indigo-300/30">
+                          {org.abbr.slice(0, 3)}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-2 text-center text-[11px] leading-tight text-slate-500 font-medium group-hover:text-indigo-700 transition-colors">
+                      {org.name}
+                    </p>
+                  </div>
+                );
+              },
+            )}
           </div>
         </div>
 
@@ -60,7 +85,9 @@ export default function Recognitions({
                 key={award.title}
                 className="bg-white rounded-2xl p-5 border border-slate-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 text-center group"
               >
-                <div className={`w-11 h-11 rounded-xl ${color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
+                <div
+                  className={`w-11 h-11 rounded-xl ${color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}
+                >
                   <Icon className="w-5 h-5" />
                 </div>
                 <p className="text-sm font-bold text-slate-800 leading-tight">

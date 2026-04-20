@@ -568,14 +568,7 @@
         }
       ],
       "partnerEyebrow": "Partner Signals",
-      "partnerLogos": [
-        "NITI",
-        "UNY",
-        "ISF",
-        "YKA",
-        "ACM",
-        "CSR"
-      ]
+      "partnerLogos": ["NITI", "UNY", "ISF", "YKA", "ACM", "CSR"]
     },
     "sharedLeadership": {
       "eyebrow": "Shared Leadership",
@@ -903,8 +896,20 @@
         "Together, we can align our strengths, amplify our impact, and build a future where every young person has the support and opportunities they deserve."
       ],
       "closingText": "Be more than a contributor — be a co-creator of change. Together, we can accelerate youth potential and build the future we want to see.",
-      "collaboratorTypes": ["Experts", "Professionals", "Businesses", "Educators", "Changemakers"],
-      "contributionModes": ["Mentorship", "Skill-building", "Funding", "Materials", "Strategic guidance"],
+      "collaboratorTypes": [
+        "Experts",
+        "Professionals",
+        "Businesses",
+        "Educators",
+        "Changemakers"
+      ],
+      "contributionModes": [
+        "Mentorship",
+        "Skill-building",
+        "Funding",
+        "Materials",
+        "Strategic guidance"
+      ],
       "ctaLabel": "Partner With Us",
       "ctaHref": "/contact"
     },
@@ -1055,23 +1060,23 @@
         "links": [
           {
             "label": "About Us",
-            "href": "#about"
+            "href": "/about"
           },
           {
             "label": "Our Team",
-            "href": "#team"
+            "href": "/team"
           },
           {
-            "label": "Careers",
-            "href": "#careers"
+            "label": "What We Do",
+            "href": "/what-we-do"
           },
           {
-            "label": "Press",
-            "href": "#press"
+            "label": "Get Involved",
+            "href": "/get-involved"
           },
           {
-            "label": "Contact",
-            "href": "#contact"
+            "label": "Home",
+            "href": "/"
           }
         ]
       },
@@ -1079,24 +1084,24 @@
         "category": "Programs",
         "links": [
           {
-            "label": "Internship Program",
-            "href": "#internship"
+            "label": "Signature Projects",
+            "href": "/what-we-do"
           },
           {
-            "label": "Pathshala Initiative",
-            "href": "#pathshala"
+            "label": "Previous Projects",
+            "href": "/what-we-do"
           },
           {
-            "label": "GreenRoots Campaign",
-            "href": "#greenroots"
+            "label": "Impact Stories",
+            "href": "/"
           },
           {
-            "label": "Mindful Youth",
-            "href": "#mindful"
+            "label": "Volunteer",
+            "href": "/get-involved"
           },
           {
-            "label": "Youth Summit",
-            "href": "#summit"
+            "label": "Partner With Us",
+            "href": "/get-involved"
           }
         ]
       },
@@ -1104,24 +1109,24 @@
         "category": "Resources",
         "links": [
           {
-            "label": "Blog",
-            "href": "#blog"
+            "label": "About",
+            "href": "/about"
           },
           {
-            "label": "Annual Report",
-            "href": "#report"
+            "label": "Team",
+            "href": "/team"
           },
           {
-            "label": "Media Kit",
-            "href": "#media"
+            "label": "What We Do",
+            "href": "/what-we-do"
           },
           {
-            "label": "Donate",
-            "href": "#donate"
+            "label": "Get Involved",
+            "href": "/get-involved"
           },
           {
-            "label": "Newsletter",
-            "href": "#newsletter"
+            "label": "Home",
+            "href": "/"
           }
         ]
       }

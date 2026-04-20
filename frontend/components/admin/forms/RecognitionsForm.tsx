@@ -97,21 +97,30 @@ export default function RecognitionsForm({
           label=""
           items={data.organizations}
           onChange={(v) => set("organizations", v)}
-          createItem={() => ({ name: "", abbr: "" })}
+          createItem={() => ({ name: "", abbr: "", logo: "" })}
           renderItem={(org, _i, onChange) => (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-              <div className="md:col-span-2">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
+              <div className="md:col-span-5">
                 <Input
                   value={org.name}
                   onChange={(v) => onChange({ ...org, name: v })}
                   placeholder="Organization name"
                 />
               </div>
-              <Input
-                value={org.abbr}
-                onChange={(v) => onChange({ ...org, abbr: v })}
-                placeholder="Abbr"
-              />
+              <div className="md:col-span-3">
+                <Input
+                  value={org.abbr}
+                  onChange={(v) => onChange({ ...org, abbr: v })}
+                  placeholder="Abbr"
+                />
+              </div>
+              <div className="md:col-span-4">
+                <Input
+                  value={org.logo ?? ""}
+                  onChange={(v) => onChange({ ...org, logo: v })}
+                  placeholder="Logo URL (optional)"
+                />
+              </div>
             </div>
           )}
         />

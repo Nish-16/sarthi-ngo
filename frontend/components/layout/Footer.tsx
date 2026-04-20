@@ -87,14 +87,17 @@ export default function Footer({ content }: { content: FooterContent }) {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
           <p>{content.copyright}</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-slate-300 transition-colors">
-              Privacy Policy
+            <a href="/about" className="hover:text-slate-300 transition-colors">
+              About
             </a>
-            <a href="#" className="hover:text-slate-300 transition-colors">
-              Terms of Use
+            <a href="/team" className="hover:text-slate-300 transition-colors">
+              Team
             </a>
-            <a href="#" className="hover:text-slate-300 transition-colors">
-              Cookie Policy
+            <a
+              href="/get-involved"
+              className="hover:text-slate-300 transition-colors"
+            >
+              Get Involved
             </a>
           </div>
         </div>

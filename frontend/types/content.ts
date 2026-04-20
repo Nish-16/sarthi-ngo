@@ -60,6 +60,7 @@ export interface WhoWeAreContent {
 export interface OrgItem {
   name: string;
   abbr: string;
+  logo?: string;
 }
 
 export interface AwardItem {
